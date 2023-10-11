@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Paulo Viní/Documents/Projetos/projeto_pokecrias",
-      "program": "c:/Users/Paulo Viní/Documents/Projetos/projeto_pokecrias/build/Debug/outDebug",
+      "cwd": "c:/Projeto/projeto_pokecrias/CodigosPrincipais",
+      "program": "c:/Projeto/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
