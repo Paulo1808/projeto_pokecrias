@@ -22,5 +22,5 @@ typedef struct
     int pokemon4;
     int pokemon5;
     int pokemon6;
-
+    
 } mochila;// mochila com os pokemons
