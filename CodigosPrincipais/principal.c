@@ -17,7 +17,7 @@ typedef struct{
 typedef struct
 {
     int pokemon1;
-    int pokemon2; 
+    int pokemon2;  
     int pokemon3;
     int pokemon4;
     int pokemon5;
