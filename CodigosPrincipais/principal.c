@@ -38,10 +38,10 @@ void exibeMenu()
         nickname[strcspn(nickname, "\n")] = '\0';
         setbuf(stdin, NULL);
 
-        printf("Bom, vamos lá %s!\n");
+        printf("Bom, vamos lá %s !\n", nickname);
         printf("Escolha uma opção para iniciar:\n");
         printf("1 - Novo Jogo\n");
-        printf("2 - Carregar Jogon\n");
+        printf("2 - Carregar Jogo\n");
         printf("3 - Mecanicas do Jogo\n");
 
         scanf("%i", &opcao);
@@ -54,6 +54,8 @@ void exibeMenu()
             break;
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
+
+            PesquisaTipoGen();
 
             break;
         case 3:
@@ -75,8 +77,56 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
-void PesquisaTipoGen()
+int PesquisaTipoGen()
 {
+
+/*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
+
+
+
+    FILE *arquivoPokedex = fopen("/home/paulo/Documentos/fundamentos/projeto_pokecrias/ArquivosPokemon/pokedex.csv", "r");
+    
+    
+
+    if (arquivoPokedex == NULL) 
+    {
+
+        fprintf(stderr, "Erro ao abrir o arquivo\n");
+
+        exit(1);
+    }
+
+    char numero[50];
+
+    while (fgets(numero, sizeof(numero), arquivoPokedex))
+    {
+    
+        char *token;
+        
+        // Use strtok para dividir a linha em campos
+        token = strtok(numero, ",");
+
+        if (token != NULL) {
+            // Exibe o conteúdo da primeira coluna
+            printf("Primeira coluna: %s\n", token);
+        }
+    }
+    
+    /*for (int i = 0; i < 5; i++)
+    {
+        fgets(numero[i], sizeof(numero[i]), arquivoPokedex);
+        nmrPokemon[i] = strtok(numero[i], ",");
+        if (nmrPokemon[i] != NULL) {
+            // Exibe o conteúdo da primeira coluna
+            printf("Primeira coluna: %s\n", nmrPokemon[i]);
+        }
+
+    }*/
+    
+    fclose("/home/paulo/Documentos/fundamentos/projeto_pokecrias/ArquivosPokemon/pokedex.csv");
+
+    return 0;
+
 
 }//fim funçao de pesquisa
 
@@ -104,6 +154,8 @@ void gerenciamentoPokemons()
 int main(){
 
         exibeMenu();
+
+        
 
 
     return 0;
