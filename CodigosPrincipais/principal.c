@@ -123,7 +123,7 @@ int PesquisaTipoGen()
 
     }*/
     
-    fclose("/home/paulo/Documentos/fundamentos/projeto_pokecrias/ArquivosPokemon/pokedex.csv");
+    fclose(arquivoPokedex);
 
     return 0;
 
