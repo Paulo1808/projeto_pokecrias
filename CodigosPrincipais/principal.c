@@ -41,10 +41,14 @@ void exibeMenu()
         nickname[strcspn(nickname, "\n")] = '\0';
         setbuf(stdin, NULL);
 
+<<<<<<< HEAD
         printf("Bom, vamos lá %s!\n", nickname);
+=======
+        printf("Bom, vamos lá %s !\n", nickname);
+>>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
         printf("Escolha uma opção para iniciar:\n");
         printf("1 - Novo Jogo\n");
-        printf("2 - Carregar Jogon\n");
+        printf("2 - Carregar Jogo\n");
         printf("3 - Mecanicas do Jogo\n");
 
         scanf("%i", &opcao);
@@ -57,6 +61,8 @@ void exibeMenu()
             break;
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
+
+            PesquisaTipoGen();
 
             break;
         case 3:
@@ -78,6 +84,7 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
+<<<<<<< HEAD
 void PesquisaTipoGen()
 
     FILE *ArquivoPokedex;
@@ -92,7 +99,58 @@ void PesquisaTipoGen()
 
 
 
+=======
+int PesquisaTipoGen()
+>>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
 {
+
+/*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
+
+
+
+    FILE *arquivoPokedex = fopen("/home/paulo/Documentos/fundamentos/projeto_pokecrias/ArquivosPokemon/pokedex.csv", "r");
+    
+    
+
+    if (arquivoPokedex == NULL) 
+    {
+
+        fprintf(stderr, "Erro ao abrir o arquivo\n");
+
+        exit(1);
+    }
+
+    char numero[50];
+
+    while (fgets(numero, sizeof(numero), arquivoPokedex))
+    {
+    
+        char *token;
+        
+        // Use strtok para dividir a linha em campos
+        token = strtok(numero, ",");
+
+        if (token != NULL) {
+            // Exibe o conteúdo da primeira coluna
+            printf("Primeira coluna: %s\n", token);
+        }
+    }
+    
+    /*for (int i = 0; i < 5; i++)
+    {
+        fgets(numero[i], sizeof(numero[i]), arquivoPokedex);
+        nmrPokemon[i] = strtok(numero[i], ",");
+        if (nmrPokemon[i] != NULL) {
+            // Exibe o conteúdo da primeira coluna
+            printf("Primeira coluna: %s\n", nmrPokemon[i]);
+        }
+
+    }*/
+    
+    fclose(arquivoPokedex);
+
+    return 0;
+
 
 }//fim funçao de pesquisa
 
@@ -120,6 +178,8 @@ void gerenciamentoPokemons()
 int main(){
 
         exibeMenu();
+
+        
 
 
     return 0;

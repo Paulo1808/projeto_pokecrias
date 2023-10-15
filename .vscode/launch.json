@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Projeto/projeto_pokecrias/CodigosPrincipais",
-      "program": "c:/Projeto/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/paulo/Documentos/fundamentos/projeto_pokecrias/CodigosPrincipais",
+      "program": "/home/paulo/Documentos/fundamentos/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
