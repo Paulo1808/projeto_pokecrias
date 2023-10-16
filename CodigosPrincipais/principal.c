@@ -28,7 +28,10 @@ typedef struct
 //funçao do menu inicial
 void exibeMenu()
 {
-    char nickname[21];
+    char* nickname = NULL;
+    int tam = 21;
+
+    nickname = (char*) malloc (tam * sizeof(char));
     int opcao;
 
         printf("Bem vindo ao Menu inicial!!!\n");
@@ -38,7 +41,11 @@ void exibeMenu()
         nickname[strcspn(nickname, "\n")] = '\0';
         setbuf(stdin, NULL);
 
+<<<<<<< HEAD
+        printf("Bom, vamos lá %s!\n", nickname);
+=======
         printf("Bom, vamos lá %s !\n", nickname);
+>>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
         printf("Escolha uma opção para iniciar:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
@@ -77,7 +84,24 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
+<<<<<<< HEAD
+void PesquisaTipoGen()
+
+    FILE *ArquivoPokedex;
+    ArquivoPokedex = fopen("pokedex.csv", "r");
+    
+    if(ArquivoPokedex == NULL){
+        fprintf(stderr, "Erro ao abrir o arquivo\n");
+        return 1;
+
+    }//msg de erro
+
+
+
+
+=======
 int PesquisaTipoGen()
+>>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
 {
 
 /*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
