@@ -84,7 +84,7 @@ int PesquisaTipoGen()
 
 
 
-    FILE *arquivoPokedex = fopen("/home/paulo/Documentos/fundamentos/projeto_pokecrias/ArquivosPokemon/pokedex.csv", "r");
+    FILE *arquivoPokedex = fopen("projeto_pokecrias/ArquivosPokemon/pokedex.csv", "r");
     
     
 
