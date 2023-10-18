@@ -94,16 +94,9 @@ void PesquisaTipoGen(){
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
-    
-        char *token;
-        
-        // Use strtok para dividir a linha em campos
-        token = strtok(numero, ",");
 
-        if (token != NULL) {
-            // Exibe o conteúdo da primeira coluna
-            printf("Primeira coluna: %s\n", token);
-        }
+            printf("%3s\n", numero);
+        
     }
 
     fclose(ArquivoPokedex);
