@@ -41,11 +41,7 @@ void exibeMenu()
         nickname[strcspn(nickname, "\n")] = '\0';
         setbuf(stdin, NULL);
 
-<<<<<<< HEAD
         printf("Bom, vamos lá %s!\n", nickname);
-=======
-        printf("Bom, vamos lá %s !\n", nickname);
->>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
         printf("Escolha uma opção para iniciar:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
@@ -84,7 +80,6 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
-<<<<<<< HEAD
 void PesquisaTipoGen()
 
     FILE *ArquivoPokedex;
@@ -99,9 +94,6 @@ void PesquisaTipoGen()
 
 
 
-=======
-int PesquisaTipoGen()
->>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
 {
 
 /*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
