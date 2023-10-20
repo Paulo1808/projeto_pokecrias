@@ -41,11 +41,7 @@ void exibeMenu()
         nickname[strcspn(nickname, "\n")] = '\0';
         setbuf(stdin, NULL);
 
-<<<<<<< HEAD
         printf("Bom, vamos lá %s!\n", nickname);
-=======
-        printf("Bom, vamos lá %s !\n", nickname);
->>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
         printf("Escolha uma opção para iniciar:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
@@ -84,11 +80,9 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
-<<<<<<< HEAD
-void PesquisaTipoGen()
+void PesquisaTipoGen(){
 
-    FILE *ArquivoPokedex;
-    ArquivoPokedex = fopen("pokedex.csv", "r");
+    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");;
     
     if(ArquivoPokedex == NULL){
         fprintf(stderr, "Erro ao abrir o arquivo\n");
@@ -96,23 +90,7 @@ void PesquisaTipoGen()
 
     }//msg de erro
 
-
-
-
-=======
-int PesquisaTipoGen()
->>>>>>> 7b66476e56864c85183cdc1d2fb7585c7d006088
-{
-
-/*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
-
-
-
-    FILE *arquivoPokedex = fopen("/home/paulo/Documentos/fundamentos/projeto_pokecrias/ArquivosPokemon/pokedex.csv", "r");
-    
-    
-
-    if (arquivoPokedex == NULL) 
+     if (ArquivoPokedex == NULL) 
     {
 
         fprintf(stderr, "Erro ao abrir o arquivo\n");
@@ -122,37 +100,18 @@ int PesquisaTipoGen()
 
     char numero[50];
 
-    while (fgets(numero, sizeof(numero), arquivoPokedex))
+    while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
     
-        char *token;
-        
-        // Use strtok para dividir a linha em campos
-        token = strtok(numero, ",");
-
-        if (token != NULL) {
-            // Exibe o conteúdo da primeira coluna
-            printf("Primeira coluna: %s\n", token);
-        }
+            printf("Primeira coluna: %s\n", numero);
     }
     
-    /*for (int i = 0; i < 5; i++)
-    {
-        fgets(numero[i], sizeof(numero[i]), arquivoPokedex);
-        nmrPokemon[i] = strtok(numero[i], ",");
-        if (nmrPokemon[i] != NULL) {
-            // Exibe o conteúdo da primeira coluna
-            printf("Primeira coluna: %s\n", nmrPokemon[i]);
-        }
-
-    }*/
     
-    fclose(arquivoPokedex);
+    fclose("pokedex.csv");
 
     return 0;
+}
 
-
-}//fim funçao de pesquisa
 
 //funçao de salvamento
 void salvamentoNoHD()

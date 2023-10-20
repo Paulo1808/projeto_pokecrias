@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/paulo/Documentos/fundamentos/projeto_pokecrias/CodigosPrincipais",
-      "program": "/home/paulo/Documentos/fundamentos/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
+      "cwd": "/home/paulo/Documentos/GitHub/projeto_pokecrias/CodigosPrincipais",
+      "program": "/home/paulo/Documentos/GitHub/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
