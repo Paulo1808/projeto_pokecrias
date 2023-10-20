@@ -82,36 +82,48 @@ void exibeMenu()
 //funçao pesquisa de pokemons
 void PesquisaTipoGen(){
 
-    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");;
-    
+    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
+
     if(ArquivoPokedex == NULL){
         fprintf(stderr, "Erro ao abrir o arquivo\n");
         return 1;
 
     }//msg de erro
 
-     if (ArquivoPokedex == NULL) 
-    {
-
-        fprintf(stderr, "Erro ao abrir o arquivo\n");
-
-        exit(1);
-    }
-
     char numero[50];
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
     
-            printf("Primeira coluna: %s\n", numero);
+        char *token;
+        
+        // Use strtok para dividir a linha em campos
+        token = strtok(numero, ",");
+
+        if (token != NULL) {
+            // Exibe o conteúdo da primeira coluna
+            printf("Primeira coluna: %s\n", token);
+        }
     }
     
+    /*for (int i = 0; i < 5; i++)
+    {
+        fgets(numero[i], sizeof(numero[i]), arquivoPokedex);
+        nmrPokemon[i] = strtok(numero[i], ",");
+        if (nmrPokemon[i] != NULL) {
+            // Exibe o conteúdo da primeira coluna
+            printf("Primeira coluna: %s\n", nmrPokemon[i]);
+        }
+
+    }*/
     
-    fclose("pokedex.csv");
+    fclose(arquivoPokedex);
 
     return 0;
 }
 
+
+}//fim funçao de pesquisa
 
 //funçao de salvamento
 void salvamentoNoHD()
