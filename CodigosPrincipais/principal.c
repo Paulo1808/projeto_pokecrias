@@ -106,18 +106,7 @@ void PesquisaTipoGen(){
         }
     }
     
-    /*for (int i = 0; i < 5; i++)
-    {
-        fgets(numero[i], sizeof(numero[i]), arquivoPokedex);
-        nmrPokemon[i] = strtok(numero[i], ",");
-        if (nmrPokemon[i] != NULL) {
-            // Exibe o conteúdo da primeira coluna
-            printf("Primeira coluna: %s\n", nmrPokemon[i]);
-        }
-
-    }*/
-    
-    fclose(arquivoPokedex);
+    fclose("pokedex.csv");
 
     return 0;
 }
