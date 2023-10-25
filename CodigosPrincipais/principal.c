@@ -108,7 +108,6 @@ void PesquisaTipoGen(){
     
     fclose("pokedex.csv");
 
-    return 0;
 }//fim funçao de pesquisa
 
 //funçao de salvamento
