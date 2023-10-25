@@ -83,6 +83,7 @@ void exibeMenu()
 void PesquisaTipoGen(){
 
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
+    char numero[50];
 
     if(ArquivoPokedex == NULL){
         fprintf(stderr, "Erro ao abrir o arquivo\n");
@@ -90,7 +91,6 @@ void PesquisaTipoGen(){
 
     }//msg de erro
 
-    char numero[50];
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
@@ -109,9 +109,6 @@ void PesquisaTipoGen(){
     fclose("pokedex.csv");
 
     return 0;
-}
-
-
 }//fim funçao de pesquisa
 
 //funçao de salvamento
