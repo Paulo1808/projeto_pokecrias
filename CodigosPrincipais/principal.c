@@ -86,15 +86,13 @@ void PesquisaTipoGen(){
     char numero[50];
 
     if(ArquivoPokedex == NULL){
-        fprintf(stderr, "Erro ao abrir o arquivo\n");
-        return 1;
-
+        printf("Erro ao abrir o arquivo\n");
+        exit(1);
     }//msg de erro
 
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
-    
         char *token;
         
         // Use strtok para dividir a linha em campos
@@ -106,8 +104,7 @@ void PesquisaTipoGen(){
         }
     }
     
-    fclose("pokedex.csv");
-
+    fclose(ArquivoPokedex);
 }//fim funçao de pesquisa
 
 //funçao de salvamento
