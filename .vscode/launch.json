@@ -7,9 +7,15 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
+<<<<<<< Updated upstream
       "externalConsole": false,
       "cwd": "/home/paulo/Documentos/GitHub/projeto_pokecrias/CodigosPrincipais",
       "program": "/home/paulo/Documentos/GitHub/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
+=======
+      "externalConsole": true,
+      "cwd": "c:/Projeto/projeto_pokecrias/CodigosPrincipais",
+      "program": "c:/Projeto/projeto_pokecrias/CodigosPrincipais/build/Debug/outDebug",
+>>>>>>> Stashed changes
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
