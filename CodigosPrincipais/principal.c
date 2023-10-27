@@ -12,7 +12,7 @@ typedef struct{
     char cor;
     int taxa_de_captura, prox_evolucao, pre_evolucao;
     float altura, peso;
-}Pokedex; //definindo struct
+}Pokemon; //definindo struct
 
 typedef struct
 {
@@ -24,6 +24,10 @@ typedef struct
     int pokemon6;
 
 } mochila;// mochila com os pokemons
+
+typedef struct{
+    int *pokemonCapturado;
+}Colecao;
 
 //funçao do menu inicial
 void exibeMenu()
@@ -80,29 +84,8 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
-<<<<<<< Updated upstream
 void PesquisaTipoGen(){
-=======
-int PesquisaTipoGen()
-{
-
-/*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
-
-
-
-    FILE *arquivoPokedex = fopen("pokedex.csv", "r");
-    
-    
-
-    if (arquivoPokedex == NULL) 
-    {
-
-        printf("Erro ao abrir o arquivo\n");
-
-        exit(1);
-    }
->>>>>>> Stashed changes
-
+//usar raylib no linux pra exibir sprite (paulo faz essa boa ai por favor)
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
     char numero[50];
 
@@ -111,6 +94,7 @@ int PesquisaTipoGen()
         exit(1);
     }//msg de erro
 
+    fread()
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
@@ -150,10 +134,15 @@ void gerenciamentoPokemons()
 */
 
 int main(){
-
         exibeMenu();
 
-        
+        Pokemon *bichinhoDaVez;
+        int numero;
+        int tamanho;
+
+        bichinhoDaVez + (Pokemon*) malloc(sizeof(Pokemon) * (tamanho+1));
+        printf("Digite o numero do pokemon capturado");
+        scanf("%i", &numero);
 
 
     return 0;
