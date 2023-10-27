@@ -12,7 +12,7 @@ typedef struct{
     char cor;
     int taxa_de_captura, prox_evolucao, pre_evolucao;
     float altura, peso;
-}Pokedex; //definindo struct
+}Pokemon; //definindo struct
 
 typedef struct
 {
@@ -24,6 +24,10 @@ typedef struct
     int pokemon6;
 
 } mochila;// mochila com os pokemons
+
+typedef struct{
+    int *pokemonCapturado;
+}Colecao;
 
 //funçao do menu inicial
 void exibeMenu()
@@ -99,7 +103,11 @@ void CriaVetorPokedex()
 
 //funçao pesquisa de pokemons
 void PesquisaTipoGen(){
+<<<<<<< HEAD
 
+=======
+//usar raylib no linux pra exibir sprite (paulo faz essa boa ai por favor)
+>>>>>>> a1cbf4614e4435052f5171c664a3881559c0d384
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
     char numero[50];
 
@@ -108,6 +116,7 @@ void PesquisaTipoGen(){
         exit(1);
     }//msg de erro
 
+    fread()
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
@@ -139,11 +148,7 @@ void gerenciamentoPokemons()
 */
 
 int main(){
-
         exibeMenu();
-
-        
-
 
     return 0;
 }//main
