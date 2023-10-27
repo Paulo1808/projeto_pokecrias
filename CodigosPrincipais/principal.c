@@ -136,14 +136,5 @@ void gerenciamentoPokemons()
 int main(){
         exibeMenu();
 
-        Pokemon *bichinhoDaVez;
-        int numero;
-        int tamanho;
-
-        bichinhoDaVez + (Pokemon*) malloc(sizeof(Pokemon) * (tamanho+1));
-        printf("Digite o numero do pokemon capturado");
-        scanf("%i", &numero);
-
-
     return 0;
 }//main
