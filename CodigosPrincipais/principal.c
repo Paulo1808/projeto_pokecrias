@@ -6,7 +6,7 @@
 typedef struct{
     int numero;
     char nome[31], tipo1[31], tipo2[31];
-    int total, ataque, defesa, ataque_especial, defesa_especial;
+    int total, hp,ataque, defesa, ataque_especial, defesa_especial;
     int velocidade, geracao;
     bool lendario;
     char cor;
@@ -58,7 +58,7 @@ void exibeMenu()
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
 
-            PesquisaTipoGen();
+            CriaVetorPokedex();
 
             break;
         case 3:
@@ -78,30 +78,27 @@ void exibeMenu()
 
 
 }//fim funçao do menu
+void CriaVetorPokedex()
+{
+    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
+    Pokedex pokemons[721];
+
+    while (!(feof(ArquivoPokedex)))
+    {
+        for (int i = 0; i < 721; i++)
+        {
+            fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", pokemons[i].nome, pokemons[i].tipo1, pokemons[i].tipo2, pokemons[i].total, pokemons[i].hp, pokemons[i].ataque, pokemons[i].defesa, pokemons[i].ataque_especial, pokemons[i].defesa_especial, pokemons[i].velocidade, pokemons[i].geracao, pokemons[i].velocidade, pokemons[i].cor, pokemons[i].altura, pokemons[i].peso, pokemons[i].taxa_de_captura);
+            printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", pokemons[i].nome, pokemons[i].tipo1, pokemons[i].tipo2, pokemons[i].total, pokemons[i].hp, pokemons[i].ataque, pokemons[i].defesa, pokemons[i].ataque_especial, pokemons[i].defesa_especial, pokemons[i].velocidade, pokemons[i].geracao, pokemons[i].velocidade, pokemons[i].cor, pokemons[i].altura, pokemons[i].peso, pokemons[i].taxa_de_captura);
+        
+        }//for
+        
+    }//while
+    
+}//criaVetorPokedex
+
 
 //funçao pesquisa de pokemons
-<<<<<<< Updated upstream
 void PesquisaTipoGen(){
-=======
-int PesquisaTipoGen()
-{
-
-/*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
-
-
-
-    FILE *arquivoPokedex = fopen("pokedex.csv", "r");
-    
-    
-
-    if (arquivoPokedex == NULL) 
-    {
-
-        printf("Erro ao abrir o arquivo\n");
-
-        exit(1);
-    }
->>>>>>> Stashed changes
 
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
     char numero[50];
@@ -114,15 +111,7 @@ int PesquisaTipoGen()
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
-        char *token;
-        
-        // Use strtok para dividir a linha em campos
-        token = strtok(numero, ",");
 
-        if (token != NULL) {
-            // Exibe o conteúdo da primeira coluna
-            printf("Primeira coluna: %s\n", token);
-        }
     }
     
     fclose(ArquivoPokedex);
