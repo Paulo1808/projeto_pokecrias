@@ -80,28 +80,7 @@ void exibeMenu()
 }//fim funçao do menu
 
 //funçao pesquisa de pokemons
-<<<<<<< Updated upstream
 void PesquisaTipoGen(){
-=======
-int PesquisaTipoGen()
-{
-
-/*tentativa falha de fazer a exibiçao de itens da tabela no terminal*/
-
-
-
-    FILE *arquivoPokedex = fopen("pokedex.csv", "r");
-    
-    
-
-    if (arquivoPokedex == NULL) 
-    {
-
-        printf("Erro ao abrir o arquivo\n");
-
-        exit(1);
-    }
->>>>>>> Stashed changes
 
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
     char numero[50];
