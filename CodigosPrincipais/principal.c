@@ -177,7 +177,9 @@ void gerenciamentoPokemons()
 */
 
 int main(){
+    printf("oiii\n");
         exibeMenu();
 
     return 0;
 }//main
+
