@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "cabecalho.h"
 
 typedef struct{
     int numero;
