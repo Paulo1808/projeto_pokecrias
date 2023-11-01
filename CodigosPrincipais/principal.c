@@ -6,7 +6,7 @@
 typedef struct{
     int numero;
     char nome[31], tipo1[31], tipo2[31];
-    int total, ataque, defesa, ataque_especial, defesa_especial;
+    int total, hp,ataque, defesa, ataque_especial, defesa_especial;
     int velocidade, geracao;
     bool lendario;
     char cor;
@@ -62,7 +62,7 @@ void exibeMenu()
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
 
-            PesquisaTipoGen();
+            CriaVetorPokedex();
 
             break;
         case 3:
@@ -82,6 +82,56 @@ void exibeMenu()
 
 
 }//fim funçao do menu
+void CriaVetorPokedex()
+{
+    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
+    Pokemon pokedexGeral[722];
+
+    while (!(feof(ArquivoPokedex)))
+    {
+        for (int i = 1; i < 722; i++)
+        {
+            fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
+            pokedexGeral[i].nome, 
+            pokedexGeral[i].tipo1, 
+            pokedexGeral[i].tipo2, 
+            pokedexGeral[i].total, 
+            pokedexGeral[i].hp, 
+            pokedexGeral[i].ataque, 
+            pokedexGeral[i].defesa, 
+            pokedexGeral[i].ataque_especial, 
+            pokedexGeral[i].defesa_especial, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].geracao, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].cor, 
+            pokedexGeral[i].altura, 
+            pokedexGeral[i].peso, 
+            pokedexGeral[i].taxa_de_captura);
+            printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
+            pokedexGeral[i].nome, 
+            pokedexGeral[i].tipo1, 
+            pokedexGeral[i].tipo2, 
+            pokedexGeral[i].total, 
+            pokedexGeral[i].hp, 
+            pokedexGeral[i].ataque, 
+            pokedexGeral[i].defesa, 
+            pokedexGeral[i].ataque_especial, 
+            pokedexGeral[i].defesa_especial, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].geracao, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].cor, 
+            pokedexGeral[i].altura, 
+            pokedexGeral[i].peso, 
+            pokedexGeral[i].taxa_de_captura);
+        }//for
+        
+    }//while
+    
+    fclose(ArquivoPokedex);
+}//criaVetorPokedex
+
 
 //funçao pesquisa de pokemons
 void PesquisaTipoGen(){
@@ -93,21 +143,14 @@ void PesquisaTipoGen(){
         exit(1);
     }//msg de erro
 
-    fread()
+    /*
+    fread();
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
-        char *token;
-        
-        // Use strtok para dividir a linha em campos
-        token = strtok(numero, ",");
 
-        if (token != NULL) {
-            // Exibe o conteúdo da primeira coluna
-            printf("Primeira coluna: %s\n", token);
-        }
     }
-    
+    */
     fclose(ArquivoPokedex);
 }//fim funçao de pesquisa
 
@@ -134,15 +177,6 @@ void gerenciamentoPokemons()
 
 int main(){
         exibeMenu();
-
-        Pokemon *bichinhoDaVez;
-        int numero;
-        int tamanho;
-
-        bichinhoDaVez + (Pokemon*) malloc(sizeof(Pokemon) * (tamanho+1));
-        printf("Digite o numero do pokemon capturado");
-        scanf("%i", &numero);
-
 
     return 0;
 }//main
