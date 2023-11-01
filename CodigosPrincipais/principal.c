@@ -136,8 +136,6 @@ void CriaVetorPokedex()
 
 //funçao pesquisa de pokemons
 void PesquisaTipoGen(){
-
-//usar raylib no linux pra exibir sprite (paulo faz essa boa ai por favor)
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
     char numero[50];
 
