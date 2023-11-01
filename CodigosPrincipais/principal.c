@@ -12,7 +12,7 @@ typedef struct{
     char cor;
     int taxa_de_captura, prox_evolucao, pre_evolucao;
     float altura, peso;
-}Pokedex; //definindo struct
+}Pokemon; //definindo struct
 
 typedef struct
 {
@@ -24,6 +24,10 @@ typedef struct
     int pokemon6;
 
 } mochila;// mochila com os pokemons
+
+typedef struct{
+    int *pokemonCapturado;
+}Colecao;
 
 //funçao do menu inicial
 void exibeMenu()
@@ -81,7 +85,6 @@ void exibeMenu()
 
 //funçao pesquisa de pokemons
 void PesquisaTipoGen(){
-
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
     char numero[50];
 
@@ -90,6 +93,7 @@ void PesquisaTipoGen(){
         exit(1);
     }//msg de erro
 
+    fread()
 
     while (fgets(numero, sizeof(numero), ArquivoPokedex))
     {
@@ -129,10 +133,15 @@ void gerenciamentoPokemons()
 */
 
 int main(){
-
         exibeMenu();
 
-        
+        Pokemon *bichinhoDaVez;
+        int numero;
+        int tamanho;
+
+        bichinhoDaVez + (Pokemon*) malloc(sizeof(Pokemon) * (tamanho+1));
+        printf("Digite o numero do pokemon capturado");
+        scanf("%i", &numero);
 
 
     return 0;
