@@ -91,9 +91,40 @@ void CriaVetorPokedex()
     {
         for (int i = 1; i < 722; i++)
         {
-            fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", pokedexGeral[i].nome, pokedexGeral[i].tipo1, pokedexGeral[i].tipo2, pokedexGeral[i].total, pokedexGeral[i].hp, pokedexGeral[i].ataque, pokedexGeral[i].defesa, pokedexGeral[i].ataque_especial, pokedexGeral[i].defesa_especial, pokedexGeral[i].velocidade, pokedexGeral[i].geracao, pokedexGeral[i].velocidade, pokedexGeral[i].cor, pokedexGeral[i].altura, pokedexGeral[i].peso, pokedexGeral[i].taxa_de_captura);
-            printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", pokedexGeral[i].nome, pokedexGeral[i].tipo1, pokedexGeral[i].tipo2, pokedexGeral[i].total, pokedexGeral[i].hp, pokedexGeral[i].ataque, pokedexGeral[i].defesa, pokedexGeral[i].ataque_especial, pokedexGeral[i].defesa_especial, pokedexGeral[i].velocidade, pokedexGeral[i].geracao, pokedexGeral[i].velocidade, pokedexGeral[i].cor, pokedexGeral[i].altura, pokedexGeral[i].peso, pokedexGeral[i].taxa_de_captura);
-        
+            fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
+            pokedexGeral[i].nome, 
+            pokedexGeral[i].tipo1, 
+            pokedexGeral[i].tipo2, 
+            pokedexGeral[i].total, 
+            pokedexGeral[i].hp, 
+            pokedexGeral[i].ataque, 
+            pokedexGeral[i].defesa, 
+            pokedexGeral[i].ataque_especial, 
+            pokedexGeral[i].defesa_especial, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].geracao, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].cor, 
+            pokedexGeral[i].altura, 
+            pokedexGeral[i].peso, 
+            pokedexGeral[i].taxa_de_captura);
+            printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
+            pokedexGeral[i].nome, 
+            pokedexGeral[i].tipo1, 
+            pokedexGeral[i].tipo2, 
+            pokedexGeral[i].total, 
+            pokedexGeral[i].hp, 
+            pokedexGeral[i].ataque, 
+            pokedexGeral[i].defesa, 
+            pokedexGeral[i].ataque_especial, 
+            pokedexGeral[i].defesa_especial, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].geracao, 
+            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].cor, 
+            pokedexGeral[i].altura, 
+            pokedexGeral[i].peso, 
+            pokedexGeral[i].taxa_de_captura);
         }//for
         
     }//while
