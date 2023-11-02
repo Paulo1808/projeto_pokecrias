@@ -13,7 +13,7 @@ typedef struct{
     char cor;
     int taxa_de_captura, prox_evolucao, pre_evolucao;
     float altura, peso;
-}Pokemon; //definindo struct
+}Pokemon; //definindo struct com as infos de cada pokemon
 
 typedef struct
 {
@@ -24,11 +24,11 @@ typedef struct
     int pokemon5;
     int pokemon6;
 
-} mochila;// mochila com os pokemons
+}mochila;// mochila com os pokemons
 
 typedef struct{
     int *pokemonCapturado;
-}Colecao;
+}Colecao; //struct coleçao
 
 //funçao do menu inicial
 void exibeMenu()
@@ -36,7 +36,7 @@ void exibeMenu()
     char* nickname = NULL;
     int tam = 21;
 
-    nickname = (char*) malloc (tam * sizeof(char));
+    nickname = (char*) malloc (tam * sizeof(char)); //aloca dinamicamente o tamanho do nome inserido
     int opcao;
 
         printf("Bem vindo ao Menu inicial!!!\n");
@@ -44,17 +44,18 @@ void exibeMenu()
         setbuf(stdin, NULL);
         fgets(nickname, 20, stdin);
         nickname[strcspn(nickname, "\n")] = '\0';
-        setbuf(stdin, NULL);
+        setbuf(stdin, NULL); //recebe o nome inserido
 
         printf("Bom, vamos lá %s!\n", nickname);
         printf("Escolha uma opção para iniciar:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
-        printf("3 - Mecanicas do Jogo\n");
+        printf("3 - Mecanicas do Jogo\n"); //menu do jogo
+        printf("4 - Fechar o jogo\n");
 
         scanf("%i", &opcao);
 
-        switch (opcao)
+        switch (opcao) //executa a opçao escolhida
         {
         case 1:
             printf("Envia para a funçao de inicio de jogo\n");
@@ -71,7 +72,7 @@ void exibeMenu()
 
             break;
         case 4:
-            printf("Fecha o jogo\n");
+            printf("Fechando o jogo...\n");
 
             break;
         
@@ -83,14 +84,15 @@ void exibeMenu()
 
 
 }//fim funçao do menu
+
 void CriaVetorPokedex()
 {
-    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
-    Pokemon pokedexGeral[722];
+    FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
+    Pokemon pokedexGeral[722]; 
 
     while (!(feof(ArquivoPokedex)))
     {
-        for (int i = 1; i < 722; i++)
+        for (int i = 1; i < 722; i++) //lê as informaçoes de cada pokemon
         {
             fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
             pokedexGeral[i].nome, 
@@ -109,6 +111,8 @@ void CriaVetorPokedex()
             pokedexGeral[i].altura, 
             pokedexGeral[i].peso, 
             pokedexGeral[i].taxa_de_captura);
+
+            //exibe as informaçoes de cada pokemon
             printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
             pokedexGeral[i].nome, 
             pokedexGeral[i].tipo1, 
@@ -130,13 +134,13 @@ void CriaVetorPokedex()
         
     }//while
     
-    fclose(ArquivoPokedex);
+    fclose(ArquivoPokedex); //fecha o arquivo
 }//criaVetorPokedex
 
 
 //funçao pesquisa de pokemons
 void PesquisaTipoGen(){
-    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
+    FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo com as informaçoes dos pokemons
     char numero[50];
 
     if(ArquivoPokedex == NULL){
@@ -152,7 +156,7 @@ void PesquisaTipoGen(){
 
     }
     */
-    fclose(ArquivoPokedex);
+    fclose(ArquivoPokedex); //fecha o arquivo
 }//fim funçao de pesquisa
 
 //funçao de salvamento
@@ -170,7 +174,7 @@ void gerenciamentoPokemons()
 //funçoes necessarias
 //-------------------
 /*
-1- Menus e submenus
+1- Menus e submenus ----------- (menu já está feito)
 2- pesquisa por tipo e geração
 3- salvamento em binario 
 4- gerenciamento dos pokemons obtidos
