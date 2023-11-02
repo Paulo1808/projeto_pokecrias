@@ -138,24 +138,24 @@ void CriaVetorPokedex()
 }//criaVetorPokedex
 
 
-//funçao pesquisa de pokemons
 void PesquisaTipoGen(){
     FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo com as informaçoes dos pokemons
     char numero[50];
 
-    if(ArquivoPokedex == NULL){
-        printf("Erro ao abrir o arquivo\n");
-        exit(1);
-    }//msg de erro
 
-    /*
-    fread();
 
-    while (fgets(numero, sizeof(numero), ArquivoPokedex))
+    FILE *arquivoPokedex = fopen("pokedex.csv", "r");
+    
+    
+
+    if (arquivoPokedex == NULL) 
     {
 
+        fprintf(stderr, "Erro ao abrir o arquivo\n");
+
+        exit(1);
     }
-    */
+    
     fclose(ArquivoPokedex); //fecha o arquivo
 }//fim funçao de pesquisa
 
