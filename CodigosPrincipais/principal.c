@@ -128,7 +128,7 @@ void CriaVetorPokedex()
                 }
                 else
                 {
-                    fscanf(ArquivoPokedex, "%i ,%s ,%s ,%s ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%s ,%f ,%f ,%i \n", 
+                    fscanf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
                     &pokedexGeral[i].numero,
                     pokedexGeral[i].nome, 
                     pokedexGeral[i].tipo1, 
@@ -154,7 +154,7 @@ void CriaVetorPokedex()
         for (int i = 1; i < 722; i++)
             {
                 //exibe as informaçoes de cada pokemon
-                printf("%i ,%s ,%s ,%s ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%s ,%f ,%f ,%i \n", 
+                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
                 pokedexGeral[i].numero,
                 pokedexGeral[i].nome, 
                 pokedexGeral[i].tipo1, 
@@ -184,8 +184,17 @@ void PesquisaTipoGen(){
     //variaveis 
     int opcao;
     int numeroGeracao;
+<<<<<<< HEAD
     char tipoPokemon[21];
     Pokemon pokedex[722];
+=======
+    char TipoPokemon[21];
+
+
+
+    
+    
+>>>>>>> 13780ac13a8eda1c3f1d1e48fee01186265a974d
 
     //abertura do arquivo
     FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo com as informaçoes dos pokemons
