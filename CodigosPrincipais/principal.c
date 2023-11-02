@@ -149,7 +149,7 @@ void CriaVetorPokedex(Pokemon pokedexGeral[])
     fclose(ArquivoPokedex); //fecha o arquivo
 }//criaVetorPokedex
 
-
+//funçao pra pesquisar o tipo
 void PesquisaTipoGen(){
     
     //variaveis 
@@ -159,24 +159,24 @@ void PesquisaTipoGen(){
     char tipoPokemon[21];
     Pokemon pokedex[722];
 
-    //cria o vetro de todos os pokemons
+    //cria o vetor de todos os pokemons
     CriaVetorPokedex(pokedex);
 
     printf("Qual parametro deseja pesquisar:\n");
     printf("1 - Tipo dos pokemons(sendo tipo primário e secundário)\n");
     printf("2 - Geraçao dos pokemons\n");
     printf("3 - Nome do pokemon\n");
-    scanf("%i", &opcao);
+    scanf("%i", &opcao); //recebe a opçao
 
     switch (opcao)
     {
-    case 1:
+    case 1: //tipo do pokemon
         
-        printf("Digite o Tipo em que desejaver os pokemons:\n");
+        printf("Digite o Tipo em que deseja ver os pokemons:\n");
         setbuf(stdin, NULL);
         fgets(tipoPokemon, 20, stdin);
         tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
-        setbuf(stdin, NULL);
+        setbuf(stdin, NULL); //recebe o tipo
 
         for (int i = 1; i < 722; i++)
         {
@@ -184,7 +184,7 @@ void PesquisaTipoGen(){
             {
                 printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
                 pokedex[i].numero,
-                pokedex[i].nome, 
+                pokedex[i].nome,                         /*exibe as infos dos pokemons*/
                 pokedex[i].tipo1, 
                 pokedex[i].tipo2, 
                 pokedex[i].total, 
@@ -206,7 +206,7 @@ void PesquisaTipoGen(){
         }//for 
         
         break;
-    case 2:
+    case 2:  //geraçao dos pokemons
 
         do
         {
@@ -243,7 +243,7 @@ void PesquisaTipoGen(){
         }
         
         break;
-    case 3:
+    case 3: //nome do pokemon
         printf("Digite o nome do pokemon:\n");
         setbuf(stdin, NULL);
         fgets(nomePokemon, 20, stdin);
