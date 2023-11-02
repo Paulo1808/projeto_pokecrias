@@ -155,6 +155,7 @@ void PesquisaTipoGen(){
     //variaveis 
     int opcao;
     int numeroGeracao;
+    char nomePokemon[21];
     char tipoPokemon[21];
     Pokemon pokedex[722];
 
@@ -164,6 +165,7 @@ void PesquisaTipoGen(){
     printf("Qual parametro deseja pesquisar:\n");
     printf("1 - Tipo dos pokemons(sendo tipo primário e secundário)\n");
     printf("2 - Geraçao dos pokemons\n");
+    printf("3 - Nome do pokemon\n");
     scanf("%i", &opcao);
 
     switch (opcao)
@@ -178,7 +180,7 @@ void PesquisaTipoGen(){
 
         for (int i = 1; i < 722; i++)
         {
-            if (strcmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcmp(tipoPokemon, pokedex[i].tipo2) == 0)
+            if (strcasecmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcasecmp(tipoPokemon, pokedex[i].tipo2) == 0)
             {
                 printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
                 pokedex[i].numero,
@@ -240,12 +242,48 @@ void PesquisaTipoGen(){
             }//if
         }
         
-        
+        break;
+    case 3:
+        printf("Digite o nome do pokemon:\n");
+        setbuf(stdin, NULL);
+        fgets(nomePokemon, 20, stdin);
+        nomePokemon[strcspn(nomePokemon, "\n")] = '\0';
+        setbuf(stdin, NULL);
+
+        for (int i = 1; i < 722; i++)
+        {
+            if (strcasecmp(nomePokemon, pokedex[i].nome) == 0)
+            {
+                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                pokedex[i].numero,
+                pokedex[i].nome, 
+                pokedex[i].tipo1, 
+                pokedex[i].tipo2, 
+                pokedex[i].total, 
+                pokedex[i].hp, 
+                pokedex[i].ataque, 
+                pokedex[i].defesa, 
+                pokedex[i].ataque_especial, 
+                pokedex[i].defesa_especial, 
+                pokedex[i].velocidade, 
+                pokedex[i].geracao, 
+                pokedex[i].lendario, 
+                pokedex[i].cor, 
+                pokedex[i].altura, 
+                pokedex[i].peso, 
+                pokedex[i].taxa_de_captura);
+
+                break;
+
+            }//if
+
+        }//for
+
         break;
 
     default:
         break;
-    }
+    }//switch
 
 }//fim funçao de pesquisa
 
