@@ -157,9 +157,9 @@ void PesquisaTipoGen()
                 {
                     if (strcasecmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcasecmp(tipoPokemon, pokedex[i].tipo2) == 0)
                     {
-                        printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                        printf("|%3i|%-12s|%-12s|%-12s|%3i|%3i|%3i|%3i|%3i|%3i|%3i|%i|%i|%-8s|%5.2f|%6.2f|%3i|\n", 
                         pokedex[i].numero,
-                        pokedex[i].nome,                         /*exibe as infos dos pokemons*/
+                        pokedex[i].nome,                         //exibe as infos dos pokemons
                         pokedex[i].tipo1, 
                         pokedex[i].tipo2, 
                         pokedex[i].total, 
@@ -175,7 +175,6 @@ void PesquisaTipoGen()
                         pokedex[i].altura, 
                         pokedex[i].peso, 
                         pokedex[i].taxa_de_captura);
-
                     }//if
 
                 }//for 
@@ -194,7 +193,7 @@ void PesquisaTipoGen()
                 {
                     if (numeroGeracao == pokedex[i].geracao)
                     {
-                        printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                        printf("|%3i|%-12s|%-12s|%-12s|%3i|%3i|%3i|%3i|%3i|%3i|%3i|%i|%i|%-8s|%5.2f|%6.2f|%3i|\n", 
                         pokedex[i].numero,
                         pokedex[i].nome, 
                         pokedex[i].tipo1, 
@@ -229,9 +228,9 @@ void PesquisaTipoGen()
                 {
                     if (strcasecmp(nomePokemon, pokedex[i].nome) == 0)
                     {
-                        printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                        printf("Numero: %3i\nNome: %-12s\nTipo 1: %-12s\nTipo 2: %-12s\nTotal: %3i\nHP: %3i\nAtaque: %3i\nDefesa: %3i\nAt. Especial: %3i\nDf. Especial: %3i\n Velocidade: %3i\nGeração: %i\nLendário: %i\nCor: %-8sAltura: %5.2f\nPeso: %6.2f\nTaxa Captura: %3i\n", 
                         pokedex[i].numero,
-                        pokedex[i].nome, 
+                        pokedex[i].nome,                         /*exibe as infos do pokemon*/
                         pokedex[i].tipo1, 
                         pokedex[i].tipo2, 
                         pokedex[i].total, 
