@@ -98,9 +98,7 @@ void CriaVetorPokedex(Pokemon pokedexGeral[])
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     
     fseek(ArquivoPokedex, 0, SEEK_SET);
-
-
-
+    
         for (int i = 0; i < 722; i++)
         {
                 if (i == 0)
