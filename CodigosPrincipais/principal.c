@@ -256,7 +256,6 @@ void PesquisaTipoGen()
         default:
             break;
     }//switch
-
 }//fim funçao de pesquisa
 
 //funçao de salvamento
