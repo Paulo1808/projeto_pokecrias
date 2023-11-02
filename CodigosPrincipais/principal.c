@@ -93,12 +93,10 @@ void exibeMenu()
 
 }//fim funçao do menu
 
-void CriaVetorPokedex()
+void CriaVetorPokedex(Pokemon pokedexGeral[])
 {
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     
-    Pokemon pokedexGeral[722];
-
     fseek(ArquivoPokedex, 0, SEEK_SET);
 
 
@@ -163,7 +161,7 @@ void PesquisaTipoGen(){
     Pokemon pokedex[722];
 
     //cria o vetro de todos os pokemons
-    CriaVetorPokedex();
+    CriaVetorPokedex(pokedex);
 
     printf("Qual parametro deseja pesquisar:\n");
     printf("1 - Tipo dos pokemons(sendo tipo primário e secundário)\n");
