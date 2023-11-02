@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "cabecalho.h"
 
-
-typedef struct{
+typedef struct
+{
     int numero;
     char nome[31], tipo1[31], tipo2[31];
     int total, hp,ataque, defesa, ataque_especial, defesa_especial;
@@ -19,9 +18,7 @@ typedef struct{
 typedef struct
 {
     int prox_evolucao, pre_evolucao;
-
 }evolucoes;
-
 
 typedef struct
 {
@@ -47,32 +44,30 @@ void exibeMenu()
     nickname = (char*) malloc (tam * sizeof(char)); //aloca dinamicamente o tamanho do nome inserido
     int opcao;
 
-        printf("Bem vindo ao Menu inicial!!!\n");
-        printf("Primeiramente, me diga seu nickname para que possamos continuar:\n");
-        setbuf(stdin, NULL);
-        fgets(nickname, 20, stdin);
-        nickname[strcspn(nickname, "\n")] = '\0';
-        setbuf(stdin, NULL); //recebe o nome inserido
+    printf("Bem vindo ao Menu inicial!!!\n");
+    printf("Primeiramente, me diga seu nickname para que possamos continuar:\n");
+    setbuf(stdin, NULL);
+    fgets(nickname, 20, stdin);
+    nickname[strcspn(nickname, "\n")] = '\0';
+    setbuf(stdin, NULL); //recebe o nome inserido
 
-        printf("Bom, vamos lá %s!\n", nickname);
-        printf("Escolha uma opção para iniciar:\n");
-        printf("1 - Novo Jogo\n");
-        printf("2 - Carregar Jogo\n");
-        printf("3 - Mecanicas do Jogo\n"); //menu do jogo
-        printf("4 - Fechar o jogo\n");
+    printf("Bom, vamos lá %s!\n", nickname);
+    printf("Escolha uma opção para iniciar:\n");
+    printf("1 - Novo Jogo\n");
+    printf("2 - Carregar Jogo\n");
+    printf("3 - Mecanicas do Jogo\n"); //menu do jogo
+    printf("4 - Fechar o jogo\n");
 
-        scanf("%i", &opcao);
+    scanf("%i", &opcao);
 
-        switch (opcao) //executa a opçao escolhida
-        {
+    switch (opcao) //executa a opçao escolhida
+    {
         case 1:
             printf("Envia para a funçao de inicio de jogo\n");
             PesquisaTipoGen();
             break;
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
-
-            CriaVetorPokedex();
 
             break;
         case 3:
@@ -88,9 +83,7 @@ void exibeMenu()
             printf("Opção invalida...");
 
             break;
-        }
-
-
+    }
 }//fim funçao do menu
 
 void CriaVetorPokedex(Pokemon pokedexGeral[])
@@ -98,154 +91,171 @@ void CriaVetorPokedex(Pokemon pokedexGeral[])
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     
     fseek(ArquivoPokedex, 0, SEEK_SET);
-    
-        for (int i = 0; i < 722; i++)
+
+    for (int i = 0; i < 722; i++)
+    {
+        if (i == 0)
         {
-                if (i == 0)
-                {
-                    fscanf(ArquivoPokedex, "%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n", 
-                    &pokedexGeral[i].numero,
-                    pokedexGeral[i].nome, 
-                    pokedexGeral[i].tipo1, 
-                    pokedexGeral[i].tipo2, 
-                    &pokedexGeral[i].total, 
-                    &pokedexGeral[i].hp, 
-                    &pokedexGeral[i].ataque, 
-                    &pokedexGeral[i].defesa, 
-                    &pokedexGeral[i].ataque_especial, 
-                    &pokedexGeral[i].defesa_especial, 
-                    &pokedexGeral[i].velocidade, 
-                    &pokedexGeral[i].geracao, 
-                    &pokedexGeral[i].lendario, 
-                    pokedexGeral[i].cor, 
-                    &pokedexGeral[i].altura, 
-                    &pokedexGeral[i].peso, 
-                    &pokedexGeral[i].taxa_de_captura);
-                }
-                else
-                {
-                    fscanf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
-                    &pokedexGeral[i].numero,
-                    pokedexGeral[i].nome, 
-                    pokedexGeral[i].tipo1, 
-                    pokedexGeral[i].tipo2, 
-                    &pokedexGeral[i].total, 
-                    &pokedexGeral[i].hp, 
-                    &pokedexGeral[i].ataque, 
-                    &pokedexGeral[i].defesa, 
-                    &pokedexGeral[i].ataque_especial, 
-                    &pokedexGeral[i].defesa_especial, 
-                    &pokedexGeral[i].velocidade, 
-                    &pokedexGeral[i].geracao, 
-                    &pokedexGeral[i].lendario, 
-                    pokedexGeral[i].cor, 
-                    &pokedexGeral[i].altura, 
-                    &pokedexGeral[i].peso, 
-                    &pokedexGeral[i].taxa_de_captura);
-                }
-                
+            do{
+            fseek(ArquivoPokedex, 1, SEEK_CUR);
+            }while(fgetc(ArquivoPokedex) != '\n');
         }
+
+        fscanf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
+        &pokedexGeral[i].numero,
+        pokedexGeral[i].nome, 
+        pokedexGeral[i].tipo1, 
+        pokedexGeral[i].tipo2, 
+        &pokedexGeral[i].total, 
+        &pokedexGeral[i].hp, 
+        &pokedexGeral[i].ataque, 
+        &pokedexGeral[i].defesa, 
+        &pokedexGeral[i].ataque_especial, 
+        &pokedexGeral[i].defesa_especial, 
+        &pokedexGeral[i].velocidade, 
+        &pokedexGeral[i].geracao, 
+        &pokedexGeral[i].lendario, 
+        pokedexGeral[i].cor, 
+        &pokedexGeral[i].altura, 
+        &pokedexGeral[i].peso, 
+        &pokedexGeral[i].taxa_de_captura);
+    }//for
 
     fclose(ArquivoPokedex); //fecha o arquivo
 }//criaVetorPokedex
 
-
-void PesquisaTipoGen(){
-    
+//funçao pra pesquisar o tipo
+void PesquisaTipoGen()
+{    
     //variaveis 
     int opcao;
     int numeroGeracao;
+    char nomePokemon[21];
     char tipoPokemon[21];
     Pokemon pokedex[722];
 
-    //cria o vetro de todos os pokemons
+    //cria o vetor de todos os pokemons
     CriaVetorPokedex(pokedex);
 
     printf("Qual parametro deseja pesquisar:\n");
     printf("1 - Tipo dos pokemons(sendo tipo primário e secundário)\n");
     printf("2 - Geraçao dos pokemons\n");
-    scanf("%i", &opcao);
+    printf("3 - Nome do pokemon\n");
+    scanf("%i", &opcao); //recebe a opçao
 
     switch (opcao)
     {
-    case 1:
+        case 1: //tipo do pokemon
         
-        printf("Digite o Tipo em que desejaver os pokemons:\n");
-        setbuf(stdin, NULL);
-        fgets(tipoPokemon, 20, stdin);
-        tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
-        setbuf(stdin, NULL);
+                printf("Digite o Tipo em que deseja ver os pokemons:\n");
+                setbuf(stdin, NULL);
+                fgets(tipoPokemon, 20, stdin);
+                tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
+                setbuf(stdin, NULL); //recebe o tipo
 
-        for (int i = 1; i < 722; i++)
-        {
-            if (strcmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcmp(tipoPokemon, pokedex[i].tipo2) == 0)
-            {
-                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
-                pokedex[i].numero,
-                pokedex[i].nome, 
-                pokedex[i].tipo1, 
-                pokedex[i].tipo2, 
-                pokedex[i].total, 
-                pokedex[i].hp, 
-                pokedex[i].ataque, 
-                pokedex[i].defesa, 
-                pokedex[i].ataque_especial, 
-                pokedex[i].defesa_especial, 
-                pokedex[i].velocidade, 
-                pokedex[i].geracao, 
-                pokedex[i].lendario, 
-                pokedex[i].cor, 
-                pokedex[i].altura, 
-                pokedex[i].peso, 
-                pokedex[i].taxa_de_captura);
+                for (int i = 1; i < 722; i++)
+                {
+                    if (strcasecmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcasecmp(tipoPokemon, pokedex[i].tipo2) == 0)
+                    {
+                        printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                        pokedex[i].numero,
+                        pokedex[i].nome,                         /*exibe as infos dos pokemons*/
+                        pokedex[i].tipo1, 
+                        pokedex[i].tipo2, 
+                        pokedex[i].total, 
+                        pokedex[i].hp, 
+                        pokedex[i].ataque, 
+                        pokedex[i].defesa, 
+                        pokedex[i].ataque_especial, 
+                        pokedex[i].defesa_especial, 
+                        pokedex[i].velocidade, 
+                        pokedex[i].geracao, 
+                        pokedex[i].lendario, 
+                        pokedex[i].cor, 
+                        pokedex[i].altura, 
+                        pokedex[i].peso, 
+                        pokedex[i].taxa_de_captura);
 
-            }//if
+                    }//if
 
-        }//for 
-        
+                }//for 
         break;
-    case 2:
-
-        do
-        {
-
-            printf("Digite o número da geração a ser exibida\n:");
-            scanf("%i", &numeroGeracao);
-    
-        } while (numeroGeracao < 0 || numeroGeracao > 6);
-
-        for (int i = 1; i < 722; i++)
-        {
-            if (numeroGeracao == pokedex[i].geracao)
-            {
-                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
-                pokedex[i].numero,
-                pokedex[i].nome, 
-                pokedex[i].tipo1, 
-                pokedex[i].tipo2, 
-                pokedex[i].total, 
-                pokedex[i].hp, 
-                pokedex[i].ataque, 
-                pokedex[i].defesa, 
-                pokedex[i].ataque_especial, 
-                pokedex[i].defesa_especial, 
-                pokedex[i].velocidade, 
-                pokedex[i].geracao, 
-                pokedex[i].lendario, 
-                pokedex[i].cor, 
-                pokedex[i].altura, 
-                pokedex[i].peso, 
-                pokedex[i].taxa_de_captura);
-
-            }//if
-        }
         
-        
-        break;
+        case 2:  //geraçao dos pokemons
 
-    default:
+                do
+                {
+                    printf("Digite o número da geração a ser exibida\n:");
+                    scanf("%i", &numeroGeracao);
+            
+                } while (numeroGeracao < 0 || numeroGeracao > 6);
+
+                for (int i = 1; i < 722; i++)
+                {
+                    if (numeroGeracao == pokedex[i].geracao)
+                    {
+                        printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                        pokedex[i].numero,
+                        pokedex[i].nome, 
+                        pokedex[i].tipo1, 
+                        pokedex[i].tipo2, 
+                        pokedex[i].total, 
+                        pokedex[i].hp, 
+                        pokedex[i].ataque, 
+                        pokedex[i].defesa, 
+                        pokedex[i].ataque_especial, 
+                        pokedex[i].defesa_especial, 
+                        pokedex[i].velocidade, 
+                        pokedex[i].geracao, 
+                        pokedex[i].lendario, 
+                        pokedex[i].cor, 
+                        pokedex[i].altura, 
+                        pokedex[i].peso, 
+                        pokedex[i].taxa_de_captura);
+
+                    }//if
+                }
+                
         break;
-    }
+        
+        case 3: //nome do pokemon
+                printf("Digite o nome do pokemon:\n");
+                setbuf(stdin, NULL);
+                fgets(nomePokemon, 20, stdin);
+                nomePokemon[strcspn(nomePokemon, "\n")] = '\0';
+                setbuf(stdin, NULL);
+
+                for (int i = 1; i < 722; i++)
+                {
+                    if (strcasecmp(nomePokemon, pokedex[i].nome) == 0)
+                    {
+                        printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                        pokedex[i].numero,
+                        pokedex[i].nome, 
+                        pokedex[i].tipo1, 
+                        pokedex[i].tipo2, 
+                        pokedex[i].total, 
+                        pokedex[i].hp, 
+                        pokedex[i].ataque, 
+                        pokedex[i].defesa, 
+                        pokedex[i].ataque_especial, 
+                        pokedex[i].defesa_especial, 
+                        pokedex[i].velocidade, 
+                        pokedex[i].geracao, 
+                        pokedex[i].lendario, 
+                        pokedex[i].cor, 
+                        pokedex[i].altura, 
+                        pokedex[i].peso, 
+                        pokedex[i].taxa_de_captura);
+
+                        break;
+                    }//if
+                }//for
+            break;
+
+        default:
+            break;
+    }//switch
 
 }//fim funçao de pesquisa
 
@@ -275,4 +285,3 @@ int main(){
         
     return 0;
 }//main
-
