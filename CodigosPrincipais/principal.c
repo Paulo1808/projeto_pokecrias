@@ -89,31 +89,34 @@ void CriaVetorPokedex()
 {
     FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo da pokedex
     Pokemon pokedexGeral[722];
+    fseek(ArquivoPokedex, 0, SEEK_SET);
 
     while (!(feof(ArquivoPokedex)))
     {
         for (int i = 1; i < 722; i++) //lê as informaçoes de cada pokemon
         {
-            fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
-            pokedexGeral[i].nome, 
-            pokedexGeral[i].tipo1, 
-            pokedexGeral[i].tipo2, 
-            pokedexGeral[i].total, 
-            pokedexGeral[i].hp, 
-            pokedexGeral[i].ataque, 
-            pokedexGeral[i].defesa, 
-            pokedexGeral[i].ataque_especial, 
-            pokedexGeral[i].defesa_especial, 
-            pokedexGeral[i].velocidade, 
-            pokedexGeral[i].geracao, 
-            pokedexGeral[i].velocidade, 
-            pokedexGeral[i].cor, 
-            pokedexGeral[i].altura, 
-            pokedexGeral[i].peso, 
-            pokedexGeral[i].taxa_de_captura);
+            fscanf(ArquivoPokedex, "%i ,%s ,%s ,%s ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%s ,%f ,%f ,%i \n", 
+            &pokedexGeral[i].numero,
+            &pokedexGeral[i].nome, 
+            &pokedexGeral[i].tipo1, 
+            &pokedexGeral[i].tipo2, 
+            &pokedexGeral[i].total, 
+            &pokedexGeral[i].hp, 
+            &pokedexGeral[i].ataque, 
+            &pokedexGeral[i].defesa, 
+            &pokedexGeral[i].ataque_especial, 
+            &pokedexGeral[i].defesa_especial, 
+            &pokedexGeral[i].velocidade, 
+            &pokedexGeral[i].geracao, 
+            &pokedexGeral[i].lendario, 
+            &pokedexGeral[i].cor, 
+            &pokedexGeral[i].altura, 
+            &pokedexGeral[i].peso, 
+            &pokedexGeral[i].taxa_de_captura);
 
             //exibe as informaçoes de cada pokemon
-            printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
+            printf("%i ,%s ,%s ,%s ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%i ,%s ,%f ,%f ,%i \n", 
+            pokedexGeral[i].numero,
             pokedexGeral[i].nome, 
             pokedexGeral[i].tipo1, 
             pokedexGeral[i].tipo2, 
@@ -125,7 +128,7 @@ void CriaVetorPokedex()
             pokedexGeral[i].defesa_especial, 
             pokedexGeral[i].velocidade, 
             pokedexGeral[i].geracao, 
-            pokedexGeral[i].velocidade, 
+            pokedexGeral[i].lendario, 
             pokedexGeral[i].cor, 
             pokedexGeral[i].altura, 
             pokedexGeral[i].peso, 
