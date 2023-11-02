@@ -180,16 +180,15 @@ void CriaVetorPokedex()
 
 
 void PesquisaTipoGen(){
-    FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo com as informaçoes dos pokemons
+    
+    //variaveis 
+    int opcao;
     int numeroGeracao;
-    char TipoPokemon[21];
+    char tipoPokemon[21];
+    Pokemon pokedex[722];
 
-
-
-    FILE *ArquivoPokedex = fopen("pokedex.csv", "r");
-    
-    
-
+    //abertura do arquivo
+    FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo com as informaçoes dos pokemons
     if (ArquivoPokedex == NULL) 
     {
 
@@ -197,6 +196,49 @@ void PesquisaTipoGen(){
 
         exit(1);
     }
+
+    switch (opcao)
+    {
+    case 1:
+        
+        printf("Digite o Tipo em que desejaver os pokemons:\n");
+        setbuf(stdin, NULL);
+        fgets(tipoPokemon, 20, stdin);
+        tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
+        setbuf(stdin, NULL);
+
+        for (int i = 1; i < 722; i++)
+        {
+            if (strcmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcmp(tipoPokemon, pokedex[i].tipo2) == 0)
+            {
+                
+            }
+        }
+        
+        
+
+        break;
+    case 2:
+
+        do
+        {
+
+            printf("Digite o número da geração a ser exibida\n:");
+            scanf("%i", &numeroGeracao);
+    
+        } while (numeroGeracao < 0 || numeroGeracao > 6);
+        
+        break;
+
+    default:
+        break;
+    }
+
+
+    
+    
+
+    
     
     fclose(ArquivoPokedex); //fecha o arquivo
 }//fim funçao de pesquisa
