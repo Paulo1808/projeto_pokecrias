@@ -87,13 +87,16 @@ void exibeMenu()
 
 void CriaVetorPokedex()
 {
-    FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo da pokedex
+    FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     Pokemon pokedexGeral[722];
+
+
 
     while (!(feof(ArquivoPokedex)))
     {
-        for (int i = 1; i < 722; i++) //lê as informaçoes de cada pokemon
+        for (int i = 0; i < 722; i++) //lê as informaçoes de cada pokemon
         {
+            
             fscanf(ArquivoPokedex, "%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
             pokedexGeral[i].nome, 
             pokedexGeral[i].tipo1, 
@@ -112,6 +115,11 @@ void CriaVetorPokedex()
             pokedexGeral[i].peso, 
             pokedexGeral[i].taxa_de_captura);
 
+            
+        }//for
+
+        for (int i = 1; i < 722; i++)
+        {
             //exibe as informaçoes de cada pokemon
             printf("%i , %s , %s , %s , %i , %i , %i , %i , %i , %i , %i , %i , %i , %s , %lf , %lf , %i \n", 
             pokedexGeral[i].nome, 
@@ -131,6 +139,7 @@ void CriaVetorPokedex()
             pokedexGeral[i].peso, 
             pokedexGeral[i].taxa_de_captura);
         }//for
+        
         
     }//while
     
