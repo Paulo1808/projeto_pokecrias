@@ -87,7 +87,7 @@ void exibeMenu()
 
 void CriaVetorPokedex()
 {
-    FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
+    FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo da pokedex
     Pokemon pokedexGeral[722]; 
 
     while (!(feof(ArquivoPokedex)))
