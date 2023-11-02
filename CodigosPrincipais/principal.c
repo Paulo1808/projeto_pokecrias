@@ -182,7 +182,7 @@ void gerenciamentoPokemons()
 
 int main(){
         exibeMenu();
-
+        
     return 0;
 }//main
 
