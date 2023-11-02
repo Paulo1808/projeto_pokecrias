@@ -67,7 +67,7 @@ void exibeMenu()
         {
         case 1:
             printf("Envia para a funçao de inicio de jogo\n");
-
+            PesquisaTipoGen();
             break;
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
@@ -149,32 +149,7 @@ void CriaVetorPokedex()
                 }
                 
         }
-    
 
-        for (int i = 1; i < 722; i++)
-            {
-                //exibe as informaçoes de cada pokemon
-                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
-                pokedexGeral[i].numero,
-                pokedexGeral[i].nome, 
-                pokedexGeral[i].tipo1, 
-                pokedexGeral[i].tipo2, 
-                pokedexGeral[i].total, 
-                pokedexGeral[i].hp, 
-                pokedexGeral[i].ataque, 
-                pokedexGeral[i].defesa, 
-                pokedexGeral[i].ataque_especial, 
-                pokedexGeral[i].defesa_especial, 
-                pokedexGeral[i].velocidade, 
-                pokedexGeral[i].geracao, 
-                pokedexGeral[i].lendario, 
-                pokedexGeral[i].cor, 
-                pokedexGeral[i].altura, 
-                pokedexGeral[i].peso, 
-                pokedexGeral[i].taxa_de_captura);
-                
-            }//for
-    
     fclose(ArquivoPokedex); //fecha o arquivo
 }//criaVetorPokedex
 
@@ -184,27 +159,16 @@ void PesquisaTipoGen(){
     //variaveis 
     int opcao;
     int numeroGeracao;
-<<<<<<< HEAD
     char tipoPokemon[21];
     Pokemon pokedex[722];
-=======
-    char TipoPokemon[21];
 
+    //cria o vetro de todos os pokemons
+    CriaVetorPokedex();
 
-
-    
-    
->>>>>>> 13780ac13a8eda1c3f1d1e48fee01186265a974d
-
-    //abertura do arquivo
-    FILE *ArquivoPokedex = fopen("pokedex .csv", "r"); //abre o arquivo com as informaçoes dos pokemons
-    if (ArquivoPokedex == NULL) 
-    {
-
-        fprintf(stderr, "Erro ao abrir o arquivo\n");
-
-        exit(1);
-    }
+    printf("Qual parametro deseja pesquisar:\n");
+    printf("1 - Tipo dos pokemons(sendo tipo primário e secundário)\n");
+    printf("2 - Geraçao dos pokemons\n");
+    scanf("%i", &opcao);
 
     switch (opcao)
     {
@@ -220,12 +184,29 @@ void PesquisaTipoGen(){
         {
             if (strcmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcmp(tipoPokemon, pokedex[i].tipo2) == 0)
             {
-                
-            }
-        }
-        
-        
+                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                pokedex[i].numero,
+                pokedex[i].nome, 
+                pokedex[i].tipo1, 
+                pokedex[i].tipo2, 
+                pokedex[i].total, 
+                pokedex[i].hp, 
+                pokedex[i].ataque, 
+                pokedex[i].defesa, 
+                pokedex[i].ataque_especial, 
+                pokedex[i].defesa_especial, 
+                pokedex[i].velocidade, 
+                pokedex[i].geracao, 
+                pokedex[i].lendario, 
+                pokedex[i].cor, 
+                pokedex[i].altura, 
+                pokedex[i].peso, 
+                pokedex[i].taxa_de_captura);
 
+            }//if
+
+        }//for 
+        
         break;
     case 2:
 
@@ -236,6 +217,33 @@ void PesquisaTipoGen(){
             scanf("%i", &numeroGeracao);
     
         } while (numeroGeracao < 0 || numeroGeracao > 6);
+
+        for (int i = 1; i < 722; i++)
+        {
+            if (numeroGeracao == pokedex[i].geracao)
+            {
+                printf("%3i ,%-12s ,%-12s ,%-12s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%-8s ,%5.2f ,%6.2f ,%3i \n", 
+                pokedex[i].numero,
+                pokedex[i].nome, 
+                pokedex[i].tipo1, 
+                pokedex[i].tipo2, 
+                pokedex[i].total, 
+                pokedex[i].hp, 
+                pokedex[i].ataque, 
+                pokedex[i].defesa, 
+                pokedex[i].ataque_especial, 
+                pokedex[i].defesa_especial, 
+                pokedex[i].velocidade, 
+                pokedex[i].geracao, 
+                pokedex[i].lendario, 
+                pokedex[i].cor, 
+                pokedex[i].altura, 
+                pokedex[i].peso, 
+                pokedex[i].taxa_de_captura);
+
+            }//if
+        }
+        
         
         break;
 
@@ -243,13 +251,6 @@ void PesquisaTipoGen(){
         break;
     }
 
-
-    
-    
-
-    
-    
-    fclose(ArquivoPokedex); //fecha o arquivo
 }//fim funçao de pesquisa
 
 //funçao de salvamento
