@@ -378,6 +378,7 @@ void gerenciamentoPokemons()
 3- salvamento em binario ------ AINDA FALTA
 4- gerenciamento dos pokemons obtidos ---- AINDA FALTA (estamos tentando a mochila)
 5- sistema de batalha ----- AINDA FALTA
+6- identificar se ta no windows ou linux ----- AINDA FALTA
 */
 
 int main(){
