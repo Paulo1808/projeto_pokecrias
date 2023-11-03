@@ -35,40 +35,59 @@ typedef struct{
     int *pokemonCapturado;
 }Colecao; //struct coleçao
 
+typedef struct{
+    char a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], i[15], j[15], k[15], l[15], m[15], n[15], o[15], p[15], q[15];
+}Lixo;
+
 void CriaVetorPokedex(Pokemon pokedexGeral[])
 {
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
-    
+    Lixo lixo;
     fseek(ArquivoPokedex, 0, SEEK_SET);
 
     for (int i = 0; i < 722; i++)
     {
         if (i == 0)
         {
-            do{
-            fseek(ArquivoPokedex, 1, SEEK_CUR);
-            }while(fgetc(ArquivoPokedex) != '\n');
+                fscanf(ArquivoPokedex, "%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s \n", 
+                lixo.a,
+                lixo.b,
+                lixo.c,
+                lixo.d,
+                lixo.e,
+                lixo.f,
+                lixo.g,
+                lixo.h,
+                lixo.i,
+                lixo.j,
+                lixo.k,
+                lixo.l,
+                lixo.m,
+                lixo.n,
+                lixo.o,
+                lixo.p,
+                lixo.q);
+        }else{
+            fscanf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
+            &pokedexGeral[i].numero,
+            pokedexGeral[i].nome, 
+            pokedexGeral[i].tipo1, 
+            pokedexGeral[i].tipo2, 
+            &pokedexGeral[i].total, 
+            &pokedexGeral[i].hp, 
+            &pokedexGeral[i].ataque, 
+            &pokedexGeral[i].defesa, 
+            &pokedexGeral[i].ataque_especial, 
+            &pokedexGeral[i].defesa_especial, 
+            &pokedexGeral[i].velocidade, 
+            &pokedexGeral[i].geracao, 
+            &pokedexGeral[i].lendario, 
+            pokedexGeral[i].cor, 
+            &pokedexGeral[i].altura, 
+            &pokedexGeral[i].peso, 
+            &pokedexGeral[i].taxa_de_captura);
         }
-
-        fscanf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
-        &pokedexGeral[i].numero,
-        pokedexGeral[i].nome, 
-        pokedexGeral[i].tipo1, 
-        pokedexGeral[i].tipo2, 
-        &pokedexGeral[i].total, 
-        &pokedexGeral[i].hp, 
-        &pokedexGeral[i].ataque, 
-        &pokedexGeral[i].defesa, 
-        &pokedexGeral[i].ataque_especial, 
-        &pokedexGeral[i].defesa_especial, 
-        &pokedexGeral[i].velocidade, 
-        &pokedexGeral[i].geracao, 
-        &pokedexGeral[i].lendario, 
-        pokedexGeral[i].cor, 
-        &pokedexGeral[i].altura, 
-        &pokedexGeral[i].peso, 
-        &pokedexGeral[i].taxa_de_captura);
-    }//for
+    }
 
     fclose(ArquivoPokedex); //fecha o arquivo
 }//criaVetorPokedex
@@ -266,8 +285,6 @@ void LugarDeCapturaFloresta()
     CriaVetorPokedex(pokedex);
     char tipos = {"Planta , Venenoso , Bug , Fada , Normal"};
     
-    
-
     for (int i = 1; i < 722; i++)
     {
         if (strcasecmp(tipos, pokedex[i].tipo1) == 0 || strcasecmp(tipos, pokedex[i].tipo2) == 0)
