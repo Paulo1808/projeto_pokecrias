@@ -101,11 +101,13 @@ void PesquisaTipoGen()
                 tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
                 setbuf(stdin, NULL); //recebe o tipo
 
+printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
+
                 for (int i = 1; i < 722; i++)
                 {
                     if (strcasecmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcasecmp(tipoPokemon, pokedex[i].tipo2) == 0)
                     {
-                        printf("|%3i|%-12s|%-12s|%-12s|%3i|%3i|%3i|%3i|%3i|%3i|%3i|%i|%i|%-8s|%5.2f|%6.2f|%3i|\n", 
+                        printf("|%-8i|%-12s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-7.2f|%-7.2f|%-11i|\n", 
                         pokedex[i].numero,
                         pokedex[i].nome,                         //exibe as infos dos pokemons
                         pokedex[i].tipo1, 
@@ -137,13 +139,15 @@ void PesquisaTipoGen()
             
                 } while (numeroGeracao < 0 || numeroGeracao > 6);
 
+printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
+
                 for (int i = 1; i < 722; i++)
                 {
                     if (numeroGeracao == pokedex[i].geracao)
                     {
-                        printf("|%3i|%-12s|%-12s|%-12s|%3i|%3i|%3i|%3i|%3i|%3i|%3i|%i|%i|%-8s|%5.2f|%6.2f|%3i|\n", 
+                        printf("|%8i|%-12s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-6.2f|%-4.2f|%-11i|\n", 
                         pokedex[i].numero,
-                        pokedex[i].nome, 
+                        pokedex[i].nome,                         //exibe as infos dos pokemons
                         pokedex[i].tipo1, 
                         pokedex[i].tipo2, 
                         pokedex[i].total, 
@@ -256,7 +260,6 @@ void exibeMenu()
     }
 }//fim funçao do menu
 
-//funçao pra pesquisar o tipo
 
 
 //funçao de salvamento
