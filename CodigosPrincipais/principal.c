@@ -260,21 +260,56 @@ void exibeMenu()
     }
 }//fim funçao do menu
 
-int LugarDeCapturaFloresta()
+int LugarDeCaptura()
 {
     Pokemon pokedex[722];
     CriaVetorPokedex(pokedex);
-    char tipos = {"Planta , Venenoso , Bug , Fada , Normal"};
-    int pokemonCapturado = rand() % 722 + 1;
+    int opcao_local;
     
-        if (strcasecmp(tipos, pokedex[pokemonCapturado].tipo1) == 0 || strcasecmp(tipos, pokedex[pokemonCapturado].tipo2) == 0)
-        {
-            
+    do{
+        printf("insira para qual lugar deseja ir:\n");
+        printf("floresta - 1\nlago - 2\npantano - 3\nmansao assombrada - 4\nencosta do vulcao - 5\ndeserto - 6\nmontanhas - 7\nbosque - 8\npedreira - 9\nusina eletrica - 10\nUTFPR-AP - 11\n");
+        scanf("%i", &opcao_local);
+        if(opcao_local < 1 || opcao_local > 11){
+            printf("opcao invalida... insira novamente\n");
         }
-        else
-        {
-            return
-        }
+    }while(opcao_local < 1 || opcao_local > 11);
+
+
+    switch(opcao_local){
+        case 1:
+        break;
+
+        case 2:
+        break;
+
+        case 3:
+        break;
+
+        case 4:
+        break;
+
+        case 5:
+        break;
+
+        case 6:
+        break;
+
+        case 7:
+        break;
+
+        case 8:
+        break;
+
+        case 9:
+        break;
+
+        case 10:
+        break;
+
+        case 11:
+        break;
+    }
     
 
 }//Lembarra de recriar para cada lugar
