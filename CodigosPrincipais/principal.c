@@ -377,6 +377,7 @@ void gerenciamentoPokemons()
 2- pesquisa por tipo e geração ------- FEITO
 3- salvamento em binario ------ AINDA FALTA
 4- gerenciamento dos pokemons obtidos ---- AINDA FALTA (estamos tentando a mochila)
+5- sistema de batalha ----- AINDA FALTA
 */
 
 int main(){
