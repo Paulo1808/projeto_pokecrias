@@ -260,7 +260,25 @@ void exibeMenu()
     }
 }//fim funçao do menu
 
+void LugarDeCapturaFloresta()
+{
+    Pokemon pokedex[722];
+    CriaVetorPokedex(pokedex);
+    char tipos = {"Planta , Venenoso , Bug , Fada , Normal"};
+    
+    
 
+    for (int i = 1; i < 722; i++)
+    {
+        if (strcasecmp(tipos, pokedex[i].tipo1) == 0 || strcasecmp(tipos, pokedex[i].tipo2) == 0)
+        {
+            int pokemonCapturado = rand() % 722 + 1;
+        }
+        
+    }
+    
+
+}//Lembarra de recriar para cada lugar
 
 //funçao de salvamento
 void salvamentoNoHD()
