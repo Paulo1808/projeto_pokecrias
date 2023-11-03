@@ -158,7 +158,7 @@ printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque 
             
                 } while (numeroGeracao < 0 || numeroGeracao > 6);
 
-printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
+                printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
 
                 for (int i = 1; i < 722; i++)
                 {
