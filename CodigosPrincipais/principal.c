@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <stdbool.h>
+#include <time.h> 
 
 typedef struct
 {
@@ -22,12 +24,7 @@ typedef struct
 
 typedef struct
 {
-    int pokemon1;
-    int pokemon2;  
-    int pokemon3;
-    int pokemon4;
-    int pokemon5;
-    int pokemon6;
+    Pokemon pokemons_mochila[6];
 
 }mochila;// mochila com os pokemons
 
@@ -277,37 +274,65 @@ int LugarDeCaptura()
 
 
     switch(opcao_local){
-        case 1:
+        case 1: //floresta
+
+        int opcao_captura;
+        int taxa_sorteada_captura[3];
+        char tipos_floresta = {"Planta", "Venenoso", "Bug", "Normal", "Fada"}; //define os tipos que aparecerao
+
+        srand(time(NULL));
+        int pokemon_sorteado = rand() % 722 + 1; //sorteia um pokemon
+
+        if(strcasecmp(pokedex[pokemon_sorteado].tipo1, tipos_floresta) == 0 || strcasecmp(pokedex[pokemon_sorteado].tipo2, tipos_floresta) == 0){
+            printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+            printf("voce deseja captura-lo?\n");
+            printf("1 - sim |||| 0 - nao\n");
+            scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+            if(opcao_captura != 0 || opcao_captura != 1){ //caso o usuario insira uma opcao invalida
+                printf("opcao invalida. insira novamente:\n");
+                scanf("%i", opcao_captura);
+            }
+
+            if(opcao_captura == 1){
+                for(int i = 0; i < 3; i++){
+                    taxa_sorteada_captura[i] = rand() % 255 + 1; //gera a probabilidade de captura (3 chances)
+                    if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].taxa_de_captura){ //o valor deve ser menor para captura-lo
+                        //mandar p mochila e pro gerenciamento de pokemons
+                    }
+                }
+            }
+        }
+
         break;
 
-        case 2:
+        case 2: //lago
         break;
 
-        case 3:
+        case 3: //pantano
         break;
 
-        case 4:
+        case 4: //mansao assombrada
         break;
 
-        case 5:
+        case 5: //encosta do vulcao
         break;
 
-        case 6:
+        case 6: //deserto
         break;
 
-        case 7:
+        case 7: //montanha
         break;
 
-        case 8:
+        case 8: //bosque
         break;
 
-        case 9:
+        case 9: //pedreira
         break;
 
-        case 10:
+        case 10: //usina eletrica
         break;
 
-        case 11:
+        case 11: //utfpr
         break;
     }
     
@@ -329,10 +354,10 @@ void gerenciamentoPokemons()
 //funçoes necessarias
 //-------------------
 /*
-1- Menus e submenus ----------- (menu já está feito)
-2- pesquisa por tipo e geração
-3- salvamento em binario 
-4- gerenciamento dos pokemons obtidos
+1- Menus e submenus ----------- FEITO
+2- pesquisa por tipo e geração ------- FEITO
+3- salvamento em binario ------ AINDA FALTA
+4- gerenciamento dos pokemons obtidos ---- AINDA FALTA (estamos tentando a mochila)
 */
 
 int main(){
