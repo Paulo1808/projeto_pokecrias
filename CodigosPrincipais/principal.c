@@ -24,8 +24,7 @@ typedef struct
 
 typedef struct
 {
-    Pokemon pokemons_mochila[6];
-
+    Pokemon pokemons_mochila;
 }mochila;// mochila com os pokemons
 
 typedef struct{
@@ -276,11 +275,21 @@ void exibeMenu()
     }
 }//fim funçao do menu
 
+int MallocColecaoPokemons(){
+    //passar a variavel de numero de pokemons por ponteiro e tb tem o struct do gerenciamento
+    //pokemon_capturado_gerenciamento.pokemonCapturado = (Colecao*) malloc (numero_de_pokemons * sizeof(Pokemon));
+}
+
 int LugarDeCaptura()
 {
     Pokemon pokedex[722];
+    int numero_de_pokemons; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
+    Colecao pokemon_capturado_gerenciamento; //declarando a struct colecao
     CriaVetorPokedex(pokedex);
     int opcao_local;
+
+    //acredito que seja melhor fazer uma funcao apenas pra isso e chama-la td vez que um pokemon for capturado
+    pokemon_capturado_gerenciamento.pokemonCapturado = (Colecao*) malloc (numero_de_pokemons * sizeof(Pokemon));
     
     do{
         printf("insira para qual lugar deseja ir:\n");
@@ -291,8 +300,8 @@ int LugarDeCaptura()
         }
     }while(opcao_local < 1 || opcao_local > 11);
 
-
     switch(opcao_local){
+
         case 1: //floresta
 
         int opcao_captura;
@@ -316,7 +325,9 @@ int LugarDeCaptura()
                 for(int i = 0; i < 3; i++){
                     taxa_sorteada_captura[i] = rand() % 255 + 1; //gera a probabilidade de captura (3 chances)
                     if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].taxa_de_captura){ //o valor deve ser menor para captura-lo
-                        //mandar p mochila e pro gerenciamento de pokemons
+                        //mandar pra colecao. a mochila deve ser gerenciada depois apenas
+                        numero_de_pokemons++;
+                        //chama a funcao mallocColecaoPokemons()
                     }
                 }
             }
