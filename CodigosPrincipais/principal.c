@@ -275,18 +275,22 @@ void exibeMenu()
     }
 }//fim funçao do menu
 
-int MallocColecaoPokemons(){
+int MallocColecaoPokemons(int* numero_de_pokemons){
     //passar a variavel de numero de pokemons por ponteiro e tb tem o struct do gerenciamento
     //pokemon_capturado_gerenciamento.pokemonCapturado = (Colecao*) malloc (numero_de_pokemons * sizeof(Pokemon));
+
 }
+
 
 int LugarDeCaptura()
 {
     Pokemon pokedex[722];
-    int numero_de_pokemons; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
     Colecao pokemon_capturado_gerenciamento; //declarando a struct colecao
-    CriaVetorPokedex(pokedex);
+
+    int numero_de_pokemons = 0; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
     int opcao_local;
+
+    CriaVetorPokedex(pokedex);
 
     //acredito que seja melhor fazer uma funcao apenas pra isso e chama-la td vez que um pokemon for capturado
     pokemon_capturado_gerenciamento.pokemonCapturado = (Colecao*) malloc (numero_de_pokemons * sizeof(Pokemon));
