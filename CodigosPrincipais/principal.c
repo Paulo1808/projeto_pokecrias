@@ -254,10 +254,11 @@ void exibeMenu()
         case 1:
             printf("Envia para a funçao de inicio de jogo\n");
             PesquisaTipoGen();
+            LugarDeCaptura();
             break;
         case 2:
             printf("Carrega um arquivo do jogo ja existente\n");
-
+            LugarDeCaptura();
             break;
         case 3:
             printf("Exibe as mecanicas utilizadas no jogo\n");
@@ -275,25 +276,22 @@ void exibeMenu()
     }
 }//fim funçao do menu
 
-int MallocColecaoPokemons(int* numero_de_pokemons){
-    //passar a variavel de numero de pokemons por ponteiro e tb tem o struct do gerenciamento
-    //pokemon_capturado_gerenciamento.pokemonCapturado = (Colecao*) malloc (numero_de_pokemons * sizeof(Pokemon));
-
-}
-
-
-int LugarDeCaptura()
+void LugarDeCaptura()
 {
     Pokemon pokedex[722];
     Colecao pokemon_capturado_gerenciamento; //declarando a struct colecao
-
-    int numero_de_pokemons = 0; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
+    Colecao *ptr_pokemon_capturado_gerenciamento = &pokemon_capturado_gerenciamento;
+    int *ptr_numero_de_pokemons = 0, *guarda_valor, contador; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
     int opcao_local;
+    int opcao_captura;
+    int taxa_sorteada_captura[3];
+    char tipos_floresta[40] = {"Planta, Venenoso, Bug, Normal, Fada"}; //define os tipos que aparecerao
+    int pokemon_sorteado = rand() % 722 + 1; //sorteia um pokemon
 
     CriaVetorPokedex(pokedex);
 
-    //acredito que seja melhor fazer uma funcao apenas pra isso e chama-la td vez que um pokemon for capturado
-    pokemon_capturado_gerenciamento.pokemonCapturado = (Colecao*) malloc (numero_de_pokemons * sizeof(Pokemon));
+    if((*ptr_numero_de_pokemons) == 0 && (*guarda_valor) > 0)
+    (*ptr_numero_de_pokemons) = (*guarda_valor);
     
     do{
         printf("insira para qual lugar deseja ir:\n");
@@ -307,31 +305,35 @@ int LugarDeCaptura()
     switch(opcao_local){
 
         case 1: //floresta
-
-        int opcao_captura;
-        int taxa_sorteada_captura[3];
-        char tipos_floresta = {"Planta", "Venenoso", "Bug", "Normal", "Fada"}; //define os tipos que aparecerao
-
         srand(time(NULL));
-        int pokemon_sorteado = rand() % 722 + 1; //sorteia um pokemon
 
-        if(strcasecmp(pokedex[pokemon_sorteado].tipo1, tipos_floresta) == 0 || strcasecmp(pokedex[pokemon_sorteado].tipo2, tipos_floresta) == 0){
-            printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
-            printf("voce deseja captura-lo?\n");
-            printf("1 - sim |||| 0 - nao\n");
-            scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+            if(strcasecmp(pokedex[pokemon_sorteado].tipo1, tipos_floresta) == 0 || strcasecmp(pokedex[pokemon_sorteado].tipo2, tipos_floresta) == 0){
+                printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                printf("voce deseja captura-lo?\n");
+                printf("1 - sim |||| 0 - nao\n");
+                scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+
             if(opcao_captura != 0 || opcao_captura != 1){ //caso o usuario insira uma opcao invalida
                 printf("opcao invalida. insira novamente:\n");
-                scanf("%i", opcao_captura);
+                scanf("%i", &opcao_captura);
             }
 
             if(opcao_captura == 1){
                 for(int i = 0; i < 3; i++){
                     taxa_sorteada_captura[i] = rand() % 255 + 1; //gera a probabilidade de captura (3 chances)
                     if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].taxa_de_captura){ //o valor deve ser menor para captura-lo
+                        (*ptr_numero_de_pokemons)++;
+
                         //mandar pra colecao. a mochila deve ser gerenciada depois apenas
-                        numero_de_pokemons++;
-                        //chama a funcao mallocColecaoPokemons()
+                        if((*ptr_numero_de_pokemons) == 1){
+                            ptr_pokemon_capturado_gerenciamento = (Colecao*) malloc (*ptr_numero_de_pokemons * sizeof(int));
+                            if(ptr_pokemon_capturado_gerenciamento == NULL){
+                                printf("Mem�ria insuficiente.");
+                                exit(1);
+                            }
+                            (*guarda_valor) = (*ptr_numero_de_pokemons);
+                        }else if(*ptr_numero_de_pokemons > 1)
+                            ptr_pokemon_capturado_gerenciamento = realloc(ptr_pokemon_capturado_gerenciamento, sizeof(int));
                     }
                 }
             }
