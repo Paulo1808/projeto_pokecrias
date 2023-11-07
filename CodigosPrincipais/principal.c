@@ -224,58 +224,6 @@ printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque 
     }//switch
 }//fim funçao de pesquisa
 
-//funçao do menu inicial
-void exibeMenu()
-{
-    char* nickname = NULL;
-    int tam = 21;
-
-    nickname = (char*) malloc (tam * sizeof(char)); //aloca dinamicamente o tamanho do nome inserido
-    int opcao;
-
-    printf("Bem vindo ao Menu inicial!!!\n");
-    printf("Primeiramente, me diga seu nickname para que possamos continuar:\n");
-    setbuf(stdin, NULL);
-    fgets(nickname, 20, stdin);
-    nickname[strcspn(nickname, "\n")] = '\0';
-    setbuf(stdin, NULL); //recebe o nome inserido
-
-    printf("Bom, vamos lá %s!\n", nickname);
-    printf("Escolha uma opção para iniciar:\n");
-    printf("1 - Novo Jogo\n");
-    printf("2 - Carregar Jogo\n");
-    printf("3 - Mecanicas do Jogo\n"); //menu do jogo
-    printf("4 - Fechar o jogo\n");
-
-    scanf("%i", &opcao);
-
-    switch (opcao) //executa a opçao escolhida
-    {
-        case 1:
-            printf("Envia para a funçao de inicio de jogo\n");
-            PesquisaTipoGen();
-            LugarDeCaptura();
-            break;
-        case 2:
-            printf("Carrega um arquivo do jogo ja existente\n");
-            LugarDeCaptura();
-            break;
-        case 3:
-            printf("Exibe as mecanicas utilizadas no jogo\n");
-
-            break;
-        case 4:
-            printf("Fechando o jogo...\n");
-
-            break;
-        
-        default:
-            printf("Opção invalida...");
-
-            break;
-    }
-}//fim funçao do menu
-
 void LugarDeCaptura()
 {
     Pokemon pokedex[722];
@@ -326,9 +274,9 @@ void LugarDeCaptura()
 
                         //mandar pra colecao. a mochila deve ser gerenciada depois apenas
                         if((*ptr_numero_de_pokemons) == 1){
-                            ptr_pokemon_capturado_gerenciamento = (Colecao*) malloc (*ptr_numero_de_pokemons * sizeof(int));
+                            ptr_pokemon_capturado_gerenciamento = (Colecao*) malloc (*ptr_numero_de_pokemons * sizeof(int));// trocar para realloc
                             if(ptr_pokemon_capturado_gerenciamento == NULL){
-                                printf("Mem�ria insuficiente.");
+                                printf("Mem�ria insuficiente.");
                                 exit(1);
                             }
                             (*guarda_valor) = (*ptr_numero_de_pokemons);
@@ -387,6 +335,214 @@ void gerenciamentoPokemons()
 
 }//fim funçao de gerenciamento
 
+void MallocNovoJogo(int* nmrPokemon) //malloc para o pokemon inicial
+{
+    Colecao* PokemonInicialEscolhido;
+
+    PokemonInicialEscolhido  = (Colecao*) malloc (1 * sizeof(int));
+
+    if(PokemonInicialEscolhido == NULL)
+    {
+    printf("Erro: Memória Insuficiente!\n");
+    exit(1);
+    }//if
+
+    PokemonInicialEscolhido = &nmrPokemon;
+    
+}
+
+void NovoJogo() //abre um arquivo novo 
+{
+    FILE* Inicializando_Jogo = fopen("pokemonGame.dat", "wb"); //abre o arquivo do novo jogo
+    int opcao_geracao;
+    int opcao_pokemon;
+    int PokemonEscolhidoFinal;
+     
+    
+
+    if(Inicializando_Jogo == NULL){
+        
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);// 1 significa erro
+        
+    }// if
+    
+    
+    printf("Bem vindo! O jogo esta sendo inicializado...\n");
+
+    printf("Eu sou F.R.I.D.A.Y e te ajudarei sempre que necessario nessa jornada...\n Para começarmos você deve escolher um pokemon inicial.\n Essa é a lista de pokemons iniciais: \n");
+    
+    //apresenta as opções de pokemons iniciais disponiveis de acordo com sua respectiva geração
+    printf("1° Geração:\n 1 - Bulbasaur\n 2 - Charmander\n 3 - Squirtle\n");
+
+    printf("2º Geração:\n 1 - Chicorita\n  2 - Cyndaquil\n3 - Totododile\n");
+
+    printf("3° Geração:\n 1 - Treecko\n 2 - Torchic\n 3- Mudkip\n");
+
+    printf("4º Geração:\n 1 - Turtwig\n 2 - Chimchar\n 3 - Piplup\n");
+
+    printf("5º Geração:\n 1 - Snivy\n 2 - Tepig\n 3 - Oshawott\n");
+
+    printf("6º Geração:\n 1 - Chespin\n  2 - Fennekin\n 3 - Froakie\n");
+
+    printf("insira qual geração deseja escolher:\n");
+    scanf("%i", &opcao_geracao);
+    if(opcao_geracao < 1 || opcao_geracao > 6){
+        printf("opção de geracao invalida! Insira novamente...\n");
+        scanf("%i", &opcao_geracao);
+    }
+
+        switch (opcao_geracao)
+        {
+        case 1:
+            printf("QUEM VOCÊ ESCOLHE?\n");
+            printf("1 - Bulbasaur\n2 - Charmander\n3 - Squirtle\n");
+
+            if(opcao_pokemon == 1)
+                {
+                    PokemonEscolhidoFinal = 1;
+                   MallocNovoJogo(PokemonEscolhidoFinal);
+
+                }//Bulbasaur
+            if(opcao_pokemon == 2)
+                {
+                    PokemonEscolhidoFinal = 4;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Charmander
+            if(opcao_pokemon == 3)
+                {
+                    PokemonEscolhidoFinal = 7;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+
+                }//Squirtle
+   
+            break;
+
+        case 2:
+            printf("QUEM VOCÊ ESCOLHE?\n 1 - Chikorita\n 2 - Totododile\n 3 - Cyndaquil\n");
+            scanf("%i", &opcao_pokemon);
+
+            if(opcao_pokemon == 1)
+                {
+                    PokemonEscolhidoFinal = 152;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Chikorita
+                
+            if (opcao_pokemon == 2)
+                {
+                    PokemonEscolhidoFinal = 155;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Totododile
+                
+            if (opcao_pokemon == 3)
+                {
+                    PokemonEscolhidoFinal = 158;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Cyndaquil
+            
+            break;
+        
+        case 3:
+            printf("QUEM VOCÊ ESCOLHE?\n 1 - Treecko\n 2 - Torchic\n 3- Mudkip\n");
+            scanf("%i", &opcao_pokemon);
+
+            if(opcao_pokemon == 1)
+                {
+                    PokemonEscolhidoFinal = 252;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Treecko
+                
+            if (opcao_pokemon == 2)
+                {
+                    PokemonEscolhidoFinal = 255;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Torchic
+                
+            if (opcao_pokemon == 3)
+                {
+                    PokemonEscolhidoFinal = 258;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Mudkip
+
+            break;
+
+        case 4:
+            printf("QUEM VOCÊ ESCOLHE?\n 1 - Turtwig\n 2 - Chimchar\n 3 - Piplup\n");
+            scanf("%i", &opcao_pokemon);
+
+            if(opcao_pokemon == 1)
+                {
+                    PokemonEscolhidoFinal = 387;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Tortwig
+                
+            if (opcao_pokemon == 390)
+                {
+                    PokemonEscolhidoFinal = 1;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Chimchar
+                
+            if (opcao_pokemon == 393)
+                {
+                    PokemonEscolhidoFinal = 1;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Piplup
+            break;
+
+        case 5:
+            printf("QUEM VOCÊ ESCOLHE?\n 1 - Snivy\n 2 - Tepig\n 3 - Oshawott\n");
+            scanf("%i", &opcao_pokemon);
+
+            if(opcao_pokemon == 1)
+                {
+                    PokemonEscolhidoFinal = 495;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Snivy
+                
+            if (opcao_pokemon == 2)
+                {
+                    PokemonEscolhidoFinal = 498;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Tepig
+                
+            if (opcao_pokemon == 3)
+                {
+                    PokemonEscolhidoFinal = 501;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Oshawott
+            break;
+
+        case 6:
+            printf("QUEM VOCÊ ESCOLHE?\n 1 - Chespin\n  2 - Fennekin\n 3 - Froakie\n");
+            scanf("%i", &opcao_pokemon);
+
+            if(opcao_pokemon == 1)
+                {
+                    PokemonEscolhidoFinal = 650;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Chespin
+                
+            if (opcao_pokemon == 2)
+                {
+                    PokemonEscolhidoFinal = 653;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Fennekin
+                
+            if (opcao_pokemon == 3)
+                {
+                    PokemonEscolhidoFinal = 656;
+                    MallocNovoJogo(PokemonEscolhidoFinal);
+                }//Froaki
+            break;
+
+        default:
+
+            printf("Opção invalida... Digite novamente...");
+            break;
+        }//switch
+
+}//funçao de inicializaçao do jogo
+
 //funçoes necessarias
 //-------------------
 /*
@@ -399,7 +555,54 @@ void gerenciamentoPokemons()
 */
 
 int main(){
-        exibeMenu();
+        char* nickname = NULL;
+        int tam = 21;
+
+        nickname = (char*) malloc (tam * sizeof(char)); //aloca dinamicamente o tamanho do nome inserido
+        int opcao;
+
+            printf("Bem vindo ao Menu inicial!!!\n");
+            printf("Primeiramente, me diga seu nickname para que possamos continuar:\n");
+            setbuf(stdin, NULL);
+            fgets(nickname, 20, stdin);
+            nickname[strcspn(nickname, "\n")] = '\0';
+            setbuf(stdin, NULL); //recebe o nome inserido
+
+            printf("Bom, vamos lá %s!\n", nickname);
+            printf("Escolha uma opção para iniciar:\n");
+            printf("1 - Novo Jogo\n");
+            printf("2 - Carregar Jogo\n");
+            printf("3 - Mecanicas do Jogo\n"); //menu do jogo
+            printf("4 - Fechar o jogo\n");
+
+            scanf("%i", &opcao);
+
+            switch (opcao) //executa a opçao escolhida
+            {
+                case 1:
+                    printf("Envia para a funçao de inicio de jogo\n");
+                    NovoJogo();
+                    PesquisaTipoGen();
+                    LugarDeCaptura();
+                    break;
+                case 2:
+                    printf("Carrega um arquivo do jogo ja existente\n");
+                    LugarDeCaptura();
+                    break;
+                case 3:
+                    printf("Exibe as mecanicas utilizadas no jogo\n");
+
+                    break;
+                case 4:
+                    printf("Fechando o jogo...\n");
+
+                    break;
+                
+                default:
+                    printf("Opção invalida...");
+
+                    break;
+            }
         
     return 0;
 }//main
