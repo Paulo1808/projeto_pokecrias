@@ -3,7 +3,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdbool.h>
-#include <time.h> 
+#include <time.h>
 
 typedef struct
 {
@@ -11,16 +11,14 @@ typedef struct
     char nome[31], tipo1[31], tipo2[31];
     int total, hp,ataque, defesa, ataque_especial, defesa_especial;
     int velocidade, geracao;
-    int lendario;
+    int lendario; //= true
     char cor[16];
     int taxa_de_captura;
     float altura, peso;
+    int prox_evolucao, pre_evolucao;
 }Pokemon; //definindo struct com as infos de cada pokemon
 
-typedef struct
-{
-    int prox_evolucao, pre_evolucao;
-}evolucoes;
+typedef enum {nao_lendario = 0, lendario}BoolLendario; //enumerando as constantes booleanas (lendario ou nao)
 
 typedef struct
 {
@@ -88,6 +86,49 @@ void CriaVetorPokedex(Pokemon pokedexGeral[])
     fclose(ArquivoPokedex); //fecha o arquivo
 }//criaVetorPokedex
 
+void CadastroColecao(){
+    Pokemon pokedexGeral[722];
+    int opcao_cadastro_colecao;
+
+    CriaVetorPokedex(pokedexGeral);
+    
+    do{
+        printf("O que deseja fazer?\n"); //opcoes de cadastro na pokedex
+        printf("1 - INSERIR\n");
+        printf("2 - LISTAR\n");
+        printf("3 - PESQUISAR\n");
+        printf("4 - ALTERAR\n");
+        printf("5 - EXCLUIR\n");
+        scanf("%i", &opcao_cadastro_colecao);
+
+        if(opcao_cadastro_colecao < 1 || opcao_cadastro_colecao > 5){
+            printf("opcao invalida!!! insira novamente:\n");
+        }
+    }while(opcao_cadastro_colecao < 1 || opcao_cadastro_colecao > 5);
+    
+    switch(opcao_cadastro_colecao){
+        case 1:
+
+        break;
+
+        case 2:
+
+        break;
+
+        case 3:
+
+        break;
+
+        case 4:
+
+        break;
+
+        case 5:
+        
+        break;
+    }
+}
+
 void PesquisaTipoGen()
 {    
     //variaveis 
@@ -95,8 +136,8 @@ void PesquisaTipoGen()
     int numeroGeracao;
     char nomePokemon[21];
     char tipoPokemon[21];
-    Pokemon pokedex[722];
-
+    Pokemon *pokedex; 
+    pokedex = (Pokemon*) malloc (722 * sizeof(Pokemon));
     //cria o vetor de todos os pokemons
     CriaVetorPokedex(pokedex);
 
@@ -229,7 +270,7 @@ void LugarDeCaptura()
     Pokemon pokedex[722];
     Colecao pokemon_capturado_gerenciamento; //declarando a struct colecao
     Colecao *ptr_pokemon_capturado_gerenciamento = &pokemon_capturado_gerenciamento;
-    int *ptr_numero_de_pokemons = 0, *guarda_valor, contador; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
+    int *ptr_numero_de_pokemons = 0, *guarda_valor; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
     int opcao_local;
     int opcao_captura;
     int taxa_sorteada_captura[3];
@@ -347,7 +388,7 @@ void MallocNovoJogo(int* nmrPokemon) //malloc para o pokemon inicial
     exit(1);
     }//if
 
-    PokemonInicialEscolhido = &nmrPokemon;
+    PokemonInicialEscolhido->pokemonCapturado = *nmrPokemon;
     
 }
 
@@ -357,8 +398,6 @@ void NovoJogo() //abre um arquivo novo
     int opcao_geracao;
     int opcao_pokemon;
     int PokemonEscolhidoFinal;
-     
-    
 
     if(Inicializando_Jogo == NULL){
         
@@ -401,18 +440,18 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 1;
-                   MallocNovoJogo(PokemonEscolhidoFinal);
+                   MallocNovoJogo(&PokemonEscolhidoFinal);
 
                 }//Bulbasaur
             if(opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 4;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Charmander
             if(opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 7;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
 
                 }//Squirtle
    
@@ -425,19 +464,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 152;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Chikorita
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 155;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Totododile
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 158;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Cyndaquil
             
             break;
@@ -449,19 +488,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 252;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Treecko
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 255;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Torchic
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 258;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Mudkip
 
             break;
@@ -473,19 +512,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 387;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Tortwig
                 
             if (opcao_pokemon == 390)
                 {
                     PokemonEscolhidoFinal = 1;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Chimchar
                 
             if (opcao_pokemon == 393)
                 {
                     PokemonEscolhidoFinal = 1;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Piplup
             break;
 
@@ -496,19 +535,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 495;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Snivy
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 498;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Tepig
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 501;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Oshawott
             break;
 
@@ -519,19 +558,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 650;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Chespin
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 653;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Fennekin
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 656;
-                    MallocNovoJogo(PokemonEscolhidoFinal);
+                    MallocNovoJogo(&PokemonEscolhidoFinal);
                 }//Froaki
             break;
 
