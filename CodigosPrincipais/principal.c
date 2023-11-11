@@ -5,6 +5,16 @@
 #include <stdbool.h>
 #include <time.h>
 
+void verificaWinOuLinux()
+{
+        #ifdef _WIN32 //Testa se o SO é Windows
+            system("cls");
+            printf("Está no Windows\n");
+        #else
+            system("clear");
+            printf("Está no Linux\n");
+        #endif
+}
 typedef struct
 {
     int numero;
@@ -15,7 +25,6 @@ typedef struct
     char cor[16];
     int taxa_de_captura;
     float altura, peso;
-    int prox_evolucao, pre_evolucao;
 }Pokemon; //definindo struct com as infos de cada pokemon
 
 typedef enum {nao_lendario = 0, lendario}BoolLendario; //enumerando as constantes booleanas (lendario ou nao)
@@ -157,7 +166,7 @@ void PesquisaTipoGen()
                 tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
                 setbuf(stdin, NULL); //recebe o tipo
 
-printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
+                printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
 
                 for (int i = 1; i < 722; i++)
                 {
@@ -272,18 +281,16 @@ void LugarDeCaptura()
     Colecao *ptr_pokemon_capturado_gerenciamento = &pokemon_capturado_gerenciamento;
     int *ptr_numero_de_pokemons = 0, *guarda_valor; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
     int opcao_local;
-    int opcao_captura;
+    int opcao_captura = 1;
     int taxa_sorteada_captura[3];
     char tipos_floresta[40] = {"Planta, Venenoso, Bug, Normal, Fada"}; //define os tipos que aparecerao
+    srand(time(NULL));
     int pokemon_sorteado = rand() % 722 + 1; //sorteia um pokemon
 
     CriaVetorPokedex(pokedex);
-
-    if((*ptr_numero_de_pokemons) == 0 && (*guarda_valor) > 0)
-    (*ptr_numero_de_pokemons) = (*guarda_valor);
     
     do{
-        printf("insira para qual lugar deseja ir:\n");
+        printf("para onde vamos:\n");
         printf("floresta - 1\nlago - 2\npantano - 3\nmansao assombrada - 4\nencosta do vulcao - 5\ndeserto - 6\nmontanhas - 7\nbosque - 8\npedreira - 9\nusina eletrica - 10\nUTFPR-AP - 11\n");
         scanf("%i", &opcao_local);
         if(opcao_local < 1 || opcao_local > 11){
@@ -294,40 +301,48 @@ void LugarDeCaptura()
     switch(opcao_local){
 
         case 1: //floresta
-        srand(time(NULL));
+            while(opcao_captura != 0){
 
-            if(strcasecmp(pokedex[pokemon_sorteado].tipo1, tipos_floresta) == 0 || strcasecmp(pokedex[pokemon_sorteado].tipo2, tipos_floresta) == 0){
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_floresta) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_floresta) != NULL){ //compara substring
                 printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
                 printf("voce deseja captura-lo?\n");
                 printf("1 - sim |||| 0 - nao\n");
                 scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
-
-            if(opcao_captura != 0 || opcao_captura != 1){ //caso o usuario insira uma opcao invalida
-                printf("opcao invalida. insira novamente:\n");
-                scanf("%i", &opcao_captura);
+                
+                while(opcao_captura != 0 && opcao_captura != 1){
+                    printf("opcao invalida. insira novamente:\n");
+                    scanf("%i", &opcao_captura);
+                } //caso seja inserida uma opcao invalida
             }
 
-            if(opcao_captura == 1){
-                for(int i = 0; i < 3; i++){
-                    taxa_sorteada_captura[i] = rand() % 255 + 1; //gera a probabilidade de captura (3 chances)
-                    if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].taxa_de_captura){ //o valor deve ser menor para captura-lo
-                        (*ptr_numero_de_pokemons)++;
+                if(opcao_captura == 1){
+                    for(int i = 0; i < 3; i++){
+                        taxa_sorteada_captura[i] = rand() % 255 + 1; //gera a probabilidade de captura (3 chances)
+                        if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].taxa_de_captura){ //o valor deve ser menor para captura-lo
+                    (*ptr_numero_de_pokemons)++; //mandar ja pro struct (colecao.numero sla)
 
-                        //mandar pra colecao. a mochila deve ser gerenciada depois apenas
-                        if((*ptr_numero_de_pokemons) == 1){
-                            ptr_pokemon_capturado_gerenciamento = (Colecao*) malloc (*ptr_numero_de_pokemons * sizeof(int));// trocar para realloc
-                            if(ptr_pokemon_capturado_gerenciamento == NULL){
-                                printf("Mem�ria insuficiente.");
-                                exit(1);
-                            }
-                            (*guarda_valor) = (*ptr_numero_de_pokemons);
-                        }else if(*ptr_numero_de_pokemons > 1)
-                            ptr_pokemon_capturado_gerenciamento = realloc(ptr_pokemon_capturado_gerenciamento, sizeof(int));
+                            //mandar pra colecao. a mochila deve ser gerenciada depois apenas
+                            if((*ptr_numero_de_pokemons) == 1){
+                                ptr_pokemon_capturado_gerenciamento = (Colecao*) malloc (*ptr_numero_de_pokemons * sizeof(int));// trocar para realloc
+                                if(ptr_pokemon_capturado_gerenciamento == NULL){
+                                    printf("Memoria insuficiente.");
+                                    exit(1);
+                                }
+                                (*guarda_valor) = (*ptr_numero_de_pokemons);
+                            }else if(*ptr_numero_de_pokemons > 1)
+                                ptr_pokemon_capturado_gerenciamento = realloc(ptr_pokemon_capturado_gerenciamento, sizeof(int));
+                            
+                        }
                     }
+                    printf("Pokemon capturado!!!");
+                }else{
+                    printf("o pokemon %s fugiu !!!", pokedex[pokemon_sorteado].nome);
                 }
-            }
-        }
 
+            }else{
+                srand(time(NULL));
+                pokemon_sorteado = rand() % 722 + 1;
+            }
         break;
 
         case 2: //lago
@@ -363,18 +378,6 @@ void LugarDeCaptura()
     
 
 }//Lembarra de recriar para cada lugar
-
-//funçao de salvamento
-void salvamentoNoHD()
-{
-
-}//fim funçao de salvamento
-
-//funçao de gerenciamento de pokemons
-void gerenciamentoPokemons()
-{
-
-}//fim funçao de gerenciamento
 
 void MallocNovoJogo(int* nmrPokemon) //malloc para o pokemon inicial
 {
@@ -436,7 +439,8 @@ void NovoJogo() //abre um arquivo novo
         case 1:
             printf("QUEM VOCÊ ESCOLHE?\n");
             printf("1 - Bulbasaur\n2 - Charmander\n3 - Squirtle\n");
-
+            scanf("%i", &opcao_pokemon);
+            
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 1;
@@ -578,9 +582,38 @@ void NovoJogo() //abre um arquivo novo
 
             printf("Opção invalida... Digite novamente...");
             break;
+            
         }//switch
 
 }//funçao de inicializaçao do jogo
+
+void MecanicasDeJogo()
+{
+    printf("Mecanicas de Jogo:\n");
+
+    printf("Passo 1:\n\n");
+    printf("F.R.I.D.A.Y: Escolher seu inicial é uma das partes mais importantes da nossa jornada, ele te acompanhara durante o inicio da jornada e te ajudara futuramente em batalhas,\n assim que iniciar um novo jogo você terá que escolher uma geração e um de seus respectivos iniciais\n sendo tipo água, fogo ou planta...");
+
+    printf("Passo 2:\n\n");
+    printf("F.R.I.D.A.Y: Vamos a captura, agora vamos começar a formar seu time, primeiramente vamos começar escolhendo a area em que vamos captura- los\n essas areas são floresta, pantano, fabrica, etc... e cada uma pode aparecer um tipo especifico de pokemon dependendo de seu tipo\n");
+    printf("Os tipos de acordo com cada lugar:\nFloreta:\n Planta\nVenenoso\nNormal\nInseto\nFada\n Lago:\nAgua\nVoador\nPlanta\n Plantano:\nPsychic\nVenenoso\nAgua\nInseto\nMansão\n Assombrada:\nDark\nGhost\nPsychic\nEncosta Do Vucão:\nFogo\nLutador\nPedra\nTerra\nDeserto:\nPedra\nTerra\nFogo\nMontanhas:\nDragão\nVoador\nBosque:\nDragão\nFada\nPedreira:\nAço\nPedra\nTerra\nUsina Eletrica:\nEletrico\nUTFPR- AP:\nFogo\nEletrico\nPedra\nTerra\nFada\nPlanta\nAço\n");
+
+    printf("Passo 3:\n\n");
+    printf("F.R.I.D.A.Y: Batalha, continua\n\n\n");
+
+}//regras do jogo e como jogar
+
+//funçao de salvamento
+void salvamentoNoHD()
+{
+
+}//fim funçao de salvamento
+
+//funçao de gerenciamento de pokemons
+void gerenciamentoPokemons()
+{
+
+}//fim funçao de gerenciamento
 
 //funçoes necessarias
 //-------------------
@@ -599,6 +632,8 @@ int main(){
 
         nickname = (char*) malloc (tam * sizeof(char)); //aloca dinamicamente o tamanho do nome inserido
         int opcao;
+
+        verificaWinOuLinux();
 
             printf("Bem vindo ao Menu inicial!!!\n");
             printf("Primeiramente, me diga seu nickname para que possamos continuar:\n");
@@ -621,7 +656,7 @@ int main(){
                 case 1:
                     printf("Envia para a funçao de inicio de jogo\n");
                     NovoJogo();
-                    PesquisaTipoGen();
+                    //PesquisaTipoGen();
                     LugarDeCaptura();
                     break;
                 case 2:
@@ -629,7 +664,8 @@ int main(){
                     LugarDeCaptura();
                     break;
                 case 3:
-                    printf("Exibe as mecanicas utilizadas no jogo\n");
+                    
+                    MecanicasDeJogo();
 
                     break;
                 case 4:
@@ -639,9 +675,10 @@ int main(){
                 
                 default:
                     printf("Opção invalida...");
+                    
 
                     break;
             }
-        
+        free(nickname);
     return 0;
 }//main
