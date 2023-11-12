@@ -667,20 +667,7 @@ void LugarDeCaptura()
 
 void AllocJogo(int* nmrPokemon) //malloc pro pokemon inicial escolhido
 {
-    Colecao* PokemonsCapturados;
-
-    PokemonsCapturados = (Colecao*) malloc (PokemonsCapturados * sizeof(int));
-
-    if(PokemonsCapturados == NULL)
-    {
-        tam++;
-        PokemonsCapturados = (Colecao*) realloc (PokemonsCapturados,tam * sizeof(int));
-        
-    }//ifa
-
-    PokemonsCapturados->pokemonCapturado = *nmrPokemon;
-    printf("%i ", PokemonsCapturados->pokemonCapturado);
-    
+    //arrumar isso pra ontem
 }
 
 void NovoJogo() //abre um arquivo novo 
