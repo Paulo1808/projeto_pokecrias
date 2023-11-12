@@ -36,6 +36,7 @@ typedef struct
 
 typedef struct{
     int *pokemonCapturado;
+    int *contadorPokemons;
 }Colecao; //struct coleçao
 
 typedef struct{
@@ -96,9 +97,10 @@ void CriaVetorPokedex(Pokemon pokedexGeral[])
 }//criaVetorPokedex
 
 void CadastroColecao(){
-    Pokemon pokedexGeral[722];
-    int opcao_cadastro_colecao;
+    Pokemon *pokedexGeral, novoPokemon;
+    int opcao_cadastro_colecao, numeroNovoPokemon = 721;
 
+    pokedexGeral = (Pokemon*) malloc(722 * sizeof(Pokemon));
     CriaVetorPokedex(pokedexGeral);
     
     do{
@@ -117,7 +119,61 @@ void CadastroColecao(){
     
     switch(opcao_cadastro_colecao){
         case 1:
+            numeroNovoPokemon++;
+            printf("inserir novo pokemon nº %i\n",numeroNovoPokemon);
+            
+            setbuf(stdin, NULL);
+            printf("digite o nome do pokemon que deseja adicionar:\n");
+            fgets(novoPokemon.nome, 30, stdin);
+            novoPokemon.nome[strcspn(novoPokemon.nome, "\n")] ='\0';
+            setbuf(stdin, NULL);
+            
+            printf("Digite o tipo 1 do %s:\n", novoPokemon.nome);
+            fgets(novoPokemon.tipo1, 30, stdin);
+            novoPokemon.tipo1[strcspn(novoPokemon.tipo1, "\n")] = '\0';
+            setbuf(stdin, NULL);
 
+            printf("digite o tipo 2 do %s (caso não quiser, digite \"NULL\"):\n", novoPokemon.nome);
+            fgets(novoPokemon.tipo2, 30, stdin);
+            novoPokemon.tipo2[strcspn(novoPokemon.tipo2, "\n")] = '\0';
+            setbuf(stdin, NULL);
+
+            printf("digite o valor de ataque do %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.ataque);
+            
+            printf("digite o valor de defesa do %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.defesa);
+            
+            printf("digite o valor de ataque especial do %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.ataque_especial);
+            
+            printf("digite o valor de defesa especial do %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.defesa_especial);
+            
+            printf("digite a velocidade de %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.velocidade);
+            
+            printf("digite o hp de %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.hp);
+            
+            novoPokemon.total = novoPokemon.ataque + novoPokemon.defesa + novoPokemon.ataque_especial + 
+                                novoPokemon.defesa_especial + novoPokemon.velocidade + novoPokemon.hp;
+
+            printf("qual a geração deseja colocar %s:\n", novoPokemon.nome);
+            scanf("%i", &novoPokemon.geracao);
+            
+            printf("é lendário?\n1 - sim\n2 - não:\n");
+            scanf("%i", &novoPokemon.lendario);
+
+            printf("qual a cor de %s:\n", novoPokemon.nome);
+            fgets(novoPokemon.cor, 30, stdin);
+            novoPokemon.cor[strcspn(novoPokemon.cor, "\n")] = '\0';
+            setbuf(stdin, NULL);
+            
+            printf("qual a altura de %s em metros:\n", novoPokemon.nome);
+            scanf
+omekopovon& ,f%""
+            
         break;
 
         case 2:
@@ -274,16 +330,34 @@ void PesquisaTipoGen()
     }//switch
 }//fim funçao de pesquisa
 
+void gerenciamentoPokemons(int* quant_pokemons_capturados, Colecao* gerenciamento)
+{
+    gerenciamento = realloc(gerenciamento, *quant_pokemons_capturados * sizeof(Colecao));
+
+}//fim funçao de gerenciamento
+
 void LugarDeCaptura()
 {
     Pokemon pokedex[722];
-    Colecao pokemon_capturado_gerenciamento; //declarando a struct colecao
-    Colecao *ptr_pokemon_capturado_gerenciamento = &pokemon_capturado_gerenciamento;
-    int *ptr_numero_de_pokemons = 0, *guarda_valor; //aqui eu criei uma variavel pra alocar o numero na memoria de acordo com o n. de pokemons que o usuario possuir
+    Colecao* reallocGerenciamento;
+
+    int *contador_de_pokemons = 1; //1 pq ja tem o pokemon inicial
     int opcao_local;
-    int opcao_captura = 1;
+    int opcao_captura;
     int taxa_sorteada_captura[3];
+
     char tipos_floresta[40] = {"Planta, Venenoso, Bug, Normal, Fada"}; //define os tipos que aparecerao
+    char tipos_lago[40] = {"Agua, Voador, Planta"};
+    char tipos_pantano[40] = {"Psychic, Venenoso, Agua, Inseto"};
+    char tipos_mansao_assombrada[40] = {"Dark, Ghost, Psychic"};
+    char tipos_vulcao[40] = {"Fogo, Lutador, Pedra, Terra"};
+    char tipos_deserto[40] = {"Pedra, Terra, Fogo"};
+    char tipos_montanhas[40] = {"Dragao, Voador"};
+    char tipos_bosque[40] = {"Dragao, Fada"};
+    char tipos_pedreira[40] = {"Aço, Pedra, Terra"};
+    char tipos_usina[40] = {"Eletrico"};
+    char tipos_utfpr[40] = {"Fogo, Eletrico, Pedra, Terra, Fada, Planta, Aço"};
+
     srand(time(NULL));
     int pokemon_sorteado = rand() % 722 + 1; //sorteia um pokemon
 
@@ -301,60 +375,135 @@ void LugarDeCaptura()
     switch(opcao_local){
 
         case 1: //floresta
-            while(opcao_captura != 0){
 
-            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_floresta) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_floresta) != NULL){ //compara substring
-                printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
-                printf("voce deseja captura-lo?\n");
-                printf("1 - sim |||| 0 - nao\n");
-                scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
-                
-                while(opcao_captura != 0 && opcao_captura != 1){
-                    printf("opcao invalida. insira novamente:\n");
-                    scanf("%i", &opcao_captura);
-                } //caso seja inserida uma opcao invalida
-            }
+                if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_floresta) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_floresta) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
 
-                if(opcao_captura == 1){
-                    for(int i = 0; i < 3; i++){
-                        taxa_sorteada_captura[i] = rand() % 255 + 1; //gera a probabilidade de captura (3 chances)
-                        if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].taxa_de_captura){ //o valor deve ser menor para captura-lo
-                    (*ptr_numero_de_pokemons)++; //mandar ja pro struct (colecao.numero sla)
-
-                            //mandar pra colecao. a mochila deve ser gerenciada depois apenas
-                            if((*ptr_numero_de_pokemons) == 1){
-                                ptr_pokemon_capturado_gerenciamento = (Colecao*) malloc (*ptr_numero_de_pokemons * sizeof(int));// trocar para realloc
-                                if(ptr_pokemon_capturado_gerenciamento == NULL){
-                                    printf("Memoria insuficiente.");
-                                    exit(1);
-                                }
-                                (*guarda_valor) = (*ptr_numero_de_pokemons);
-                            }else if(*ptr_numero_de_pokemons > 1)
-                                ptr_pokemon_capturado_gerenciamento = realloc(ptr_pokemon_capturado_gerenciamento, sizeof(int));
-                            
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
                         }
                     }
-                    printf("Pokemon capturado!!!");
-                }else{
-                    printf("o pokemon %s fugiu !!!", pokedex[pokemon_sorteado].nome);
                 }
-
-            }else{
-                srand(time(NULL));
-                pokemon_sorteado = rand() % 722 + 1;
-            }
+      
         break;
 
         case 2: //lago
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_lago) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_lago) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 3: //pantano
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_pantano) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_pantano) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 4: //mansao assombrada
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_mansao_assombrada) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_mansao_assombrada) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 5: //encosta do vulcao
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_vulcao != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_vulcao) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 6: //deserto
@@ -379,19 +528,21 @@ void LugarDeCaptura()
 
 }//Lembarra de recriar para cada lugar
 
-void MallocNovoJogo(int* nmrPokemon) //malloc para o pokemon inicial
+void AllocJogo(int* nmrPokemon) //malloc pro pokemon inicial escolhido
 {
-    Colecao* PokemonInicialEscolhido;
+    Colecao* PokemonsCapturados;
 
-    PokemonInicialEscolhido  = (Colecao*) malloc (1 * sizeof(int));
+    PokemonsCapturados = (Colecao*) malloc (PokemonsCapturados * sizeof(int));
 
-    if(PokemonInicialEscolhido == NULL)
+    if(PokemonsCapturados == NULL)
     {
-    printf("Erro: Memória Insuficiente!\n");
-    exit(1);
-    }//if
+        tam++;
+        PokemonsCapturados = (Colecao*) realloc (PokemonsCapturados,tam * sizeof(int));
+        
+    }//ifa
 
-    PokemonInicialEscolhido->pokemonCapturado = *nmrPokemon;
+    PokemonsCapturados->pokemonCapturado = *nmrPokemon;
+    printf("%i ", PokemonsCapturados->pokemonCapturado);
     
 }
 
@@ -429,12 +580,13 @@ void NovoJogo() //abre um arquivo novo
 
     printf("insira qual geração deseja escolher:\n");
     scanf("%i", &opcao_geracao);
+
     if(opcao_geracao < 1 || opcao_geracao > 6){
         printf("opção de geracao invalida! Insira novamente...\n");
         scanf("%i", &opcao_geracao);
     }
 
-        switch (opcao_geracao)
+    switch (opcao_geracao)
         {
         case 1:
             printf("QUEM VOCÊ ESCOLHE?\n");
@@ -444,18 +596,18 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 1;
-                   MallocNovoJogo(&PokemonEscolhidoFinal);
+                  AllocJogo(&PokemonEscolhidoFinal);
 
                 }//Bulbasaur
             if(opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 4;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Charmander
             if(opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 7;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
 
                 }//Squirtle
    
@@ -468,19 +620,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 152;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Chikorita
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 155;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Totododile
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 158;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Cyndaquil
             
             break;
@@ -492,19 +644,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 252;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Treecko
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 255;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Torchic
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 258;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Mudkip
 
             break;
@@ -516,19 +668,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 387;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Tortwig
                 
             if (opcao_pokemon == 390)
                 {
                     PokemonEscolhidoFinal = 1;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Chimchar
                 
             if (opcao_pokemon == 393)
                 {
                     PokemonEscolhidoFinal = 1;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Piplup
             break;
 
@@ -539,19 +691,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 495;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Snivy
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 498;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Tepig
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 501;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Oshawott
             break;
 
@@ -562,19 +714,19 @@ void NovoJogo() //abre um arquivo novo
             if(opcao_pokemon == 1)
                 {
                     PokemonEscolhidoFinal = 650;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Chespin
                 
             if (opcao_pokemon == 2)
                 {
                     PokemonEscolhidoFinal = 653;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Fennekin
                 
             if (opcao_pokemon == 3)
                 {
                     PokemonEscolhidoFinal = 656;
-                    MallocNovoJogo(&PokemonEscolhidoFinal);
+                    AllocJogo(&PokemonEscolhidoFinal);
                 }//Froaki
             break;
 
@@ -589,7 +741,7 @@ void NovoJogo() //abre um arquivo novo
 
 void MecanicasDeJogo()
 {
-    printf("Mecanicas de Jogo:\n");
+    printf("Mecanicas de Jogo:\n"); 
 
     printf("Passo 1:\n\n");
     printf("F.R.I.D.A.Y: Escolher seu inicial é uma das partes mais importantes da nossa jornada, ele te acompanhara durante o inicio da jornada e te ajudara futuramente em batalhas,\n assim que iniciar um novo jogo você terá que escolher uma geração e um de seus respectivos iniciais\n sendo tipo água, fogo ou planta...");
@@ -610,10 +762,8 @@ void salvamentoNoHD()
 }//fim funçao de salvamento
 
 //funçao de gerenciamento de pokemons
-void gerenciamentoPokemons()
-{
 
-}//fim funçao de gerenciamento
+
 
 //funçoes necessarias
 //-------------------
