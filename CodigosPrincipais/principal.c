@@ -171,7 +171,7 @@ void CadastroColecao(){
             setbuf(stdin, NULL);
             
             printf("qual a altura de %s em metros:\n", novoPokemon.nome);
-            scanf();
+            scanf("%i", &novoPokemon.taxa_de_captura);
             
         break;
 
@@ -506,21 +506,159 @@ void LugarDeCaptura()
         break;
 
         case 6: //deserto
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_deserto) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_deserto) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 7: //montanha
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_montanhas) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_montanhas) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 8: //bosque
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_bosque) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_bosque) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 9: //pedreira
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_pedreira) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_pedreira) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 10: //usina eletrica
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_usina) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_usina) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
 
         case 11: //utfpr
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_utfpr) != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_utfpr) != NULL){ //compara substring
+                    printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
+                    printf("voce deseja captura-lo?\n");
+                    printf("1 - sim |||| 0 - nao\n");
+                    scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
+                    
+                    while(opcao_captura != 0 && opcao_captura != 1){
+                        printf("opcao invalida. insira novamente:\n");
+                        scanf("%i", &opcao_captura);
+                    } //caso seja inserida uma opcao invalida
+
+                    if(opcao_captura == 1){
+                        for(int i = 0; i < 3; i++){
+                            taxa_sorteada_captura[i] = rand() % 255 + 1; //sorteia 3 numeros --> 3 chances de captura
+                            if(taxa_sorteada_captura[i] <= pokedex[pokemon_sorteado].numero){ //o numero sorteado deve ser menor ou igual a sua taxa para ser capturado
+                                (*contador_de_pokemons)++;
+                                gerenciamentoPokemons(*contador_de_pokemons, reallocGerenciamento); //chama a funcao para reallocar
+                            }else{
+                                printf("não conseguimos captura-lo!\n");
+                            }
+                        }
+                    }
+                }
         break;
     }
     
