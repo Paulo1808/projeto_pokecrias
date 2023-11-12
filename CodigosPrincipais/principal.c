@@ -171,8 +171,7 @@ void CadastroColecao(){
             setbuf(stdin, NULL);
             
             printf("qual a altura de %s em metros:\n", novoPokemon.nome);
-            scanf
-omekopovon& ,f%""
+            scanf();
             
         break;
 
@@ -481,7 +480,7 @@ void LugarDeCaptura()
         break;
 
         case 5: //encosta do vulcao
-            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_vulcao != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_vulcao) != NULL){ //compara substring
+            if(strstr(pokedex[pokemon_sorteado].tipo1, tipos_vulcao != NULL || strstr(pokedex[pokemon_sorteado].tipo2, tipos_vulcao) != NULL)){ //compara substring
                     printf("um %s apareceu !!!\n", pokedex[pokemon_sorteado].nome);
                     printf("voce deseja captura-lo?\n");
                     printf("1 - sim |||| 0 - nao\n");
