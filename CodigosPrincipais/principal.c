@@ -43,7 +43,7 @@ typedef struct{
     char a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], i[15], j[15], k[15], l[15], m[15], n[15], o[15], p[15], q[15];
 }Lixo;
 
-void CriaVetorPokedex(Pokemon pokedexGeral[])
+void CriaVetorPokedex(Pokemon *pokedexGeral)
 {
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     Lixo lixo;
@@ -97,12 +97,14 @@ void CriaVetorPokedex(Pokemon pokedexGeral[])
 }//criaVetorPokedex
 
 void CadastroColecao(){
-    Pokemon *pokedexGeral, novoPokemon;
-    int opcao_cadastro_colecao, numeroNovoPokemon = 721;
 
-    pokedexGeral = (Pokemon*) malloc(722 * sizeof(Pokemon));
+    Pokemon *pokedexGeral;
+    int opcao_cadastro_colecao, *tamanhoVetor, numeroNovoPokemon;
+
+    pokedexGeral = (Pokemon*) malloc((*tamanhoVetor) * sizeof(Pokemon));
     CriaVetorPokedex(pokedexGeral);
-    
+
+    numeroNovoPokemon = pokedexGeral[(*tamanhoVetor) - 1].numero;
     do{
         printf("O que deseja fazer?\n"); //opcoes de cadastro na pokedex
         printf("1 - INSERIR\n");
@@ -120,67 +122,85 @@ void CadastroColecao(){
     switch(opcao_cadastro_colecao){
         case 1:
             numeroNovoPokemon++;
+            (*tamanhoVetor)++;
             printf("inserir novo pokemon nº %i\n",numeroNovoPokemon);
             
+            pokedexGeral = realloc(pokedexGeral, (*tamanhoVetor) * sizeof(Pokemon));
+
+            pokedexGeral[numeroNovoPokemon].numero = numeroNovoPokemon;
+
             setbuf(stdin, NULL);
             printf("digite o nome do pokemon que deseja adicionar:\n");
-            fgets(novoPokemon.nome, 30, stdin);
-            novoPokemon.nome[strcspn(novoPokemon.nome, "\n")] ='\0';
+            fgets(pokedexGeral[numeroNovoPokemon].nome, 30, stdin);
+            pokedexGeral[numeroNovoPokemon].nome[strcspn(pokedexGeral[numeroNovoPokemon].nome, "\n")] ='\0';
             setbuf(stdin, NULL);
             
-            printf("Digite o tipo 1 do %s:\n", novoPokemon.nome);
-            fgets(novoPokemon.tipo1, 30, stdin);
-            novoPokemon.tipo1[strcspn(novoPokemon.tipo1, "\n")] = '\0';
+            printf("Digite o tipo 1 do %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            fgets(pokedexGeral[numeroNovoPokemon].tipo1, 30, stdin);
+            pokedexGeral[numeroNovoPokemon].tipo1[strcspn(pokedexGeral[numeroNovoPokemon].tipo1, "\n")] = '\0';
             setbuf(stdin, NULL);
 
-            printf("digite o tipo 2 do %s (caso não quiser, digite \"NULL\"):\n", novoPokemon.nome);
-            fgets(novoPokemon.tipo2, 30, stdin);
-            novoPokemon.tipo2[strcspn(novoPokemon.tipo2, "\n")] = '\0';
+            printf("digite o tipo 2 do %s (caso não quiser, digite \"NULL\"):\n", pokedexGeral[numeroNovoPokemon].nome);
+            fgets(pokedexGeral[numeroNovoPokemon].tipo2, 30, stdin);
+            pokedexGeral[numeroNovoPokemon].tipo2[strcspn(pokedexGeral[numeroNovoPokemon].tipo2, "\n")] = '\0';
             setbuf(stdin, NULL);
 
-            printf("digite o valor de ataque do %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.ataque);
+            printf("digite o valor de ataque do %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].ataque);
             
-            printf("digite o valor de defesa do %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.defesa);
+            printf("digite o valor de defesa do %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].defesa);
             
-            printf("digite o valor de ataque especial do %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.ataque_especial);
+            printf("digite o valor de ataque especial do %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].ataque_especial);
             
-            printf("digite o valor de defesa especial do %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.defesa_especial);
+            printf("digite o valor de defesa especial do %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].defesa_especial);
             
-            printf("digite a velocidade de %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.velocidade);
+            printf("digite a velocidade de %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].velocidade);
             
-            printf("digite o hp de %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.hp);
+            printf("digite o hp de %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].hp);
             
-            novoPokemon.total = novoPokemon.ataque + novoPokemon.defesa + novoPokemon.ataque_especial + 
-                                novoPokemon.defesa_especial + novoPokemon.velocidade + novoPokemon.hp;
+            pokedexGeral[numeroNovoPokemon].total = pokedexGeral[numeroNovoPokemon].ataque + 
+                                                    pokedexGeral[numeroNovoPokemon].defesa + 
+                                                    pokedexGeral[numeroNovoPokemon].ataque_especial + 
+                                                    pokedexGeral[numeroNovoPokemon].defesa_especial + 
+                                                    pokedexGeral[numeroNovoPokemon].velocidade + 
+                                                    pokedexGeral[numeroNovoPokemon].hp;
 
-            printf("qual a geração deseja colocar %s:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.geracao);
+            printf("qual a geração deseja colocar %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].geracao);
             
-            printf("é lendário?\n1 - sim\n2 - não:\n");
-            scanf("%i", &novoPokemon.lendario);
+            printf("%s é lendário?\n1 - sim\n2 - não:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].lendario);
 
-            printf("qual a cor de %s:\n", novoPokemon.nome);
-            fgets(novoPokemon.cor, 30, stdin);
-            novoPokemon.cor[strcspn(novoPokemon.cor, "\n")] = '\0';
+            printf("qual a cor de %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            fgets(pokedexGeral[numeroNovoPokemon].cor, 30, stdin);
+            pokedexGeral[numeroNovoPokemon].cor[strcspn(pokedexGeral[numeroNovoPokemon].cor, "\n")] = '\0';
             setbuf(stdin, NULL);
             
-            printf("qual a altura de %s em metros:\n", novoPokemon.nome);
-            scanf("%i", &novoPokemon.taxa_de_captura);
+            printf("qual a altura de %s em metros:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%f", &pokedexGeral[numeroNovoPokemon].altura);
+
+            printf("qual o peso de %s em kg:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%f", &pokedexGeral[numeroNovoPokemon].peso);
+
+            printf("qual a taxa de captura de %s:\n", pokedexGeral[numeroNovoPokemon].nome);
+            scanf("%i", &pokedexGeral[numeroNovoPokemon].taxa_de_captura);
             
         break;
 
         case 2:
+            printf("listar os pokemons cadastrados\n");
+            
+
 
         break;
 
         case 3:
-
+            
         break;
 
         case 4:
@@ -667,7 +687,8 @@ void LugarDeCaptura()
 
 void AllocJogo(int* nmrPokemon) //malloc pro pokemon inicial escolhido
 {
-    //arrumar isso pra ontem
+    
+        
 }
 
 void NovoJogo() //abre um arquivo novo 
@@ -912,7 +933,7 @@ int main(){
             printf("Bem vindo ao Menu inicial!!!\n");
             printf("Primeiramente, me diga seu nickname para que possamos continuar:\n");
             setbuf(stdin, NULL);
-            fgets(nickname, 20, stdin);
+            fgets(nickname, tam, stdin);
             nickname[strcspn(nickname, "\n")] = '\0';
             setbuf(stdin, NULL); //recebe o nome inserido
 
