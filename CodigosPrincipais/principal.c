@@ -107,7 +107,7 @@ void CadastroColecao(){
     Pokemon *pokedexGeral;
     int opcao_cadastro_colecao, *tamanhoVetor, numeroNovoPokemon;
 
-    pokedexGeral = (Pokemon*) malloc((*tamanhoVetor) * sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente
+    pokedexGeral = (Pokemon*) malloc(722 * sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente
     CriaVetorPokedex(pokedexGeral);//envia para a fun��o que recebe a pokedex
 
     numeroNovoPokemon = pokedexGeral[(*tamanhoVetor) - 1].numero;
@@ -734,7 +734,7 @@ void LugarDeCaptura()
                 printf("voce deseja captura-lo?\n");
                 printf("1 - sim |||| 0 - nao\n");
                 scanf("%i", &opcao_captura); //recebe se vai capturar ou nao
-                376
+        
                 while(opcao_captura != 0 && opcao_captura != 1)
                 {
                     //caso seja inserida uma opcao invalida
