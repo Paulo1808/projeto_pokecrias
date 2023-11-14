@@ -101,16 +101,44 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
     fclose(ArquivoPokedex); //fecha o arquivo
 }//CriaVetorPokedex
 
+void CriaVetorNovosPokemons(Pokemon *pokedexGeral, int* contador_pokemon_add)
+{
+    //declara��o de vari�veis
+    FILE *ArquivoPokedex = fopen("novosPokemons.csv", "a"); //abre o arquivo da pokedex
+
+    fprintf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
+    &pokedexGeral[i].numero,
+    pokedexGeral[i].nome, 
+    pokedexGeral[i].tipo1,                          //escreve no arquivo .csv
+    pokedexGeral[i].tipo2, 
+    &pokedexGeral[i].total, 
+    &pokedexGeral[i].hp, 
+    &pokedexGeral[i].ataque, 
+    &pokedexGeral[i].defesa, 
+    &pokedexGeral[i].ataque_especial, 
+    &pokedexGeral[i].defesa_especial, 
+    &pokedexGeral[i].velocidade, 
+    &pokedexGeral[i].geracao, 
+    &pokedexGeral[i].lendario, 
+    pokedexGeral[i].cor, 
+    &pokedexGeral[i].altura, 
+    &pokedexGeral[i].peso, 
+    &pokedexGeral[i].taxa_de_captura);
+
+    fclose(ArquivoPokedex); //fecha o arquivo
+}//CriaVetorNovosPokemons
+
 void CadastroColecao(){
 
     //declara��o de vari�veis
-    Pokemon *pokedexGeral;
-    int opcao_cadastro_colecao, *tamanhoVetor, numeroNovoPokemon;
+    Pokemon *pokedexGeral, *novosPokemons;
+    int opcao_cadastro_colecao, numeroNovoPokemon;
+    int* contador_pokemons_add; //conta o numero de pokemons adicionados 
 
     pokedexGeral = (Pokemon*) malloc(722 * sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente
     CriaVetorPokedex(pokedexGeral);//envia para a fun��o que recebe a pokedex
 
-    numeroNovoPokemon = pokedexGeral[(*tamanhoVetor) - 1].numero;
+    numeroNovoPokemon = pokedexGeral[722].numero;
     do
     {
         printf("O que deseja fazer?\n"); //opcoes de cadastro na pokedex
@@ -129,10 +157,10 @@ void CadastroColecao(){
     {
         case 1://inserir um novo pokem�n
             numeroNovoPokemon++;//novo numero para o novo pokemon
-            (*tamanhoVetor)++;//incrementa o tamanho do vetor
             printf("inserir novo pokemon nº %i\n",numeroNovoPokemon);
+            (*contador_pokemons_add)++; //adiciona no contador
             
-            pokedexGeral = realloc(pokedexGeral, (*tamanhoVetor) * sizeof(Pokemon));//realoca para receber o novo pokemon
+            pokedexGeral = realloc(pokedexGeral, (722 + (*contador_pokemons_add)) * sizeof(Pokemon));//realoca para receber o novo pokemon
 
             pokedexGeral[numeroNovoPokemon].numero = numeroNovoPokemon;//recebe o numero do pokemon
 
@@ -197,7 +225,7 @@ void CadastroColecao(){
 
             printf("qual a taxa de captura de %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de taxa de captura
             scanf("%i", &pokedexGeral[numeroNovoPokemon].taxa_de_captura);
-            
+
         break;
 
         case 2://listar pokemons
@@ -375,7 +403,7 @@ void LugarDeCaptura()
 
     //alocação dos pokemos dinamicamente assim que sair do sistema de captura
     int tam = 1000;
-    reallocGerenciamento = malloc (tam * sizeof(Colecao));
+    reallocGerenciamento = (Colecao*) malloc (tam * sizeof(Colecao));
 
     int *contador_de_pokemons = 1; //1 pq ja tem o pokemon inicial
     int opcao_local;
@@ -854,20 +882,20 @@ void LugarDeCaptura()
     }//switch
 }//LugarDeCaptura
 
+void AllocJogo(int* nmrPokemon)
+{
+    Colecao* reservaMemoria = (Colecao*) malloc (1 * sizeof(Colecao));
+    reservaMemoria = nmrPokemon;
+
+}
+
 
 void NovoJogo() //abre um arquivo novo 
 {
     //declara��o de vari�veis
-    FILE* Inicializando_Jogo = fopen("pokemonGame.dat", "wb"); //abre o arquivo do novo jogo
     int opcao_geracao;
     int opcao_pokemon;
     int PokemonEscolhidoFinal;
-
-    if(Inicializando_Jogo == NULL)
-    {
-        printf("Erro ao abrir o arquivo!\n");
-        exit(1);// 1 significa erro    
-    }// if
     
     //coment�rios iniciais para auxiliar o usu�rio
     printf("Bem vindo! O jogo esta sendo inicializado...\n");
@@ -1069,9 +1097,9 @@ void MecanicasDeJogo()
 }//MecanicasDeJogo
 
 //funçao de salvamento
-void salvamentoNoHD()
+void salvamentoNoHD() //EM BINARIO
 {
-
+    //salvar pokemons da mochila e da coleção
 }//salvamentoNoHD
 
 //funçoes necessarias
@@ -1080,10 +1108,10 @@ void salvamentoNoHD()
 1- Menus e submenus ----------- FEITO
 2- pesquisa por tipo e geração ------- FEITO
 3- salvamento em binario ------ AINDA FALTA
-4- gerenciamento dos pokemons obtidos ---- AINDA FALTA (estamos tentando a mochila)
-5- sistema de batalha ----- AINDA FALTA
+4- gerenciamento dos pokemons obtidos ---- MAIS OU MENOS FEITO --> mochila com os 6 bichin
+5- sistema de batalha ----- NEM IREMOS FAZER
 6- identificar se ta no windows ou linux ----- FEITO
-7- cadastro de novos pokemons na pokedex e na cole��o ----- AINDA FALTA (terminar todos os topicos)
+7- cadastro de novos pokemons na pokedex e na cole��o ----- AINDA FALTA MAIS OU MENOS (terminar todos os topicos)
 */
 
 int main()
@@ -1106,48 +1134,50 @@ int main()
 
     printf("Bom, vamos lá %s!\n", nickname);
     
-    //menu do jogo
-    printf("Escolha uma op��o para iniciar:\n");
-    printf("1 - Novo Jogo\n");
-    printf("2 - Carregar Jogo\n");
-    printf("3 - Mecanicas do Jogo\n"); 
-    printf("4 - Fechar o jogo\n");
+    do{
+        printf("Escolha uma op��o para iniciar:\n");
+        printf("Escolha uma op��o para iniciar:\n");
+        printf("1 - Novo Jogo\n");
+        printf("2 - Carregar Jogo\n");
+        printf("3 - Mecanicas do Jogo\n"); 
+        printf("4 - Fechar o jogo\n");
 
-    scanf("%i", &opcao);
+        scanf("%i", &opcao);
 
-    switch (opcao) //executa a opçao escolhida
-    {
-        case 1:
-            printf("Envia para a funçao de inicio de jogo\n");
-            NovoJogo();
-            //PesquisaTipoGen();
-            LugarDeCaptura();
+        switch (opcao) //executa a opçao escolhida
+        {
+            case 1:
+                printf("Envia para a funçao de inicio de jogo\n");
+                NovoJogo();
+                //PesquisaTipoGen();
+                LugarDeCaptura();
 
-        break;
-        
-        case 2:
-            printf("Carrega um arquivo do jogo ja existente\n");
-            LugarDeCaptura();
+            break;
+            
+            case 2:
+                printf("Carrega um arquivo do jogo ja existente\n");
+                LugarDeCaptura();
 
-        break;
-        
-        case 3:
-            printf("Mecanicas do Jogo\n");
-            MecanicasDeJogo();
+            break;
+            
+            case 3:
+                printf("Mecanicas do Jogo\n");
+                MecanicasDeJogo();
 
-        break;
-        
-        case 4:
-            printf("Fechando o jogo...\n");
-            salvamentoNoHD();
+            break;
+            
+            case 4:
+                printf("Fechando o jogo...\n");
+                salvamentoNoHD();
 
-        break;
-        
-        default:
-            printf("Op��o invalida...");
+            break;
+            
+            default:
+                printf("Op��o invalida...");
 
-        break;
-    }//switch
+            break;
+        }//switch
+    }while(opcao != 4);//menu do jogo (do while)
 
     free(nickname);
 
