@@ -50,9 +50,9 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     Lixo lixo;
     fseek(ArquivoPokedex, 0, SEEK_SET);//direciona para o inï¿½cio do arquivo
-    int i = 0;
+    int i;
 
-    while()
+    while(i = 0; i < 722; i++)
     {
         if (i == 0)//caso for a linha de nome das colunas
         {
@@ -70,7 +70,7 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
             lixo.k,
             lixo.l,
             lixo.m,
-            lixo.n,
+            lixo.n, 
             lixo.o,
             lixo.p,
             lixo.q);
@@ -105,7 +105,7 @@ void CadastroColecao(){
 
     //declaraï¿½ï¿½o de variï¿½veis
     Pokemon *pokedexGeral;
-    int opcao_cadastro_colecao, opcao, posicaoNovoPokemon, numeroPokemon = 1, i = 1, contador;
+    int opcao_cadastro_colecao, opcao, posicaoNovoPokemon, numeroPokemon = 1, i = 1, contador, fimPokedex = 1;
     char nome_pokemon_inserir[21];
     char nome_pokemon_alterar[21];
     char nome_pokemon_excluir[21];
@@ -114,11 +114,16 @@ void CadastroColecao(){
     pokedexGeral = (Pokemon*) calloc(1000, sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente com todas as posições zeradas
     CriaVetorPokedex(pokedexGeral);//envia para a funï¿½ï¿½o que recebe a pokedex
     
-    //enquanto for uma linha ocupada por um vetor ou uma linha de vetor excluido, para encontrar o fim da pokedex
+    numeroPokemon = pokedexGeral[1].numero;//assume um primeiro valor para o numero novo
+    //enquanto for uma linha ocupada por um pokemon ou uma linha de vetor excluido, para encontrar o fim da pokedex
     while(pokedexGeral[i].numero != 0 || strcmp(pokedexGeral[i].nome, "excluido") == 0)
     {
-        posicaoNovoPokemon++;
-        numeroPokemon++;
+        //qual será o numero do pokemon novo
+        if(pokedexGeral[i].numero > numeroPokemon)
+        {
+            numeroPokemon = pokedexGeral[i].numero;
+        }//if
+        fimPokedex++;//incrementa até encontrar o fim da pokedex
         i++;
     }//while
 
@@ -140,22 +145,23 @@ void CadastroColecao(){
     {
         case 1://inserir um novo pokemï¿½n
             i = 1;
-            while(contador == 0)//enquanto não entrou em nenhuma condição
+            while(contador == 0)
             {
-                if(pokedexGeral[i].numero == '0' && strcmp(pokedexGeral[i].nome, "0") == 0)//se o numero estiver zerado e no nome estiver nulo
-                {
-                    posicaoNovoPokemon = i;
-                    pokedexGeral[i].numero = i;
-                    contador++;
-                }//if
+                //onde será armazenado o pokemon novo
                 if(pokedexGeral[i].numero == '0' && strcmp(pokedexGeral[i].nome, "excluido") == 0)//se no numero estiver zerado e o nome for algum pokemon excluido
                 {
                     posicaoNovoPokemon = i;
-                    pokedexGeral[i].numero = numeroPokemon;
                     contador++;
+                }//if
+                if(pokedexGeral[i].numero == '0' && strcmp(pokedexGeral[i].nome, "0") == 0)//se no numero e no nome estiver zerados
+                {
+                    posicaoNovoPokemon = i;
+                    contador++;
+                    fimPokedex++;//se estiver a linha zerada, deve incrementar o tamanho do vetor final
                 }//if
                 i++;
             }//while
+            
             do
             {
                 setbuf(stdin, NULL);//recebe o nome de um pokemon
@@ -165,7 +171,7 @@ void CadastroColecao(){
                 setbuf(stdin, NULL);
 
                 contador = 0;//variavel de localização para verificar se não tem repetido
-                for(int i = 1; i < posicaoNovoPokemon; i++)
+                for(int i = 1; i < fimPokedex; i++)
                 {
                     if(strcasecmp(nome_pokemon_inserir, pokedexGeral[i].nome) == 0)//caso forem nomes iguais
                     {
@@ -186,32 +192,38 @@ void CadastroColecao(){
             pokedexGeral[posicaoNovoPokemon].tipo2[strcspn(pokedexGeral[posicaoNovoPokemon].tipo2, "\n")] = '\0';
             setbuf(stdin, NULL);
 
-            do{//recebe o valor de ataque
+            do//recebe o valor de ataque
+            {
                 printf("digite o valor de ataque do %s:\n", pokedexGeral[posicaoNovoPokemon].nome); 
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].ataque);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].ataque < 0);
 
-            do{//recebe o valor de defesa
+            do//recebe o valor de defesa
+            {
                 printf("digite o valor de defesa do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].defesa);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].defesa < 0);
 
-            do{//recebe o valor de ataque especial
+            do//recebe o valor de ataque especial
+            {
                 printf("digite o valor de ataque especial do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].ataque_especial);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].ataque_especial < 0);
                 
-            do{//recebe o valor de defesa especial
+            do//recebe o valor de defesa especial
+            {
                 printf("digite o valor de defesa especial do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].defesa_especial);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].defesa_especial < 0);
                 
-            do{//recebe o valor de velocidade
+            do//recebe o valor de velocidade
+            {
                 printf("digite a velocidade de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].velocidade);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].velocidade < 0);
 
-            do{//recebe o valor de maximo dano
+            do//recebe o valor de maximo dano
+            {
                 printf("digite o hp de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].hp);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].hp < 0);
@@ -224,12 +236,14 @@ void CadastroColecao(){
                                                     pokedexGeral[posicaoNovoPokemon].velocidade + 
                                                     pokedexGeral[posicaoNovoPokemon].hp;
 
-            do{//recebe o valor de geraï¿½ï¿½o
+            do//recebe o valor de geraï¿½ï¿½o
+            {
                 printf("qual a geraï¿½ï¿½o deseja colocar %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].geracao);
             }while(pokedexGeral[posicaoNovoPokemon].geracao < 0 || pokedexGeral[posicaoNovoPokemon].geracao > 6);
 
-            do{//se o pokemon ï¿½ lendario ou nï¿½o
+            do//se o pokemon ï¿½ lendario ou nï¿½o
+            {
                 printf("%s ï¿½ lendï¿½rio?\n1 - sim\n2 - nï¿½o:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].lendario);
             }while(pokedexGeral[posicaoNovoPokemon].lendario != 0 && pokedexGeral[posicaoNovoPokemon].lendario != 1);
@@ -240,28 +254,31 @@ void CadastroColecao(){
             pokedexGeral[posicaoNovoPokemon].cor[strcspn(pokedexGeral[posicaoNovoPokemon].cor, "\n")] = '\0';
             setbuf(stdin, NULL);
 
-            do{//recebe o valor de altura
+            do//recebe o valor de altura
+            {
                 printf("qual a altura de %s em metros:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%f", &pokedexGeral[posicaoNovoPokemon].altura);
             }while(pokedexGeral[posicaoNovoPokemon].altura < 0);
 
-            do{//recebe o valor de peso
+            do//recebe o valor de peso
+            {
                 printf("qual o peso de %s em kg:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%f", &pokedexGeral[posicaoNovoPokemon].peso);
             }while(pokedexGeral[posicaoNovoPokemon].peso < 0);
 
-            do{//recebe o valor de taxa de captura
+            do//recebe o valor de taxa de captura
+            {
                 printf("qual a taxa de captura de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].taxa_de_captura);
             }while(pokedexGeral[posicaoNovoPokemon].taxa_de_captura > 255 || pokedexGeral[posicaoNovoPokemon].taxa_de_captura < 0);
 
-            pokedexGeral = realloc(pokedexGeral, posicaoNovoPokemon * sizeof(Pokemon));
+            pokedexGeral = realloc(pokedexGeral, fimPokedex * sizeof(Pokemon));
         break;
 
         case 2://listar pokemons
             printf("listar os pokemons\n");
 
-            for(i = 1; i < posicaoNovoPokemon; i++)
+            for(i = 1; i < fimPokedex; i++)
             {
                 if(strcmp(pokedexGeral[i].nome, "excluido") != 0)
                 {
@@ -297,7 +314,7 @@ void CadastroColecao(){
                 setbuf(stdin, NULL);
 
                 contador = 0;//variavel de localização
-                for(i = 1; i < posicaoNovoPokemon; i++)
+                for(i = 1; i < fimPokedex; i++)
                 {
                     if(strcasecmp(nome_pokemon_pesquisar, pokedexGeral[i].nome) == 0)//compara com o nome recebido
                     {
@@ -346,7 +363,7 @@ void CadastroColecao(){
                 setbuf(stdin, NULL);
 
                 contador = 0;//variavel de localização
-                for(i = 1; i < posicaoNovoPokemon; i++)
+                for(i = 1; i < fimPokedex; i++)
                 {
                     if(strcasecmp(nome_pokemon_alterar, pokedexGeral[i].nome) == 0)//compara com o nome de todos os pokemons
                     {
@@ -524,7 +541,7 @@ void CadastroColecao(){
                 setbuf(stdin, NULL);
 
                 contador = 0;//variavel de localização
-                for(i = 1; i < 1000; i++)
+                for(i = 1; i < fimPokedex; i++)
                 {
                     if (strcasecmp(nome_pokemon_excluir, pokedexGeral[i].nome) == 0)
                     {
