@@ -50,9 +50,8 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     Lixo lixo;
     fseek(ArquivoPokedex, 0, SEEK_SET);//direciona para o in�cio do arquivo
-    int i;
 
-    while(i = 0; i < 722; i++)
+    for(int i = 0; i < 722; i++)
     {
         if (i == 0)//caso for a linha de nome das colunas
         {
