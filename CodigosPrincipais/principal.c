@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include <time.h>
 
-
 typedef struct
 {
     int numero;
@@ -101,44 +100,58 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
     fclose(ArquivoPokedex); //fecha o arquivo
 }//CriaVetorPokedex
 
-void CriaVetorNovosPokemons(Pokemon *pokedexGeral, int* contador_pokemon_add)
+/*void CriaVetorNovosPokemons(Pokemon *pokedexGeral, int* contador_pokemon_add)
 {
     //declara��o de vari�veis
-    FILE *ArquivoPokedex = fopen("novosPokemons.csv", "a"); //abre o arquivo da pokedex
-
-    fprintf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
-    &pokedexGeral[i].numero,
-    pokedexGeral[i].nome, 
-    pokedexGeral[i].tipo1,                          //escreve no arquivo .csv
-    pokedexGeral[i].tipo2, 
-    &pokedexGeral[i].total, 
-    &pokedexGeral[i].hp, 
-    &pokedexGeral[i].ataque, 
-    &pokedexGeral[i].defesa, 
-    &pokedexGeral[i].ataque_especial, 
-    &pokedexGeral[i].defesa_especial, 
-    &pokedexGeral[i].velocidade, 
-    &pokedexGeral[i].geracao, 
-    &pokedexGeral[i].lendario, 
-    pokedexGeral[i].cor, 
-    &pokedexGeral[i].altura, 
-    &pokedexGeral[i].peso, 
-    &pokedexGeral[i].taxa_de_captura);
 
     fclose(ArquivoPokedex); //fecha o arquivo
-}//CriaVetorNovosPokemons
+}//CriaVetorNovosPokemons*/
+
+void salvaVetorPokedex(Pokemon *pokedexGeral, int tamanhoFinal){
+
+    FILE *ArquivoPokedex = fopen("novosPokemons.csv", "a"); //abre o arquivo da pokedex
+
+    for(int i = 1; i < tamanhoFinal; i++){
+        fprintf(ArquivoPokedex, "%3i ,%s ,%s ,%s ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%3i ,%i ,%i ,%s ,%f ,%f ,%3i \n", 
+        &pokedexGeral[i].numero,
+        pokedexGeral[i].nome, 
+        pokedexGeral[i].tipo1,                          //escreve no arquivo .csv
+        pokedexGeral[i].tipo2, 
+        &pokedexGeral[i].total, 
+        &pokedexGeral[i].hp, 
+        &pokedexGeral[i].ataque, 
+        &pokedexGeral[i].defesa, 
+        &pokedexGeral[i].ataque_especial, 
+        &pokedexGeral[i].defesa_especial, 
+        &pokedexGeral[i].velocidade, 
+        &pokedexGeral[i].geracao, 
+        &pokedexGeral[i].lendario, 
+        pokedexGeral[i].cor, 
+        &pokedexGeral[i].altura, 
+        &pokedexGeral[i].peso, 
+        &pokedexGeral[i].taxa_de_captura);
+    }
+
+}
 
 void CadastroColecao(){
 
     //declara��o de vari�veis
     Pokemon *pokedexGeral, *novosPokemons;
-    int opcao_cadastro_colecao, numeroNovoPokemon;
-    int* contador_pokemons_add; //conta o numero de pokemons adicionados 
+    int opcao_cadastro_colecao, posicaoNovoPokemon, numeroPokemon = 1, i = 1;
+    char nome_pokemon_alterar[21];
+    char nome_pokemon_excluir[21];
+    char nome_pokemon_pesquisar[21];
 
-    pokedexGeral = (Pokemon*) malloc(722 * sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente
+    pokedexGeral = (Pokemon*) calloc(1000, sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente
     CriaVetorPokedex(pokedexGeral);//envia para a fun��o que recebe a pokedex
+    
+    while(pokedexGeral[i].numero != 0 || strcmp(pokedexGeral[i].nome, "excluido" != '0')){
+        posicaoNovoPokemon++;
+        numeroPokemon++;
+        i++
+    }//while
 
-    numeroNovoPokemon = pokedexGeral[722].numero;
     do
     {
         printf("O que deseja fazer?\n"); //opcoes de cadastro na pokedex
@@ -156,95 +169,294 @@ void CadastroColecao(){
     switch(opcao_cadastro_colecao)//casos de cadastro
     {
         case 1://inserir um novo pokem�n
-            numeroNovoPokemon++;//novo numero para o novo pokemon
-            printf("inserir novo pokemon nº %i\n",numeroNovoPokemon);
-            (*contador_pokemons_add)++; //adiciona no contador
-            
-            pokedexGeral = realloc(pokedexGeral, (722 + (*contador_pokemons_add)) * sizeof(Pokemon));//realoca para receber o novo pokemon
+            for(i = 1; i < 1000; i++){
+                if(pokedexGeral[i].numero == '0' && strcmp(pokedexGeral[i].nome, "0") == 0){//se o numero estiver zerado e no nome estiver nulo
+                    posicaoNovoPokemon = i;
+                    pokedexGeral[i].numero = numeroPokemon;
+                }
+                if(pokedexGeral[i].numero == '0' && strcmp(pokedexGeral[i].nome, "excluido") == 0){//se no numero estiver zerado e o nome for algum pokemon excluido
+                    posicaoNovoPokemon = i;
+                }
+            }//for
 
-            pokedexGeral[numeroNovoPokemon].numero = numeroNovoPokemon;//recebe o numero do pokemon
+            do{
+                setbuf(stdin, NULL);
+                printf("digite o nome do pokemon que deseja adicionar:\n");//recebe o nome do pokemon
+                fgets(pokedexGeral[posicaoNovoPokemon].nome, 30, stdin);
+                pokedexGeral[posicaoNovoPokemon].nome[strcspn(pokedexGeral[posicaoNovoPokemon].nome, "\n")] ='\0';
+                setbuf(stdin, NULL);
+            }while(pokedexGeral[posicaoNovoPokemon].nome == NULL)
 
-            setbuf(stdin, NULL);
-            printf("digite o nome do pokemon que deseja adicionar:\n");//recebe o nome do pokemon
-            fgets(pokedexGeral[numeroNovoPokemon].nome, 30, stdin);
-            pokedexGeral[numeroNovoPokemon].nome[strcspn(pokedexGeral[numeroNovoPokemon].nome, "\n")] ='\0';
-            setbuf(stdin, NULL);
-            
-            printf("Digite o tipo 1 do %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o tipo principal 
-            fgets(pokedexGeral[numeroNovoPokemon].tipo1, 30, stdin);
-            pokedexGeral[numeroNovoPokemon].tipo1[strcspn(pokedexGeral[numeroNovoPokemon].tipo1, "\n")] = '\0';
+            do{
+                printf("Digite o tipo 1 do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o tipo principal 
+                fgets(pokedexGeral[posicaoNovoPokemon].tipo1, 30, stdin);
+                pokedexGeral[posicaoNovoPokemon].tipo1[strcspn(pokedexGeral[posicaoNovoPokemon].tipo1, "\n")] = '\0';
+                setbuf(stdin, NULL);
+            }while(pokedexGeral[posicaoNovoPokemon].tipo1 == NULL);
+
+            printf("digite o tipo 2 do %s (caso não quiser, digite \"NULL\"):\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o tipo secundario
+            fgets(pokedexGeral[posicaoNovoPokemon].tipo2, 30, stdin);
+            pokedexGeral[posicaoNovoPokemon].tipo2[strcspn(pokedexGeral[posicaoNovoPokemon].tipo2, "\n")] = '\0';
             setbuf(stdin, NULL);
 
-            printf("digite o tipo 2 do %s (caso não quiser, digite \"NULL\"):\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o tipo secundario
-            fgets(pokedexGeral[numeroNovoPokemon].tipo2, 30, stdin);
-            pokedexGeral[numeroNovoPokemon].tipo2[strcspn(pokedexGeral[numeroNovoPokemon].tipo2, "\n")] = '\0';
-            setbuf(stdin, NULL);
-
-            printf("digite o valor de ataque do %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de ataque 
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].ataque);
+            printf("digite o valor de ataque do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de ataque 
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].ataque);
             
-            printf("digite o valor de defesa do %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de defesa
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].defesa);
+            printf("digite o valor de defesa do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de defesa
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].defesa);
             
-            printf("digite o valor de ataque especial do %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de ataque especial
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].ataque_especial);
+            printf("digite o valor de ataque especial do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de ataque especial
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].ataque_especial);
             
-            printf("digite o valor de defesa especial do %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de defesa especial
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].defesa_especial);
+            printf("digite o valor de defesa especial do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de defesa especial
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].defesa_especial);
             
-            printf("digite a velocidade de %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de velocidade
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].velocidade);
+            printf("digite a velocidade de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de velocidade
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].velocidade);
             
-            printf("digite o hp de %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de maximo dano
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].hp);
+            printf("digite o hp de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de maximo dano
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].hp);
             
             //valor total � a soma dos ataques, defesas, velocidade e hp
-            pokedexGeral[numeroNovoPokemon].total = pokedexGeral[numeroNovoPokemon].ataque + 
-                                                    pokedexGeral[numeroNovoPokemon].defesa + 
-                                                    pokedexGeral[numeroNovoPokemon].ataque_especial + 
-                                                    pokedexGeral[numeroNovoPokemon].defesa_especial + 
-                                                    pokedexGeral[numeroNovoPokemon].velocidade + 
-                                                    pokedexGeral[numeroNovoPokemon].hp;
+            pokedexGeral[posicaoNovoPokemon].total = pokedexGeral[posicaoNovoPokemon].ataque + 
+                                                    pokedexGeral[posicaoNovoPokemon].defesa + 
+                                                    pokedexGeral[posicaoNovoPokemon].ataque_especial + 
+                                                    pokedexGeral[posicaoNovoPokemon].defesa_especial + 
+                                                    pokedexGeral[posicaoNovoPokemon].velocidade + 
+                                                    pokedexGeral[posicaoNovoPokemon].hp;
 
-            printf("qual a gera��o deseja colocar %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de gera��o
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].geracao);
+            printf("qual a gera��o deseja colocar %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de gera��o
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].geracao);
             
-            printf("%s � lend�rio?\n1 - sim\n2 - n�o:\n", pokedexGeral[numeroNovoPokemon].nome);//se o pokemon � lendario ou n�o
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].lendario);
+            printf("%s � lend�rio?\n1 - sim\n2 - n�o:\n", pokedexGeral[posicaoNovoPokemon].nome);//se o pokemon � lendario ou n�o
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].lendario);
 
-            printf("qual a cor de %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe a cor do pokemon
-            fgets(pokedexGeral[numeroNovoPokemon].cor, 30, stdin);
-            pokedexGeral[numeroNovoPokemon].cor[strcspn(pokedexGeral[numeroNovoPokemon].cor, "\n")] = '\0';
+            printf("qual a cor de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe a cor do pokemon
+            fgets(pokedexGeral[posicaoNovoPokemon].cor, 30, stdin);
+            pokedexGeral[posicaoNovoPokemon].cor[strcspn(pokedexGeral[posicaoNovoPokemon].cor, "\n")] = '\0';
             setbuf(stdin, NULL);
             
-            printf("qual a altura de %s em metros:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de altura
-            scanf("%f", &pokedexGeral[numeroNovoPokemon].altura);
+            printf("qual a altura de %s em metros:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de altura
+            scanf("%f", &pokedexGeral[posicaoNovoPokemon].altura);
 
-            printf("qual o peso de %s em kg:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de peso
-            scanf("%f", &pokedexGeral[numeroNovoPokemon].peso);
+            printf("qual o peso de %s em kg:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de peso
+            scanf("%f", &pokedexGeral[posicaoNovoPokemon].peso);
 
-            printf("qual a taxa de captura de %s:\n", pokedexGeral[numeroNovoPokemon].nome);//recebe o valor de taxa de captura
-            scanf("%i", &pokedexGeral[numeroNovoPokemon].taxa_de_captura);
+            printf("qual a taxa de captura de %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o valor de taxa de captura
+            scanf("%i", &pokedexGeral[posicaoNovoPokemon].taxa_de_captura);
 
+            pokedexGeral = realloc(pokedexGeral, posicaoNovoPokemon);
+            salvaVetorPokedex(pokedexGeral, posicaoNovoPokemon);
         break;
 
         case 2://listar pokemons
             printf("listar os pokemons\n");
-            
+
+            for(i = 0; i < posicaoNovoPokemon; i++){
+                if(strcmp(poke))
+                printf("Numero: %3i\nNome: %-12s\nTipo 1: %-12s\nTipo 2: %-12s\nTotal: %3i\nHP: %3i\nAtaque: %3i\nDefesa: %3i\nAt. Especial: %3i\nDf. Especial: %3i\n Velocidade: %3i\nGeração: %i\nLendário: %i\nCor: %-8sAltura: %5.2f\nPeso: %6.2f\nTaxa Captura: %3i\n", 
+                    pokedexGeral[i].numero,
+                    pokedexGeral[i].nome,                         //exibe as infos dos pokemons
+                    pokedexGeral[i].tipo1, 
+                    pokedexGeral[i].tipo2, 
+                    pokedexGeral[i].total, 
+                    pokedexGeral[i].hp, 
+                    pokedexGeral[i].ataque, 
+                    pokedexGeral[i].defesa, 
+                    pokedexGeral[i].ataque_especial, 
+                    pokedexGeral[i].defesa_especial, 
+                    pokedexGeral[i].velocidade, 
+                    pokedexGeral[i].geracao, 
+                    pokedexGeral[i].lendario, 
+                    pokedexGeral[i].cor, 
+                    pokedexGeral[i].altura, 
+                    pokedexGeral[i].peso, 
+                    pokedexGeral[i].taxa_de_captura);
+            }
+
         break;
 
         case 3://pesquisar pokemons
-            printf("pesquisar os pokemons\n");
+
+            printf("insira o nome do pokemon que deseja pesquisar:\n");
+            fgets(nome_pokemon_pesquisar, 20, stdin);
+            nome_pokemon_pesquisar[strcspn(nome_pokemon_pesquisar, "\n")] = '\0';
+            setbuf(stdin, NULL);
+
+            for(i = 0; i < posicaoNovoPokemon; i++){
+                if(strcasecmp(nome_pokemon_pesquisar, pokedexGeral[i].nome) == 0){ //compara com o nome recebido
+                    printf("NOME: %s\n", pokedexGeral[i].nome);
+                    printf("NUMERO: %i\n", pokedexGeral[i].numero);
+                    printf("TIPO 1: %s\n", pokedexGeral[i].tipo1);
+                    printf("TIPO 2: %s\n", pokedexGeral[i].tipo2);
+                    printf("HP: %i\n", pokedexGeral[i].hp);
+                    printf("ATAQUE: %i\n", pokedexGeral[i].ataque);
+                    printf("DEFESA: %i\n", pokedexGeral[i].defesa);
+                    printf("ATAQUE ESPECIAL: %i\n", pokedexGeral[i].ataque_especial);
+                    printf("DEFESA ESPECIAL: %i\n", pokedexGeral[i].defesa_especial);
+                    printf("VELOCIDADE: %i\n", pokedexGeral[i].velocidade);
+                    printf("TOTAL: %i\n", pokedexGeral[i].total);
+                    printf("GERAÇÃO: %i\n", pokedexGeral[i].geracao);
+                    printf("LENDARIO: %i\n", pokedexGeral[i].lendario);
+                    printf("COR: %s\n", pokedexGeral[i].cor);
+                    printf("ALTURA: %.2f\n", pokedexGeral[i].altura);
+                    printf("PESO: %.2f\n", pokedexGeral[i].peso);
+                    printf("TAXA DE CAPTURA: %i\n", pokedexGeral[i].taxa_de_captura);
+                }else{
+                    printf("Não encontramos nenhum pokemon com esse nome...\n");
+                }
+            }
 
         break;
 
         case 4://alterar pokemons
-            printf("alterar algum pokemon cadastrado\n");
+            //recebe o nome do pokemon que tera suas informações alteradas
+            printf("insira o nome do pokemon que deseja alterar:\n");
+            fgets(nome_pokemon_alterar, 20, stdin);
+            nome_pokemon_alterar[strcspn(nome_pokemon_alterar, "\n")] = '\0';
+            setbuf(stdin, NULL);
+
+            for(i = 1; i < posicaoNovoPokemon; i++){
+                if(strcasecmp(nome_pokemon_alterar, pokedexGeral[i].nome) = 0){ //compara com o nome de todos os pokemons
+                    do{
+                        printf("insira a quantidade de HP:\n");
+                        scanf("%i", &pokedexGeral[i].hp);
+                        if(pokedexGeral[i].hp > 300){
+                            printf("HP alto demais! o numero deve ser abaixo de 300. Insira novamente:\n");
+                        }else{
+                            if(pokedexGeral[i].hp < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].hp > 300 || pokedexGeral[i].hp < 0);
+
+                    do{
+                        printf("insira a quantidade de ataque:\n");
+                        scanf("%i", &pokedexGeral[i].ataque);
+                        if(pokedexGeral[i].ataque > 300){
+                            printf("ataque alto demais! o numero deve ser abaixo de 300. Insira novamente:\n");
+                        }else{
+                            if(pokedexGeral[i].ataque < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].ataque < 0);
+
+                    do{
+                        printf("insira a quantidade de defesa:\n");
+                        scanf("%i", &pokedexGeral[i].defesa);
+                        if(pokedexGeral[i].defesa > 300){
+                            printf("defesa alta demais! o numero deve ser abaixo de 300. Insira novamente:\n")
+                        }else{
+                            if(pokedexGeral[i].defesa < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].defesa > 300 || pokedexGeral[i].defesa < 0);
+
+                    do{
+                        printf("insira a quantidade de ataque especial:\n");
+                        scanf("%i", &pokedexGeral[i].ataque_especial);
+                        if(pokedexGeral[i].ataque_especial > 300){
+                            printf("ataque especial alto demais! o numero deve ser abaixo de 300. Insira novamente:\n")
+                        }else{
+                            if(pokedexGeral[i].ataque_especial < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].ataque_especial > 300 || pokedexGeral[i].ataque_especial < 0);
+
+                    do{
+                        printf("insira a quantidade de defesa especial:\n");
+                        scanf("%i", &pokedexGeral[i].defesa_especial);
+                        if(pokedexGeral[i].defesa > 300){
+                            printf("defesa especial alta demais! o numero deve ser abaixo de 300. Insira novamente:\n")
+                        }else{
+                            if(pokedexGeral[i].defesa_especial < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].defesa_especial > 300 || pokedexGeral[i].ataque_especial < 0);
+
+                    do{
+                        printf("insira a quantidade de velocidade:\n");
+                        scanf("%i", &pokedexGeral[i].velocidade);
+                        if(pokedexGeral[i].velocidade > 150){
+                            printf("velocidade alta demais! o numero deve ser abaixo de 150. Insira novamente:\n")
+                        }else{
+                            if(pokedexGeral[i].velocidade < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].velocidade > 300 || pokedexGeral[i].velocidade < 0);
+
+                    do{
+                        printf("insira a geracao:\n");
+                        scanf("%i", &pokedexGeral[i].geracao);
+                        if(pokedexGeral[i].geracao < 0 || pokedexGeral[i].geracao > 6);
+                        printf("Geração invalida! Deve ser entre 1 e 6...\n");
+                    }while(pokedexGeral[i].geracao < 0 || pokedexGeral[i].geracao > 6);
+
+                    do{
+                        printf("insira a altura:\n");
+                        scanf("%f", &pokedexGeral[i].altura);
+                        if(pokedexGeral[i].altura < 0){
+                            printf("Altura invalida: deve ser positiva. Insira novamente:\n");
+                        }
+                    }while(pokedexGeral[i].altura < 0);
+
+                    do{
+                        printf("insira o peso:\n");
+                        scanf("%f", &pokedexGeral[i].peso);
+                        if(pokedexGeral[i].peso < 0){
+                            printf("Peso invalido: deve ser positivo. Insira novamente:\n");
+                        }
+                    }while(pokedexGeral[i].peso);
+
+                    do{
+                        printf("insira a taxa de captura:\n");
+                        scanf("%i", &pokedexGeral[i].taxa_de_captura);
+                        if(pokedexGeral[i].taxa_de_captura > 255){
+                            printf("Taxa invalida. O numero deve ser abaixo de 255. Insira novamente:\n");
+                        }else{
+                            if(pokedexGeral[i].taxa_de_captura < 0){
+                                printf("o numero deve ser positivo. Insira novamente:\n");
+                            }
+                        }
+                    }while(pokedexGeral[i].taxa_de_captura > 255 || pokedexGeral[i].taxa_de_captura < 0);
+
+
+                    pokedexGeral[i].total = pokedexGeral[i].ataque + pokedexGeral[i].defesa + pokedexGeral[i].ataque_especial + pokedexGeral[i].defesa_especial + pokedexGeral[i].velocidade + pokedexGeral[i].hp;
+                }
+            }
 
         break;
 
         case 5://excluir pokemons
             printf("excluir algum pokemon cadastradon\n");
+
+            printf("insira o nome do pokemon que deseja alterar:\n");
+            fgets(nome_pokemon_excluir, 20, stdin);
+            nome_pokemon_excluir[strcspn(nome_pokemon_excluir, "\n")] = '\0';
+            setbuf(stdin, NULL);
+
+            for(i = 1; i < 1000; i++){
+                if (strcasecmp(nome_pokemon_excluir, pokedexGeral[i].nome) == 0)
+                {
+                    pokedexGeral[i].numero = 0;
+                    pokedexGeral[i].nome = "excluido";
+                    pokedexGeral[i].ataque = 0;
+                    pokedexGeral[i].ataque_especial = 0;
+                    pokedexGeral[i].defesa = 0;
+                    pokedexGeral[i].defesa_especial = 0;
+                    pokedexGeral[i].hp = 0;
+                    pokedexGeral[i].geracao = 0;
+                    pokedexGeral[i].cor = 0;
+                    pokedexGeral[i].peso = 0;
+                    pokedexGeral[i].lendario = 0;
+                }
+                
+            }
         break;
 
         default://caso n�o queira nenhum
