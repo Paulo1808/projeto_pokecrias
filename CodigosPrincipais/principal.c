@@ -464,8 +464,9 @@ void CadastroColecao(){
                             printf("insira a geracao:\n");
                             scanf("%i", &pokedexGeral[i].geracao);
 
-                            if(pokedexGeral[i].geracao < 0 || pokedexGeral[i].geracao > 6);
-                            printf("Geração invalida! Deve ser entre 1 e 6...\n");
+                            if(pokedexGeral[i].geracao < 0 || pokedexGeral[i].geracao > 6){
+                                printf("Geração invalida! Deve ser entre 1 e 6...\n");
+                            }
                         }while(pokedexGeral[i].geracao < 0 || pokedexGeral[i].geracao > 6);
 
                         do//repetir enquanto sair do intervalo permitido
@@ -750,7 +751,7 @@ void LugarDeCaptura()
     char tipos_montanhas[40] = {"Dragao, Voador"};
     char tipos_bosque[40] = {"Dragao, Fada"};
     char tipos_pedreira[40] = {"Aço, Pedra, Terra"};
-    char tipos_usina[40] = {"Eletrico"};
+    char tipos_usina[20] = {"Eletrico"};
     char tipos_utfpr[40] = {"Fogo, Eletrico, Pedra, Terra, Fada, Planta, Aço"};
 
     //sorteia um valor aleat�rio
