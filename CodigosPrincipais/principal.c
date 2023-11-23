@@ -1,6 +1,6 @@
 /**
  * @file principal.c
- * @author your name (you@domain.com)
+ * @author millena sartori, maria eduarda mafra e paulo vinicius 
  * @brief 
  * @version 0.1
  * @date 2023-11-22
@@ -14,7 +14,12 @@
 #include <strings.h>
 #include <stdbool.h>
 #include <time.h>
+#include "cabecalho.h"
 
+/**
+ * @brief 
+ * struct que define as informacoes de cada pokemon
+ */
 typedef struct
 {
     int numero;
@@ -27,22 +32,40 @@ typedef struct
     float altura, peso;
 }Pokemon; //definindo struct com as infos de cada pokemon
 
+/**
+ * @brief 
+ * struct mochila que possui os pokemons escolhidos
+ */
+ * 
+
 typedef struct
 {
     Pokemon pokemons_mochila;
 }mochila;// mochila com os pokemons
 
+/**
+ * @brief 
+ * struct colecao com todos os pokemons que foram capturados
+ */
 typedef struct
 {
     int *pokemonCapturado;
     int *contadorPokemons;
 }Colecao; //struct cole��o
 
+/**
+ * @brief 
+ * exclui a primeira linha do documento .csv p/ ler so as informações sobre os pokemons 
+ */
 typedef struct
 {
     char a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], i[15], j[15], k[15], l[15], m[15], n[15], o[15], p[15], q[15];
 }Lixo;//lixo par armazenar a primeira linha do pokedex que n�o cont�m nenhum pokem�n
 
+/**
+ * @brief 
+ * verifica se o usuario esta no windows ou no linux
+ */
 void verificaWinOuLinux()
 {
     #ifdef _WIN32 //Testa se o SO é Windows
@@ -54,6 +77,11 @@ void verificaWinOuLinux()
     #endif
 }//verificaWinOuLinux
 
+/**
+ * @brief 
+ * cria um vetor com todos os pokemons disponiveis
+ * @param pokedexGeral struct com a informacao de cada pokemon
+ */
 void CriaVetorPokedex(Pokemon *pokedexGeral)
 {
     //declara��o de vari�veis
@@ -110,6 +138,10 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
     fclose(ArquivoPokedex); //fecha o arquivo
 }//CriaVetorPokedex
 
+/**
+ * @brief 
+ * cadastra as informações dos pokemons
+ */
 void CadastroColecao(){
 
     //declara��o de vari�veis
@@ -594,6 +626,10 @@ void CadastroColecao(){
     }//switch
 }//CadastroColecao
 
+/**
+ * @brief 
+ * pesquisa o pokemon 
+ */
 void PesquisaTipoGen()
 {    
     //declara��o de variaveis 
@@ -729,6 +765,12 @@ void PesquisaTipoGen()
     }//switch
 }//PesquisaTipoGen
 
+/**
+ * @brief 
+ *
+ * @param quant_pokemons_capturados 
+ * @param gerenciamento 
+ */
 void gerenciamentoPokemons(int* quant_pokemons_capturados, Colecao* gerenciamento)
 {
     //realoca a cole��o de pokemons
@@ -736,6 +778,10 @@ void gerenciamentoPokemons(int* quant_pokemons_capturados, Colecao* gerenciament
 
 }//gerenciamentoPokemons
 
+/**
+ * @brief 
+ * 
+ */
 void LugarDeCaptura()
 {
     //delcara��o de vari�veis
@@ -1300,6 +1346,11 @@ void LugarDeCaptura()
     }//switch
 }//LugarDeCaptura
 
+/**
+ * @brief 
+ * 
+ * @param nmrPokemon 
+ */
 void AllocJogo(int* nmrPokemon)
 {
     Colecao* reservaMemoria = (Colecao*) malloc (1 * sizeof(Colecao));
@@ -1307,6 +1358,10 @@ void AllocJogo(int* nmrPokemon)
 
 }//AllocJogo
 
+/**
+ * @brief 
+ * 
+ */
 void NovoJogo() //abre um arquivo novo 
 {
     //declara��o de vari�veis
@@ -1496,6 +1551,10 @@ void NovoJogo() //abre um arquivo novo
     }//switch
 }//NovoJogo
 
+/**
+ * @brief 
+ * 
+ */
 void MecanicasDeJogo()
 {
     //exibe as instru��es principais do jogo
@@ -1514,21 +1573,30 @@ void MecanicasDeJogo()
 //funçao de salvamento
 void salvamentoNoHD() //EM BINARIO
 {
+    FILE * salvaHD = fopen("salvamento.dat", "wb");
+    
+    //nao conseguimos terminar essa parte ainda
+    
+
+    fclose(salvaHD);
     //salvar pokemons da mochila e da coleção
 }//salvamentoNoHD
 
-//funçoes necessarias
-//-------------------
-/*
-1- Menus e submenus ----------- FEITO
-2- pesquisa por tipo e geração ------- FEITO
-3- salvamento em binario ------ AINDA FALTA
-4- gerenciamento dos pokemons obtidos ---- MAIS OU MENOS FEITO --> mochila com os 6 bichin
-5- sistema de batalha ----- NEM IREMOS FAZER
-6- identificar se ta no windows ou linux ----- FEITO
-7- cadastro de novos pokemons na pokedex e na cole��o ----- FEITO
-*/
-
+/**/**//**
+ * @brief 
+ * 
+ */
+ * 
+ */
+ * 
+ */
+ * 
+ */
+ * 
+ */
+ * 
+ * @return int 
+ */
 int main()
 {
     //decalra��o de variaveis
@@ -1573,14 +1641,17 @@ int main()
                 LugarDeCaptura();
 
             break;
-            
             case 3:
-                printf("Mecanicas do Jogo:\n");
-                MecanicasDeJogo();
+                printf("Cadastro de um novo pokemon\n");
+                CadastroColecao();
 
             break;
+
+            case 4: 
+                printf("Mecanicas do jogo:");
+                MecanicasDeJogo();
             
-            case 4:
+            case 5:
                 printf("Fechando o jogo...\n");
                 salvamentoNoHD();
 
@@ -1591,7 +1662,7 @@ int main()
 
             break;
         }//switch
-    }while(opcao != 4);//menu do jogo (do while)
+    }while(opcao != 5);//menu do jogo (do while)
 
     free(nickname);
 
