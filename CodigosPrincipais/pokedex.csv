@@ -1,4 +1,4 @@
-numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura5555
+numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_especial ,defesa_especial ,velocidade ,geracao ,lendario ,cor     ,altura_m ,peso_kg ,taxa_captura
      1 ,Bulbasaur   ,Planta   ,Venenoso ,  318 , 45 ,    49 ,    49 ,             65 ,             65 ,        45 ,      1 ,       0 ,Green   ,    0.71 ,   6.90 ,          45
      2 ,Ivysaur     ,Planta   ,Venenoso ,  405 , 60 ,    62 ,    63 ,             80 ,             80 ,        60 ,      1 ,       0 ,Green   ,    0.99 ,  13.00 ,          45
      3 ,Venusaur    ,Planta   ,Venenoso ,  525 , 80 ,    82 ,    83 ,            100 ,            100 ,        80 ,      1 ,       0 ,Green   ,    2.01 , 100.00 ,          45
