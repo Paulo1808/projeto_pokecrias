@@ -16,55 +16,56 @@
 #include <time.h>
 #include "cabecalho.h"
 
-/**
- * @brief 
- * struct que define as informacoes de cada pokemon
- */
-typedef struct
-{
-    int numero;
-    char nome[31], tipo1[31], tipo2[31];
-    int total, hp,ataque, defesa, ataque_especial, defesa_especial;
-    int velocidade, geracao;
-    int lendario;
-    char cor[16];
-    int taxa_de_captura;
-    float altura, peso;
-}Pokemon; //definindo struct com as infos de cada pokemon
+/*
+    
+    * @brief 
+    * struct que define as informacoes de cada pokemon
+    
+    typedef struct
+    {
+        int numero;
+        char nome[31], tipo1[31], tipo2[31];
+        int total, hp,ataque, defesa, ataque_especial, defesa_especial;
+        int velocidade, geracao;
+        int lendario;
+        char cor[16];
+        int taxa_de_captura;
+        float altura, peso;
+    }Pokemon; //definindo struct com as infos de cada pokemon
 
-/**
- * @brief 
- * struct mochila que possui os pokemons escolhidos
- */
+    
+    * @brief 
+    * struct mochila que possui os pokemons escolhidos
+    
 
-typedef struct
-{
-    Pokemon pokemons_mochila;
-}mochila;// mochila com os pokemons
+    typedef struct
+    {
+        Pokemon pokemons_mochila;
+    }mochila;// mochila com os pokemons
 
-/**
- * @brief 
- * struct colecao com todos os pokemons que foram capturados
- */
-typedef struct
-{
-    int *pokemonCapturado;
-    int *contadorPokemons;
-}Colecao; //struct cole��o
+    
+    * @brief 
+    * struct colecao com todos os pokemons que foram capturados
+    
+    typedef struct
+    {
+        int *pokemonCapturado;
+        int *contadorPokemons;
+    }Colecao; //struct cole��o
 
-/**
- * @brief 
- * exclui a primeira linha do documento .csv p/ ler so as informações sobre os pokemons 
- */
-typedef struct
-{
-    char a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], i[15], j[15], k[15], l[15], m[15], n[15], o[15], p[15], q[15];
-}Lixo;//lixo par armazenar a primeira linha do pokedex que n�o cont�m nenhum pokem�n
+    
+    * @brief 
+    * exclui a primeira linha do documento .csv p/ ler so as informações sobre os pokemons 
+    
+    typedef struct
+    {
+        char a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], i[15], j[15], k[15], l[15], m[15], n[15], o[15], p[15], q[15];
+    }Lixo;//lixo par armazenar a primeira linha do pokedex que n�o cont�m nenhum pokem�n
+*/
 
 /**
  * @brief 
  * verifica se o usuario esta no windows ou no linux
- */
 void verificaWinOuLinux()
 {
     #ifdef _WIN32 //Testa se o SO é Windows
@@ -75,12 +76,15 @@ void verificaWinOuLinux()
         printf("Est� no Linux\n");
     #endif
 }//verificaWinOuLinux
+*/
 
 /**
  * @brief 
+ * 
+
  * cria um vetor com todos os pokemons disponiveis
  * @param pokedexGeral struct com a informacao de cada pokemon
- */
+
 void CriaVetorPokedex(Pokemon *pokedexGeral)
 {
     //declara��o de vari�veis
@@ -135,12 +139,10 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
     }//while
 
     fclose(ArquivoPokedex); //fecha o arquivo
-}//CriaVetorPokedex
+}//CriaVetorPokede
 
-/**
  * @brief 
  * cadastra as informações dos pokemons
- */
 void CadastroColecao(){
 
     //declara��o de vari�veis
@@ -624,11 +626,11 @@ void CadastroColecao(){
         break;
     }//switch
 }//CadastroColecao
-
-/**
  * @brief 
  * pesquisa o pokemon 
  */
+
+/*
 void PesquisaTipoGen()
 {    
     //declara��o de variaveis 
@@ -764,12 +766,11 @@ void PesquisaTipoGen()
     }//switch
 }//PesquisaTipoGen
 
-/**
  * @brief 
  *
  * @param quant_pokemons_capturados 
  * @param gerenciamento 
- */
+
 void gerenciamentoPokemons(int* quant_pokemons_capturados, Colecao* gerenciamento)
 {
     //realoca a cole��o de pokemons
@@ -777,10 +778,10 @@ void gerenciamentoPokemons(int* quant_pokemons_capturados, Colecao* gerenciament
 
 }//gerenciamentoPokemons
 
-/**
+
  * @brief 
  * 
- */
+
 void LugarDeCaptura()
 {
     //delcara��o de vari�veis
@@ -1334,22 +1335,20 @@ void LugarDeCaptura()
             }//if
         }
         break;
-        /*case 12:
+        case 12:
             if (opcao_local == 12)
             {
                 contadores.contadorPokemons = (*contador_de_pokemons);
                 reallocGerenciamento = realloc(reallocGerenciamento, (*contador_de_pokemons) * sizeof (Colecao));
             }
             
-        break;*/
+        break;
     }//switch
 }//LugarDeCaptura
 
-/**
  * @brief 
  * 
  * @param nmrPokemon 
- */
 void AllocJogo(int* nmrPokemon)
 {
     Colecao* reservaMemoria = (Colecao*) malloc (1 * sizeof(Colecao));
@@ -1357,10 +1356,8 @@ void AllocJogo(int* nmrPokemon)
 
 }//AllocJogo
 
-/**
  * @brief 
  * 
- */
 void NovoJogo() //abre um arquivo novo 
 {
     //declara��o de vari�veis
@@ -1550,10 +1547,8 @@ void NovoJogo() //abre um arquivo novo
     }//switch
 }//NovoJogo
 
-/**
  * @brief 
  * 
- */
 void MecanicasDeJogo()
 {
     //exibe as instru��es principais do jogo
@@ -1568,6 +1563,7 @@ void MecanicasDeJogo()
     printf("F.R.I.D.A.Y: Batalha, continua\n\n\n");
 
 }//MecanicasDeJogo
+*/
 
 //funçao de salvamento
 void salvamentoNoHD() //EM BINARIO
@@ -1576,7 +1572,9 @@ void salvamentoNoHD() //EM BINARIO
     
     //nao conseguimos terminar essa parte ainda
     
-
+    //gcc *.c -o main.c
+    //ls
+    // ./mai
     fclose(salvaHD);
     //salvar pokemons da mochila e da coleção
 }//salvamentoNoHD
