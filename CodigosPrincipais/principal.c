@@ -36,7 +36,6 @@ typedef struct
  * @brief 
  * struct mochila que possui os pokemons escolhidos
  */
- * 
 
 typedef struct
 {
@@ -1582,18 +1581,8 @@ void salvamentoNoHD() //EM BINARIO
     //salvar pokemons da mochila e da coleção
 }//salvamentoNoHD
 
-/**/**//**
- * @brief 
- * 
- */
- * 
- */
- * 
- */
- * 
- */
- * 
- */
+/*
+ * @brief
  * 
  * @return int 
  */
