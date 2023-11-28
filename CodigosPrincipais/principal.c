@@ -1569,12 +1569,13 @@ void MecanicasDeJogo()
 */
 
 //funçao de salvamento
-void salvamentoNoHD() //EM BINARIO
+void salvamentoNoHD(mochila* pokemons6, Colecao* pokemonsColecao, int quant_pokemons_colecao) //EM BINARIO
 {
     FILE * salvaHD = fopen("salvamento.dat", "wb");
     
-    //nao conseguimos terminar essa parte ainda
-    
+    fwrite(pokemons6, sizeof(mochila), 6, salvaHD);
+    fwrite(pokemonsColecao, sizeof(Colecao), quant_pokemons_colecao, salvaHD);
+    //acredito qe seja isso apenas o salvamento
     fclose(salvaHD);
     //salvar pokemons da mochila e da coleção
 }//salvamentoNoHD
