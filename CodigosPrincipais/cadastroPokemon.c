@@ -70,6 +70,8 @@ void CadastroColecao()
                     }//if
                     i++;
                 }//while
+
+                printf("posicao do pokemon: %i, fim da pokedex: %i\n", posicaoNovoPokemon, fimPokedex);
                 
                 do
                 {
@@ -194,9 +196,7 @@ void CadastroColecao()
                 printf("| Numero |    Nome     |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
                 for(i = 1; i < fimPokedex; i++)
                 {
-                    if(strcmp(pokedexGeral[i].nome, "excluido") != 0)
-                    {
-                        printf("|%-8i|%-13s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-7.2f|%-7.2f|%-11i|\n", 
+                    printf("|%-8i|%-13s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-7.2f|%-7.2f|%-11i|\n", 
                             pokedexGeral[i].numero,
                             pokedexGeral[i].nome,                         //exibe as infos do pokemon
                             pokedexGeral[i].tipo1, 
@@ -214,7 +214,6 @@ void CadastroColecao()
                             pokedexGeral[i].altura, 
                             pokedexGeral[i].peso, 
                             pokedexGeral[i].taxa_de_captura);
-                    }//if
                 }//for
 
                 printf("deseja voltar ao menu?\n1- sim 0- nao\n");//caso queira fazer mais alguma coisa nessa funcao antes de voltar para o menu
@@ -225,6 +224,7 @@ void CadastroColecao()
                 do
                 {
                     //recebe o nome do pokemon para busca
+                    setbuf(stdin, NULL);
                     printf("insira o nome do pokemon que deseja pesquisar:\n");
                     fgets(nome_pokemon_pesquisar, 20, stdin);
                     nome_pokemon_pesquisar[strcspn(nome_pokemon_pesquisar, "\n")] = '\0';

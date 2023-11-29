@@ -35,7 +35,7 @@ int main()
     
     do
     {
-        printf("------- MENU --------");
+        printf("------- MENU --------\n");
         printf("Escolha uma opcao:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
