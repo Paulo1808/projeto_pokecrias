@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#ifndef CABECALHO_H
-#define CABECALHO_H
+#include "cadastroPokemon.h"
 
 /**
  * @brief 
@@ -10,10 +9,10 @@
  */
 void CriaVetorPokedex(Pokemon *pokedexGeral)
 {
-    //declara��o de vari�veis
+    //declaracao de variaveis
     FILE *ArquivoPokedex = fopen("pokedex.csv", "r"); //abre o arquivo da pokedex
     Lixo lixo;
-    fseek(ArquivoPokedex, 0, SEEK_SET);//direciona para o in�cio do arquivo
+    fseek(ArquivoPokedex, 0, SEEK_SET);//direciona para o inicio do arquivo
 
     for(int i = 0; i < 722; i++)
     {
@@ -63,5 +62,3 @@ void CriaVetorPokedex(Pokemon *pokedexGeral)
 
     fclose(ArquivoPokedex); //fecha o arquivo
 }//CriaVetorPokedex
-
-#endif

@@ -61,5 +61,8 @@
     "configurations": [],
     "compounds": []
   },
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "files.associations": {
+    "captura.h": "c"
+  }
 }

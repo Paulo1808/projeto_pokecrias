@@ -30,7 +30,7 @@ numero ,nome        ,tipo1    ,tipo2    ,total ,hp  ,ataque ,defesa ,ataque_espe
     29 ,Nidoran     ,Venenoso ,NULL     ,  275 , 55 ,    47 ,    52 ,             40 ,             40 ,        41 ,      1 ,       0 ,Blue    ,    0.41 ,   7.00 ,         235
     30 ,Nidorina    ,Venenoso ,NULL     ,  365 , 70 ,    62 ,    67 ,             55 ,             55 ,        56 ,      1 ,       0 ,Blue    ,    0.79 ,  20.00 ,         120
     31 ,Nidoqueen   ,Venenoso ,Terra    ,  505 , 90 ,    92 ,    87 ,             75 ,             85 ,        76 ,      1 ,       0 ,Blue    ,    1.30 ,  60.00 ,          45
-    32 ,Nidoranâ™‚    ,Venenoso ,NULL     ,  273 , 46 ,    57 ,    40 ,             40 ,             40 ,        50 ,      1 ,       0 ,Roxo    ,    0.51 ,   9.00 ,         235
+    32 ,Nidoranâ‚   ,Venenoso ,NULL     ,  273 , 46 ,    57 ,    40 ,             40 ,             40 ,        50 ,      1 ,       0 ,Roxo    ,    0.51 ,   9.00 ,         235
     33 ,Nidorino    ,Venenoso ,NULL     ,  365 , 61 ,    72 ,    57 ,             55 ,             55 ,        65 ,      1 ,       0 ,Roxo    ,    0.89 ,  19.50 ,         120
     34 ,Nidoking    ,Venenoso ,Terra    ,  505 , 81 ,   102 ,    77 ,             85 ,             75 ,        85 ,      1 ,       0 ,Roxo    ,    1.40 ,  62.00 ,          45
     35 ,Clefairy    ,Fada     ,NULL     ,  323 , 70 ,    45 ,    48 ,             60 ,             65 ,        35 ,      1 ,       0 ,Rosa    ,    0.61 ,   7.50 ,         150

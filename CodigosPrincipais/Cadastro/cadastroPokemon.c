@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#ifndef CABECALHO_H
-#define CABECALHO_H
+#include "cadastroPokemon.h"
 
 /**
  * @brief 
  * cadastra as informações dos pokemons
  */
-void CadastroColecao(){
-
-    //declara��o de vari�veis
+void CadastroColecao()
+{
+    //declaracao de variaveis
     Pokemon *pokedexGeral;
     int opcao_cadastro_colecao, opcao, posicaoNovoPokemon, numeroPokemon = 1, i = 1, contador, fimPokedex = 1;
     char nome_pokemon_inserir[21];
@@ -17,19 +16,19 @@ void CadastroColecao(){
     char nome_pokemon_excluir[21];
     char nome_pokemon_pesquisar[21];
 
-    pokedexGeral = (Pokemon*) calloc(1000, sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente com todas as posi��es zeradas
-    CriaVetorPokedex(pokedexGeral);//envia para a fun��o que recebe a pokedex
+    pokedexGeral = (Pokemon*) calloc(1000, sizeof(Pokemon));//aloca o vetor de pokemons dinamicamente com todas as posicoes zeradas
+    CriaVetorPokedex(pokedexGeral);//envia para a funcao que recebe a pokedex
     
     numeroPokemon = pokedexGeral[1].numero;//assume um primeiro valor para o numero novo
     //enquanto for uma linha ocupada por um pokemon ou uma linha de vetor excluido, para encontrar o fim da pokedex
     while(pokedexGeral[i].numero != 0 || strcmp(pokedexGeral[i].nome, "excluido") == 0)
     {
-        //qual ser� o numero do pokemon novo
+        //qual sera o numero do pokemon novo
         if(pokedexGeral[i].numero > numeroPokemon)
         {
             numeroPokemon = pokedexGeral[i].numero;
         }//if
-        fimPokedex++;//incrementa at� encontrar o fim da pokedex
+        fimPokedex++;//incrementa ate encontrar o fim da pokedex
         i++;
     }//while
 
@@ -49,11 +48,11 @@ void CadastroColecao(){
     
     switch(opcao_cadastro_colecao)//casos de cadastro
     {
-        case 1://inserir um novo pokem�n
+        case 1://inserir um novo pokemon
             i = 1;
             while(contador == 0)
             {
-                //onde ser� armazenado o pokemon novo
+                //onde sera armazenado o pokemon novo
                 if(pokedexGeral[i].numero == '0' && strcmp(pokedexGeral[i].nome, "excluido") == 0)//se no numero estiver zerado e o nome for algum pokemon excluido
                 {
                     posicaoNovoPokemon = i;
@@ -76,7 +75,7 @@ void CadastroColecao(){
                 nome_pokemon_inserir[strcspn(nome_pokemon_inserir, "\n")] ='\0';
                 setbuf(stdin, NULL);
 
-                contador = 0;//variavel de localiza��o para verificar se n�o tem repetido
+                contador = 0;//variavel de localizacao para verificar se nao tem repetido
                 for(int i = 1; i < fimPokedex; i++)
                 {
                     if(strcasecmp(nome_pokemon_inserir, pokedexGeral[i].nome) == 0)//caso forem nomes iguais
@@ -86,7 +85,7 @@ void CadastroColecao(){
                     }//if
                 }//for
             }while(contador > 0);
-            strcpy(pokedexGeral[posicaoNovoPokemon].nome, nome_pokemon_inserir);//copia o nome recebido para a posi��o do nome no vetor
+            strcpy(pokedexGeral[posicaoNovoPokemon].nome, nome_pokemon_inserir);//copia o nome recebido para a posicao do nome no vetor
 
             printf("Digite o tipo 1 do %s:\n", pokedexGeral[posicaoNovoPokemon].nome);//recebe o tipo principal 
             fgets(pokedexGeral[posicaoNovoPokemon].tipo1, 30, stdin);
@@ -134,7 +133,7 @@ void CadastroColecao(){
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].hp);
             }while(pokedexGeral[i].ataque > 300 || pokedexGeral[i].hp < 0);
             
-            //valor total � a soma dos ataques, defesas, velocidade e hp
+            //valor total: a soma dos ataques, defesas, velocidade e hp
             pokedexGeral[posicaoNovoPokemon].total = pokedexGeral[posicaoNovoPokemon].ataque + 
                                                     pokedexGeral[posicaoNovoPokemon].defesa + 
                                                     pokedexGeral[posicaoNovoPokemon].ataque_especial + 
@@ -142,15 +141,15 @@ void CadastroColecao(){
                                                     pokedexGeral[posicaoNovoPokemon].velocidade + 
                                                     pokedexGeral[posicaoNovoPokemon].hp;
 
-            do//recebe o valor de gera��o
+            do//recebe o valor de geracao
             {
-                printf("qual a gera��o deseja colocar %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
+                printf("qual a geracao deseja colocar %s:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].geracao);
             }while(pokedexGeral[posicaoNovoPokemon].geracao < 0 || pokedexGeral[posicaoNovoPokemon].geracao > 6);
 
-            do//se o pokemon � lendario ou n�o
+            do//se o pokemon pode ser lendario ou nao
             {
-                printf("%s � lend�rio?\n1 - sim\n2 - n�o:\n", pokedexGeral[posicaoNovoPokemon].nome);
+                printf("%s: lendario?\n1 - sim\n2 - nao:\n", pokedexGeral[posicaoNovoPokemon].nome);
                 scanf("%i", &pokedexGeral[posicaoNovoPokemon].lendario);
             }while(pokedexGeral[posicaoNovoPokemon].lendario != 0 && pokedexGeral[posicaoNovoPokemon].lendario != 1);
 
@@ -219,7 +218,7 @@ void CadastroColecao(){
                 nome_pokemon_pesquisar[strcspn(nome_pokemon_pesquisar, "\n")] = '\0';
                 setbuf(stdin, NULL);
 
-                contador = 0;//variavel de localiza��o
+                contador = 0;//variavel de localizacao
                 for(i = 1; i < fimPokedex; i++)
                 {
                     if(strcasecmp(nome_pokemon_pesquisar, pokedexGeral[i].nome) == 0)//compara com o nome recebido
@@ -250,7 +249,7 @@ void CadastroColecao(){
                     }//if
                 }//for
 
-                if(contador == 0)//caso n�o encontre o pokemon
+                if(contador == 0)//caso nao encontre o pokemon
                 {
                     printf("Não encontramos nenhum pokemon com esse nome. ");
                     printf("Tentar novamente?\n1- sim\n2- nao\n");//caso queira tentar uma nova pesquisa
@@ -268,7 +267,7 @@ void CadastroColecao(){
                 nome_pokemon_alterar[strcspn(nome_pokemon_alterar, "\n")] = '\0';
                 setbuf(stdin, NULL);
 
-                contador = 0;//variavel de localiza��o
+                contador = 0;//variavel de localizacao
                 for(i = 1; i < fimPokedex; i++)
                 {
                     if(strcasecmp(nome_pokemon_alterar, pokedexGeral[i].nome) == 0)//compara com o nome de todos os pokemons
@@ -380,12 +379,12 @@ void CadastroColecao(){
                         {
                             if(pokedexGeral[i].lendario == 1)
                             {
-                                printf("continuar� sendo lendario - 1\ndeixar� de ser lendario - 0");
+                                printf("continuar sendo lendario - 1\ndeixar de ser lendario - 0");
                                 scanf("%i", &pokedexGeral[i].lendario);
                             }//if
                             else
                             {
-                                printf("se tornar� lend�rio - 1\ncontinuar� normal - 0");
+                                printf("se tornar lendario - 1\ncontinuar normal - 0");
                                 scanf("%i", &pokedexGeral[i].lendario);
                             }//else
                         }while(pokedexGeral[i].lendario != 0 && pokedexGeral[i].lendario != 1);
@@ -422,15 +421,15 @@ void CadastroColecao(){
                         }while(pokedexGeral[i].taxa_de_captura > 255 || pokedexGeral[i].taxa_de_captura < 0);
 
                         contador++;//caso o pokemon foi encontrado
-                        printf("alterar outro pokemon?\n1- sim\n2- n�o\n");//caso queira alterar outro
+                        printf("alterar outro pokemon?\n1- sim\n2- nao\n");//caso queira alterar outro
                         scanf("%i", &opcao);
                     }//if
                 }//for
 
-                if(contador == 0)//caso n�o encontrou o pokemon
+                if(contador == 0)//caso nao encontrou o pokemon
                 {
-                    printf("pokemon n�o encontrado para alterar\n");
-                    printf("tentar novamente?\n1- sim\n2- n�o\n");
+                    printf("pokemon nao encontrado para alterar\n");
+                    printf("tentar novamente?\n1- sim\n2- nao\n");
                     scanf("%i", &opcao);
                 }//if
             }while(opcao == 1);//enquanto for a opcao de alterar novamente
@@ -447,7 +446,7 @@ void CadastroColecao(){
                 nome_pokemon_excluir[strcspn(nome_pokemon_excluir, "\n")] = '\0';
                 setbuf(stdin, NULL);
 
-                contador = 0;//variavel de localiza��o
+                contador = 0;//variavel de localizacao
                 for(i = 1; i < fimPokedex; i++)
                 {
                     if (strcasecmp(nome_pokemon_excluir, pokedexGeral[i].nome) == 0)
@@ -472,23 +471,21 @@ void CadastroColecao(){
                         pokedexGeral[i].taxa_de_captura = 0;
                         contador++;//caso o pokemon foi encontrado
 
-                        printf("excluir outro pokemon?\n1- sim\n2- n�o\n");//caso queira excluir outro pokemon
+                        printf("excluir outro pokemon?\n1- sim\n2- nao\n");//caso queira excluir outro pokemon
                         scanf("%i", &opcao);
                     }//if
                 }//for
 
                 if(contador == 0)
                 {
-                    printf("pokemon n�o encontrado\n");
-                    printf("tentar novamente?\n1- sim\n2- n�o\n");
+                    printf("pokemon nao encontrado\n");
+                    printf("tentar novamente?\n1- sim\n2- nao\n");
                     scanf("%i", &opcao);
                 }//if
             }while(opcao == 1);
         break;
 
-        default://caso n�o queira nenhum
-        break;
+        default://caso nao queira nenhum
+        break;//sai da funcao
     }//switch
 }//CadastroColecao
-
-#endif

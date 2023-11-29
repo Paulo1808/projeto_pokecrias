@@ -1,5 +1,5 @@
-#ifndef STRUCT_H
-#define STRUCT_H
+#ifndef CADASTROPOKEMON_H
+#define CADASTROPOKEMON_H
 
 typedef struct
 {
@@ -15,18 +15,11 @@ typedef struct
 
 typedef struct
 {
-    Pokemon pokemons_mochila;
-}mochila;// mochila com os pokemons
-
-typedef struct
-{
-    int *pokemonCapturado;
-    int *contadorPokemons;
-}Colecao; //struct cole��o
-
-typedef struct
-{
     char a[15], b[15], c[15], d[15], e[15], f[15], g[15], h[15], i[15], j[15], k[15], l[15], m[15], n[15], o[15], p[15], q[15];
 }Lixo;//lixo par armazenar a primeira linha do pokedex que n�o cont�m nenhum pokem�n
+
+void CadastroColecao();
+void CriaVetorPokedex(Pokemon *pokedexGeral);
+void PesquisaTipoGen();
 
 #endif

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#ifndef CABECALHO_H
-#define CABECALHO_H
+#include "principal.h"
 
 /**
  * @brief 
@@ -18,5 +17,3 @@ void verificaWinOuLinux()
         printf("Est� no Linux\n");
     #endif
 }//verificaWinOuLinux
-
-#endif
