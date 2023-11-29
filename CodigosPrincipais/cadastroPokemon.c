@@ -183,7 +183,7 @@ void CadastroColecao()
 
                 pokedexGeral = realloc(pokedexGeral, fimPokedex * sizeof(Pokemon));
 
-                printf("deseja voltar ao menu?\n1- sim 0- nao\n");
+                printf("deseja voltar ao menu?\n1- sim 0- nao\n");//caso queira fazer mais alguma coisa nessa funcao antes de voltar para o menu
                 scanf("%i", &sair);
 
             break;
@@ -217,7 +217,7 @@ void CadastroColecao()
                     }//if
                 }//for
 
-                printf("deseja voltar ao menu?\n1- sim 0- nao\n");
+                printf("deseja voltar ao menu?\n1- sim 0- nao\n");//caso queira fazer mais alguma coisa nessa funcao antes de voltar para o menu
                 scanf("%i", &sair);
             break;
 
@@ -269,7 +269,7 @@ void CadastroColecao()
                     }//if
                 }while(opcao == 1);//enquanto for a opcao de querer pesquisar novamnete
 
-                printf("deseja voltar ao menu?\n1- sim 0- nao\n");
+                printf("deseja voltar ao menu?\n1- sim 0- nao\n");//caso queira fazer mais alguma coisa nessa funcao antes de voltar para o menu
                 scanf("%i", &sair);
             break;
 
@@ -449,7 +449,7 @@ void CadastroColecao()
                     }//if
                 }while(opcao == 1);//enquanto for a opcao de alterar novamente
 
-                printf("deseja voltar ao menu?\n1- sim 0- nao\n");
+                printf("deseja voltar ao menu?\n1- sim 0- nao\n");//caso queira fazer mais alguma coisa nessa funcao antes de voltar para o menu
                 scanf("%i", &sair);
             break;
 
@@ -501,9 +501,9 @@ void CadastroColecao()
                     }//if
                 }while(opcao == 1);
 
-                printf("deseja voltar ao menu?\n1- sim 0- nao\n");
+                printf("deseja voltar ao menu?\n1- sim 0- nao\n");//caso queira fazer mais alguma coisa nessa funcao antes de voltar para o menu
                 scanf("%i", &sair);
             break;
         }//switch
-    }while(sair == 0);
+    }while(sair == 0);//fazer enquanto nao quiser sair da funcao
 }//CadastroColecao

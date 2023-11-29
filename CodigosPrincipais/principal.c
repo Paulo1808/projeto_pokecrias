@@ -35,7 +35,8 @@ int main()
     
     do
     {
-        printf("Escolha uma opcao para iniciar:\n");
+        printf("------- MENU --------");
+        printf("Escolha uma opcao:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
         printf("3 - Cadastro\n");
@@ -47,7 +48,7 @@ int main()
 
         switch (opcao) //executa a opçao escolhida
         {
-            case 1:
+            case 1://comeca um novo jogo
                 printf("Envia para a funcao de inicio de jogo\n");
                 NovoJogo();
                 printf("Capturas\n");
@@ -55,31 +56,31 @@ int main()
 
             break;
             
-            case 2:
+            case 2://carrega um ja existente
                 printf("Carrega um arquivo do jogo ja existente\n");
                 LugarDeCaptura(opcao);
 
             break;
             
-            case 3:
+            case 3://sistema de cadastro
                 printf("Cadastro de um novo pokemon\n");
                 CadastroColecao();
 
             break;
 
-            case 4: 
+            case 4://pesquisa de tipo geracao e nome
                 printf("Envia para a funcao de pesquisa por tipo e genero");
                 PesquisaTipoGen();
             
             break;
 
-            case 5:
+            case 5://instrucoes do jogo
                 printf("Mecanicas do jogo:");
                 MecanicasDeJogo();
 
             break;
 
-            case 6:
+            case 6://sair do jogo
                 printf("Fechando o jogo...\n");
                 LugarDeCaptura(opcao);
 
