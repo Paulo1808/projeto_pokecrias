@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "captura.h"
+#include "principal.h"
 
 /**
  * @brief realoca a estrutura colecao para cada vez que um novo pokemon for capturado

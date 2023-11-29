@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cadastroPokemon.h"
+#include <string.h>
+#include "principal.h"
 
 /**
  * @brief pesquisa os pokemons já existentes por tipo (tipo 1 ou 2), geracao ou nome
@@ -34,12 +35,12 @@ void PesquisaTipoGen()
             tipoPokemon[strcspn(tipoPokemon, "\n")] = '\0';
             setbuf(stdin, NULL); //recebe o tipo
 
-            printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
+            printf("| Numero |    Nome     |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
             for (int i = 1; i < 722; i++)
             {
                 if (strcasecmp(tipoPokemon, pokedex[i].tipo1) == 0 || strcasecmp(tipoPokemon, pokedex[i].tipo2) == 0)
                 {
-                    printf("|%-8i|%-12s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-7.2f|%-7.2f|%-11i|\n", 
+                    printf("|%-8i|%-13s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-7.2f|%-7.2f|%-11i|\n", 
                     pokedex[i].numero,
                     pokedex[i].nome,                         //exibe as infos dos pokemons que tem esse tipo
                     pokedex[i].tipo1, 
@@ -69,12 +70,12 @@ void PesquisaTipoGen()
                 scanf("%i", &numeroGeracao);
             } while(numeroGeracao < 0 || numeroGeracao > 6);
 
-            printf("| Numero |    Nome    |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
+            printf("| Numero |    Nome     |   Tipo 1   |   Tipo 2   | total |  HP  | Ataque | Defesa | Sp. Ataque | Sp. Defesa | Speed  | Gen | Lendario |   Cor   |Altura |  Peso | Taxa Cap. |\n");
             for (int i = 1; i < 722; i++)
             {
                 if (numeroGeracao == pokedex[i].geracao)
                 {
-                    printf("|%8i|%-12s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-6.2f|%-4.2f|%-11i|\n", 
+                    printf("|%8i|%-13s|%-12s|%-12s|%-7i|%-6i|%-8i|%-8i|%-12i|%-12i|%-8i|%-5i|%-10i|%-9s|%-6.2f|%-4.2f|%-11i|\n", 
                     pokedex[i].numero,
                     pokedex[i].nome,                         //exibe as infos dos pokemons que s�o dessa gera��o
                     pokedex[i].tipo1, 
@@ -126,8 +127,6 @@ void PesquisaTipoGen()
                     pokedex[i].altura, 
                     pokedex[i].peso, 
                     pokedex[i].taxa_de_captura);
-
-                    break;
                 }//if
             }//for
         break;

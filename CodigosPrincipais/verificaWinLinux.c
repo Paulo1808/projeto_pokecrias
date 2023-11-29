@@ -11,9 +11,9 @@ void verificaWinOuLinux()
 {
     #ifdef _WIN32 //Testa se o SO é Windows
         system("cls");
-        printf("Est� no Windows\n");
+        printf("Windows\n");
     #else
         system("clear");
-        printf("Est� no Linux\n");
+        printf("Linux\n");
     #endif
 }//verificaWinOuLinux

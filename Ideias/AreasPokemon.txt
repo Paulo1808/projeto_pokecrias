@@ -10,7 +10,7 @@ Agua
 Voador
 Planta
 
-Plantano:
+Pantano:
 Psychic
 Venenoso
 Agua

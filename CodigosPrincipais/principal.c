@@ -31,33 +31,36 @@ int main()
     nickname[strcspn(nickname, "\n")] = '\0';
     setbuf(stdin, NULL); //recebe o nome inserido pelo usuario
 
-    printf("Bom, vamos lá %s!\n", nickname);
+    printf("Bom, vamos la %s!\n", nickname);
     
     do
     {
         printf("Escolha uma opcao para iniciar:\n");
         printf("1 - Novo Jogo\n");
         printf("2 - Carregar Jogo\n");
-        printf("3 - Mecanicas do Jogo\n"); 
-        printf("4 - Fechar o jogo\n");
+        printf("3 - Cadastro\n");
+        printf("4 - Pesquisa rapida\n"); 
+        printf("5 - Mecanicas do Jogo\n");
+        printf("6 - Fechar o jogo\n");
 
         scanf("%i", &opcao);
 
         switch (opcao) //executa a opçao escolhida
         {
             case 1:
-                printf("Envia para a funçao de inicio de jogo\n");
+                printf("Envia para a funcao de inicio de jogo\n");
                 NovoJogo();
-                PesquisaTipoGen();
-                LugarDeCaptura(1);
+                printf("Capturas\n");
+                LugarDeCaptura(opcao);
 
             break;
             
             case 2:
                 printf("Carrega um arquivo do jogo ja existente\n");
-                LugarDeCaptura(2);
+                LugarDeCaptura(opcao);
 
             break;
+            
             case 3:
                 printf("Cadastro de um novo pokemon\n");
                 CadastroColecao();
@@ -65,12 +68,20 @@ int main()
             break;
 
             case 4: 
+                printf("Envia para a funcao de pesquisa por tipo e genero");
+                PesquisaTipoGen();
+            
+            break;
+
+            case 5:
                 printf("Mecanicas do jogo:");
                 MecanicasDeJogo();
-            
-            case 5:
+
+            break;
+
+            case 6:
                 printf("Fechando o jogo...\n");
-                LugarDeCaptura(5);
+                LugarDeCaptura(opcao);
 
             break;
             
@@ -79,7 +90,7 @@ int main()
 
             break;
         }//switch
-    }while(opcao != 5);//menu do jogo, para voltar sempre nele
+    }while(opcao != 6);//menu do jogo, para voltar sempre nele
 
     return 0;
 }//main

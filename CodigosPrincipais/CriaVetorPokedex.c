@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cadastroPokemon.h"
+#include "principal.h"
 
 /**
  * @brief 
